@@ -1,0 +1,172 @@
+.header {
+  position: relative;
+  color: white;
+  padding: 2rem;
+  padding-bottom: 0;
+  overflow: hidden;
+  height: 60vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.header img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.breadcrumb {
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.hero {
+  background-color: rgba(0, 0, 0, 0.6);
+  padding: 2rem;
+  padding-bottom: 0;
+  border-radius: 8px;
+  justify-self: flex-end;
+  margin-top: auto;
+}
+
+.hero h1 {
+  margin: 0 0 1rem;
+}
+
+.pricing {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.price {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.enroll-button {
+  padding: 0.5rem 1rem;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.coupon-box {
+  margin-top: 10px;
+  padding-left: 30px;
+  display: flex;
+  z-index: 20;
+  position: relative;
+  gap: 5px;
+}
+
+#coupon-code {
+  width: 15%;
+}
+
+.course-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px 20px;
+  background-color: #f8f8f8;
+}
+
+.course-tabs p {
+  padding: 10px 15px;
+  margin: 0;
+  background-color: #e0e0e0;
+  border-radius: 5px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.3s;
+  flex: 1 0 auto;
+  text-align: center;
+}
+
+.course-tabs p:hover {
+  color: #007bff;
+  border-bottom: 2px solid #007bff;
+}
+
+.content {
+  padding: 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+h2 {
+  border-bottom: 2px solid #ccc;
+  padding-bottom: 0.5rem;
+}
+
+.accordion {
+  background-color: #eee;
+  border: none;
+  padding: 1rem;
+  width: 100%;
+  text-align: left;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 0.5rem;
+}
+
+.accordion:hover {
+  background-color: #ddd;
+}
+
+.panel {
+  display: none;
+  background-color: white;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-top: none;
+}
+
+.test-scores p {
+  margin: 0.5rem 0;
+}
+
+.fees ul {
+  list-style: none;
+  padding: 0;
+}
+
+.fees li {
+  margin: 0.5rem 0;
+}
+
+@media (max-width: 768px) {
+  .pricing {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero {
+    padding: 1rem;
+  }
+
+  .content {
+    padding: 1rem;
+  }
+
+  .coupon-box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  #coupon-code {
+    width: 63%;
+  }
+}

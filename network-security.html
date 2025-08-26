@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Network Security - KONASAL Institute</title>
+    <!-- Link to Bootstrap for styling -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Link to FontAwesome for social icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <style>
+        /* General styles for the page */
+        body { 
+            font-family: Arial, sans-serif; 
+            background-color: white;  /* Set background color to white */
+            color: black; /* Default text color is black */
+            position: relative;
+        }
+        /* Hero Section with background image and logo on the left side */
+        .hero-section {
+            width: 100%;
+            height: 200px;
+            background-image: url('logo/network.jpg'); /* Replace with your background image URL */
+            background-size: cover;
+            background-position: center;
+            color: white;
+            text-align: center;
+            padding: 100px 20px;
+            position: relative;
+        }
+        .hero-section h1 {
+            font-size: 3em;
+            font-weight: bold;
+        }
+        .hero-section p {
+            font-size: 1.5em;
+        }
+        .logo-container {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+        }
+        .logo {
+            width: 150px;
+        }
+        /* Styling for the course container */
+        .container { 
+            max-width: 1000px; 
+            margin: 20px auto; 
+            background: rgba(255, 255, 255, 0.8); /* Light background for course details */
+            padding: 20px; 
+            border-radius: 10px;
+            background-color: #f4f4f4; /* Light, cozy background color */
+            color: #333; /* Dark text for readability */
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+        /* Left and right side columns */
+        .side-column {
+            width: 30%; /* Each side column will take 30% of the width */
+            margin: 10px;
+            text-align: center;
+            background-color: #f9f4e6; /* Light, beige background for a cozy feel */
+            color: #333; /* Dark text */
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for depth */
+            border: 1px solid #ddd; /* Light border between columns */
+        }
+        .side-column img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        /* Course header styling */
+        .course-header { 
+            text-align: center; 
+            margin-bottom: 20px; 
+            font-weight: bold;
+            color: #FFD700; /* Golden yellow header */
+            width: 100%;
+        }
+        /* Styling for the enroll button */
+        .enroll-btn { 
+            display: block; 
+            margin: 20px auto; 
+            font-weight: bold;
+            background-color: #FFD700; /* Golden yellow background */
+            color: black; /* Black text */
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+        .enroll-btn:hover {
+            background-color: #e0c100; /* Darker gold on hover */
+        }
+        /* Styling for the course syllabus */
+        ul { 
+            background: rgba(255, 255, 255, 0.2); 
+            padding: 15px; 
+            border-radius: 5px; 
+        }
+        li { 
+            margin-bottom: 10px; 
+            font-weight: bold;
+        }
+        /* Footer section styles */
+        .footer {
+            text-align: center;
+            padding: 15px;
+            margin-top: 20px;
+            background: #141E30; /* Dark blue/black background for footer */
+            color: white;
+            font-weight: bold;
+        }
+        .footer .quick-links {
+            margin-top: 10px;
+        }
+        .footer .quick-links a {
+            color: #FFD700;
+            margin: 0 10px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .footer .quick-links a:hover {
+            text-decoration: underline;
+        }
+        /* Social icon styling */
+        .footer .social-icons a {
+            color: #FFD700;
+            margin: 0 15px;
+            font-size: 20px;
+            text-decoration: none;
+        }
+        .footer .social-icons a:hover {
+            color: #fff;
+        }
+        /* Styling for the course image */
+        .course-image {
+            display: block;
+            width: 100%;
+            max-height: 300px;
+            object-fit: cover;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Hero Section with background image and logo on the left side -->
+    <div class="hero-section">
+        <div class="logo-container">
+            <img src="logo/blackgold%20png.png" alt="KONASAL Logo" class="logo" width= 150px height="120%" > <!-- Replace with your logo file -->
+        </div>
+        <h1 style="color: #e0c100">CYBER SECURITY</h1>
+       
+    </div>
+
+    <!-- Course Details Section -->
+    <div class="container">
+        <!-- Left side column with image and brief content -->
+        <div class="side-column">
+            <img src="images/courses-1.jpg" alt="Network Security Image 1"> <!-- Replace with image -->
+            <p><strong>What is Network Security?</strong></p>
+            <p>Network security involves measures to protect the integrity and confidentiality of computer networks and data.</p>
+        </div>
+
+        <!-- Course content in the center column -->
+        <div class="main-content" style="width: 35%; padding: 10px;">
+            <!--img src="network-security.jpg" alt="Network Security" class="course-image"> <!-- Replace with correct image URL -->
+            <h1 class="course-header" style="color: black">Network Security</h1>
+            <p><strong>Category:</strong> <span style="color: black;">Cyber Security</span></p>
+            <p><strong>Instructor:</strong> <span style="color: black;">John Doe</span></p>
+            <p>Learn how to <strong>protect</strong> computer networks from <strong>cyber threats</strong>, prevent <strong>unauthorized access</strong>, and secure data transmission.</p>
+            
+            <h3 style="color: #FFD700; font-weight: bold;">Course Syllabus</h3>
+            <ul>
+                <li>Introduction to Network Security</li>
+                <li>Firewall & VPN Configuration</li>
+                <li>Cyber Threat Analysis</li>
+                <li>Incident Response & Mitigation</li>
+                <li>Best Practices for Secure Networks</li>
+            </ul>
+            
+            <button class="btn enroll-btn">Enroll Now</button>
+        </div>
+
+        <!-- Right side column with image and brief content -->
+        <div class="side-column">
+            <img src="images/courses-2.jpg" alt="Network Security Image 2"> <!-- Replace with image -->
+            <p><strong>Why Network Security?</strong></p>
+            <p>Protecting networks is crucial in preventing cyber-attacks, which can lead to data breaches, financial losses, and more.</p>
+        </div>
+    </div>
+
+    <!-- Back to Courses Button (Positioned on the left side of the container) -->
+    <div class="container">
+        <a href="index.html" class="btn btn-secondary" style="display: block; margin: 20px auto;">Back to Courses</a>
+    </div>
+
+    <!-- Footer Section -->
+    <div class="footer">
+        <p>&copy; 2025 KONASAL Institute. All Rights Reserved.</p>
+        <div class="quick-links">
+            <a href="mailto:info@konasal.edu">Email Us</a> | 
+            <a href="tel:+1234567890">Call Us</a> | 
+            <a href="#">Privacy Policy</a> | 
+            <a href="#">Terms & Conditions</a> | 
+            <a href="#">FAQs</a> | 
+            <a href="#">Help & Support</a> | 
+            <a href="#">Contact</a>
+        </div>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/konasal" target="_blank"><i class="fab fa-facebook"></i></a>
+            <a href="https://twitter.com/konasal" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.instagram.com/konasal" target="_blank"><i class="fab fa-instagram"></i></a>
+            <a href="https://www.youtube.com/konasal" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="https://www.linkedin.com/company/konasal" target="_blank"><i class="fab fa-linkedin"></i></a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

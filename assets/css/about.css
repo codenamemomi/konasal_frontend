@@ -1,0 +1,774 @@
+
+
+
+
+/* Page Title */
+
+.page-title-section {
+
+    background: linear-gradient(rgba(10, 36, 99, 0.8), rgba(10, 36, 99, 0.8)), url('logo/scholar.PNG');
+
+    background-size: cover;
+
+    background-position: center;
+
+    color: white;
+
+    padding: 6rem 0;
+
+    text-align: center;
+
+    position: relative;
+
+}
+
+
+
+.page-title {
+
+    font-size: 2.5rem;
+
+    margin-bottom: 1rem;
+
+    font-weight: 700;
+
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.3);
+
+}
+
+
+
+.breadcrumb {
+
+    display: flex;
+
+    justify-content: center;
+
+    list-style: none;
+
+    padding: 0;
+
+    background-color: rgba(0,0,0,0.3);
+
+    border-radius: 50px;
+
+    padding: 0.5rem 1rem;
+
+    display: inline-flex;
+
+}
+
+
+
+.breadcrumb-item a {
+
+    color: var(--accent-color);
+
+    text-decoration: none;
+
+    font-weight: 500;
+
+}
+
+
+
+.breadcrumb-item.active {
+
+    color: white;
+
+}
+
+
+
+.breadcrumb-item + .breadcrumb-item::before {
+
+    content: ">";
+
+    color: white;
+
+    padding: 0 0.5rem;
+
+}
+
+
+
+/* About Section */
+
+.about-section {
+
+    padding: 5rem 0;
+
+    background-color: white;
+
+}
+
+
+
+.section-title {
+
+    text-align: center;
+
+    margin-bottom: 3rem;
+
+    color: var(--primary-color);
+
+    position: relative;
+
+}
+
+
+
+.section-title:after {
+
+    content: '';
+
+    display: block;
+
+    width: 70px;
+
+    height: 3px;
+
+    background-color: var(--accent-color);
+
+    margin: 1rem auto 0;
+
+    border-radius: 2px;
+
+}
+
+
+
+.about-content {
+
+    margin-bottom: 2rem;
+
+    padding-right: 2rem;
+
+}
+
+
+
+.about-content p {
+
+    margin-bottom: 1.5rem;
+
+    font-size: 1.05rem;
+
+}
+
+
+
+.about-image {
+
+    border-radius: var(--border-radius);
+
+    overflow: hidden;
+
+    box-shadow: var(--box-shadow);
+
+    height: 100%;
+
+    min-height: 350px;
+
+}
+
+
+
+.about-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.5s ease;
+
+}
+
+
+
+.about-image:hover img {
+
+    transform: scale(1.03);
+
+}
+
+
+
+/* Values Section */
+
+.values-section {
+
+    padding: 5rem 0;
+
+    background-color: #f8fafc;
+
+}
+
+
+
+.value-card {
+
+    background-color: white;
+
+    border-radius: var(--border-radius);
+
+    padding: 2rem 1.5rem;
+
+    margin-bottom: 1.5rem;
+
+    box-shadow: var(--box-shadow);
+
+    text-align: center;
+
+    border: 1px solid rgba(10, 36, 99, 0.1);
+
+    transition: var(--transition);
+
+    height: 100%;
+
+}
+
+
+
+.value-card:hover {
+
+    transform: translateY(-10px);
+
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+
+}
+
+
+
+.value-icon {
+
+    font-size: 2.5rem;
+
+    color: var(--accent-color);
+
+    margin-bottom: 1.5rem;
+
+    background-color: rgba(218, 165, 32, 0.1);
+
+    width: 80px;
+
+    height: 80px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    border-radius: 50%;
+
+}
+
+
+
+.value-card h3 {
+
+    margin-bottom: 1rem;
+
+    color: var(--primary-color);
+
+}
+
+
+
+/* Stats Section */
+
+.stats-section {
+
+    padding: 5rem 0;
+
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+
+    color: white;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+
+.stats-section::before {
+
+    content: '';
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    background: url('logo/laptop.PNG') center/cover;
+
+    opacity: 0.1;
+
+    z-index: 0;
+
+}
+
+
+
+.stat-item {
+
+    text-align: center;
+
+    margin-bottom: 1.5rem;
+
+    position: relative;
+
+    z-index: 1;
+
+    padding: 1.5rem;
+
+    background-color: rgba(255,255,255,0.1);
+
+    border-radius: var(--border-radius);
+
+    backdrop-filter: blur(5px);
+
+}
+
+
+
+.stat-number {
+
+    font-size: 3rem;
+
+    font-weight: 700;
+
+    color: var(--accent-color);
+
+    margin-bottom: 0.5rem;
+
+    line-height: 1;
+
+}
+
+
+
+.stat-label {
+
+    font-size: 1.1rem;
+
+    font-weight: 500;
+
+}
+
+
+
+/* Team Section */
+
+.team-section {
+
+    padding: 5rem 0;
+
+    background-color: white;
+
+}
+
+
+
+.team-card {
+
+    background-color: var(--light-color);
+
+    border-radius: var(--border-radius);
+
+    overflow: hidden;
+
+    box-shadow: var(--box-shadow);
+
+    margin-bottom: 1.5rem;
+
+    transition: var(--transition);
+
+    height: 100%;
+
+}
+
+
+
+.team-card:hover {
+
+    transform: translateY(-10px);
+
+    box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+
+}
+
+
+
+.team-image {
+
+    height: 300px;
+
+    overflow: hidden;
+
+}
+
+
+
+.team-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform 0.5s ease;
+
+}
+
+
+
+.team-card:hover .team-image img {
+
+    transform: scale(1.1);
+
+}
+
+
+
+.team-info {
+
+    padding: 2rem;
+
+    text-align: center;
+
+}
+
+
+
+.team-info h3 {
+
+    color: var(--primary-color);
+
+    margin-bottom: 0.5rem;
+
+}
+
+
+
+.team-info .text-muted {
+
+    color: var(--accent-color) !important;
+
+    font-weight: 500;
+
+    margin-bottom: 1rem;
+
+    display: block;
+
+}
+
+
+
+/* Button Styles */
+
+.btn-primary {
+
+    background-color: #0a2463;
+
+    border-color: #0a2463;
+
+}
+
+
+
+.btn-primary:hover {
+
+    background-color: #001845;
+
+    border-color: #001845;
+
+}
+
+
+
+/* CTA Section */
+
+.cta-section {
+
+    padding: 6rem 0;
+
+    background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+
+    color: white;
+
+    text-align: center;
+
+    position: relative;
+
+    overflow: hidden;
+
+}
+
+
+
+.cta-section::before {
+
+    content: '';
+
+    position: absolute;
+
+    top: 0;
+
+    left: 0;
+
+    width: 100%;
+
+    height: 100%;
+
+    background: url('logo/scholar.PNG') center/cover;
+
+    opacity: 0.1;
+
+    z-index: 0;
+
+}
+
+
+
+.cta-title {
+
+    font-size: 2.2rem;
+
+    margin-bottom: 1.5rem;
+
+    position: relative;
+
+    z-index: 1;
+
+}
+
+
+
+.cta-section p {
+
+    font-size: 1.1rem;
+
+    max-width: 700px;
+
+    margin: 0 auto 2rem;
+
+    position: relative;
+
+    z-index: 1;
+
+}
+
+
+
+.btn-cta {
+
+    background-color: var(--accent-color);
+
+    color: var(--primary-color);
+
+    padding: 0.9rem 2.5rem;
+
+    font-size: 1.1rem;
+
+    font-weight: 600;
+
+    border-radius: 50px;
+
+    transition: var(--transition);
+
+    border: none;
+
+    position: relative;
+
+    z-index: 1;
+
+    box-shadow: 0 4px 15px rgba(218, 165, 32, 0.4);
+
+}
+
+
+
+.btn-cta:hover {
+
+    background-color: #e6c200;
+
+    transform: translateY(-5px);
+
+    box-shadow: 0 15px 30px rgba(218, 165, 32, 0.4);
+
+}
+
+
+
+
+
+/* Responsive Styles */
+
+@media (max-width: 991.98px) {
+
+    .header-top-row {
+
+        flex-wrap: wrap;
+
+    }
+
+
+
+    
+
+    .about-content {
+
+        padding-right: 0;
+
+        margin-bottom: 2.5rem;
+
+    }
+
+}
+
+
+
+@media (max-width: 767.98px) {
+
+    .page-title {
+
+        font-size: 2rem;
+
+    }
+
+    
+
+    .header-phone {
+
+        display: none;
+
+    }
+
+    
+
+    .institution-name {
+
+        font-size: 1.1rem;
+
+    }
+
+    
+
+    .nav-menu {
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+    }
+
+    
+
+    .nav-item {
+
+        margin: 0.2rem;
+
+    }
+
+    
+
+    .nav-link {
+
+        padding: 0.5rem 0.7rem;
+
+        font-size: 0.85rem;
+
+    }
+
+    
+
+    .section-title {
+
+        font-size: 1.8rem;
+
+    }
+
+    
+
+    .stat-number {
+
+        font-size: 2.5rem;
+
+    }
+
+    
+
+    .cta-title {
+
+        font-size: 1.8rem;
+
+    }
+
+}
+
+
+
+@media (max-width: 575.98px) {
+
+    .page-title-section {
+
+        padding: 4rem 0;
+
+    }
+
+    
+
+    .page-title {
+
+        font-size: 1.8rem;
+
+    }
+
+    
+
+    .breadcrumb {
+
+        flex-wrap: wrap;
+
+        justify-content: center;
+
+        padding: 0.5rem;
+
+        border-radius: var(--border-radius);
+
+    }
+
+    
+
+    .breadcrumb-item {
+
+        margin: 0.2rem;
+
+    }
+
+    
+
+    .about-section, .values-section, 
+
+    .stats-section, .team-section, 
+
+    .cta-section {
+
+        padding: 3rem 0;
+
+    }
+
+}
+

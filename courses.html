@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>KONASAL TRAINING INSTITUTE - All Courses</title>
+
+    
+
+    <!-- Bootstrap & FontAwesome -->
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+
+
+     <!-- CSS -->
+     <link rel="stylesheet" href="./assets/css/shared.css">
+     <link rel="stylesheet" href="./assets/css/courses.css">
+ 
+     <!-- JS -->
+     <script src="./assets/js/navbar.js" defer></script>
+     <script src="./assets/js/footer.js" defer></script>
+
+</head>
+
+<body>
+    <div id="navbar"></div>
+
+
+
+    <!-- <section class="cta-section">
+
+            <div class="text-center container">
+
+                <h2 class="cta-title">Become a part of our training community – we look forward to welcoming you!</h2>
+
+                <p class="cta-text">
+
+                    Join the Konasal Training Institute and start your journey towards a brighter future.
+
+                    Whether you're enhancing your skills or exploring a new career, we're here to support you.
+
+                    Let's unlock your potential together!
+
+                </p>
+
+                <p class="cta-subtext">For more information about our courses and enrollment options:</p>
+
+                <a href="course-listing.html" class="btn btn-cta">
+
+                    <i class="me-2 fas fa-user-graduate"></i>
+
+                    Explore our individual courses to discover detailed information tailored for you!
+
+                </a>
+
+            </div>
+
+        </section> -->
+
+
+    <!-- Main Content -->
+
+    <div class="about-container" >
+
+        <div class="course-section">
+
+            <h2 class="section-title">All Career Courses</h2>
+
+            
+
+            <div class="filter-section" style="background: #0a2463">
+
+                <div class="row g-3">
+
+                    <div class="col-12 col-md-8">
+
+                        <label for="courseSearch" class="form-label">Search Courses</label>
+
+                        <input type="text" id="courseSearch" class="form-control" 
+
+                               placeholder="Search by name, description...">
+
+                    </div>
+
+                    <div class="col-12 col-md-4">
+
+                        <label for="courseFilter" class="form-label">Filter by Category</label>
+
+                        <select id="courseFilter" class="form-select">
+
+                            <option value="all">All Categories</option>
+
+                            <option value="AI">Artificial Intelligence</option>
+
+                             <option value="Cloud Computing">Cloud Computing</option>
+
+                            <option value="Cyber Security">Cyber Security</option>
+
+                            <option value="Data Science">Data Science</option>
+
+                            <option value="Research">Research</option>
+
+                             <option value="Testing">Testing</option>
+
+                        </select>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="no-results" id="noResults">
+
+                <i class="mb-3 fas fa-search fa-lg"></i>
+
+                <h4>No courses found</h4>
+
+                <p>Try adjusting your search criteria</p>
+
+            </div>
+
+
+
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="courseList"></div>
+
+        </div>
+
+    </div>
+
+
+
+    <div id="footer"></div>
+
+
+
+    <!-- Login Modal -->
+
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+
+        <div class="modal-dialog modal-dialog-centered">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+
+                    <h5 class="modal-title">Login to Your Account</h5>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+                </div>
+
+                <div class="modal-body">
+
+                    <form id="loginForm">
+
+                        <div class="mb-3">
+
+                            <label for="loginEmail" class="form-label">Email address</label>
+
+                            <input type="email" class="form-control" id="loginEmail" required>
+
+                        </div>
+
+                        <div class="mb-3">
+
+                            <label for="loginPassword" class="form-label">Password</label>
+
+                            <input type="password" class="form-control" id="loginPassword" required>
+
+                        </div>
+
+                        <div class="mb-3 form-check">
+
+                            <input type="checkbox" class="form-check-input" id="rememberMe">
+
+                            <label class="form-check-label" for="rememberMe">Remember me</label>
+
+                        </div>
+
+                        <button type="submit" class="w-100 btn btn-primary">Login</button>
+
+                    </form>
+
+                    <div class="mt-3 text-center">
+
+                        <a href="#" class="text-decoration-none">Forgot password?</a>
+
+                        <p class="mt-2">Don't have an account? <a href="#" class="text-decoration-none">Register here</a></p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- jQuery & Bootstrap JS -->
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+    <script>
+
+        // Course Data - Sorted alphabetically by title
+
+const courses = [
+
+    {
+
+        title: "Artificial Intelligence",
+
+        category: "AI",
+
+        image: "./assets/images/ai.jpg",
+
+        description: "Learn about autonomous AI agents and their implementations.",
+
+        subCourses: ["Autonomous Decision Making", "Multi-agent Systems", "Reinforcement Learning"],
+
+        page: "agentic-ai.html"
+
+    },
+
+    {
+
+        title: "AWS Master",
+
+        category: "Cloud Computing",
+
+        image: "./assets/images/aws.jpg",
+
+        description: "Comprehensive AWS training from fundamentals to advanced solutions.",
+
+        subCourses: ["CloudFormation", "EC2", "Lambda", "S3"],
+
+        page: "master-aws.html"
+
+    },
+
+    {
+
+        title: "Azure Admin",
+
+        category: "Cloud Computing",
+
+        image: "./assets/images/azure.png",
+
+        description: "Microsoft Azure cloud platform training and certification preparation.",
+
+        subCourses: ["ARM Templates", "Azure AD", "Azure Functions", "Azure VMs"],
+
+        page: "azure.html"
+
+    },
+
+    {
+
+        title: "Azure DevOps",
+
+        category: "Cloud Computing",
+
+        image: "./assets/images/devops.png",
+
+        description: "Learn DevOps practices for continuous integration and delivery.",
+
+        subCourses: ["CI/CD Pipelines", "Docker", "Infrastructure as Code", "Kubernetes"],
+
+        page: "devops.html"
+
+    },
+
+    // {
+
+    //     title: "Clinical Research",
+
+    //     category: "Research",
+
+    //     image: "./assets/images/clinical-research.png",
+
+    //     description: "Fundamentals of clinical research methodology and regulations.",
+
+    //     subCourses: ["Data Collection", "Protocol Development", "Regulatory Compliance"],
+
+    //     page: "clinical-research.html"
+
+    // },
+
+    {
+
+        title: "Cybersecurity Analysis",
+
+        category: "Cyber Security",
+
+        image: "./assets/images/cyber-analysis.jpg",
+
+        description: "Develop skills to analyze and respond to cybersecurity threats.",
+
+        subCourses: ["Incident Response", "SIEM Tools", "Threat Intelligence"],
+
+        page: "cybersecurity-analysis.html"
+
+    },
+
+    {
+
+        title: "Data Science",
+
+        category: "Data Science",
+
+        image: "./assets/images/datascience.jpg",
+
+        description: "Master Python programming for data analysis and visualization.",
+
+        subCourses: ["Matplotlib", "NumPy", "Pandas", "Seaborn"],
+
+        page: "python-data-science.html"
+
+    },
+
+    {
+
+        title: "Ethical Hacking",
+
+        category: "Cyber Security",
+
+        image: "./assets/images/ethical.jpg",
+
+        description: "Learn how to hack ethically and secure systems from vulnerabilities.",
+
+        subCourses: ["Kali Linux", "Vulnerability Assessment", "Wi-Fi Security"],
+
+        page: "ethical-hacking.html"
+
+    },
+
+    {
+
+        title: "GenAI",
+
+        category: "AI",
+
+        image: "./assets/images/genai.png",
+
+        description: "Explore Generative AI technologies and applications.",
+
+        subCourses: ["Creative Applications", "Diffusion Models", "GANs", "LLMs"],
+
+        page: "genai.html"
+
+    },
+
+    {
+
+        title: "Network Security",
+
+        category: "Cyber Security",
+
+        image: "./assets/images/network.png",
+
+        description: "Protect networks from cyber threats with advanced security techniques.",
+
+        subCourses: ["Firewall Protection", "Network Monitoring", "Penetration Testing"],
+
+        page: "network-security.html"
+
+    },
+
+    {
+
+        title: "Penetration Testing",
+
+        category: "Cyber Security",
+
+        image: "./assets/images/penetration.jpg",
+
+        description: "Master the art of penetration testing to identify system vulnerabilities.",
+
+        subCourses: ["Metasploit Framework", "OWASP Top 10", "Security Assessment"],
+
+        page: "penetration-testing.html"
+
+    },
+
+    {
+
+        title: "Power BI",
+
+        category: "Data Science",
+
+        image: "./assets/images/powerbi-two.png",
+
+        description: "Data visualization with Tableau and Power BI tools.",
+
+        subCourses: ["Dashboards", "Data Modeling", "Visual Analytics"],
+
+        page: "tableau-powerbi.html"
+
+    },
+
+    {
+
+        title: "QA Testing",
+
+        category: "Testing",
+
+        image: "./assets/images/qa-testing.jpg",
+
+        description: "Quality assurance testing methodologies and best practices.",
+
+        subCourses: ["Automation", "Bug Tracking", "Regression Testing", "Test Cases"],
+
+        page: "qa-testing.html"
+
+    },
+
+    {
+
+        title: "SAP Security/GRC AC 12.0,12.1 & S4 Hana",
+
+        category: "Cyber Security",
+
+        image: "./assets/images/sap-security.png",
+
+        description: "Specialized training in SAP Security and Governance, Risk, and Compliance.",
+
+        subCourses: ["Access Control", "Risk Management", "S4 Hana Security"],
+
+        page: "sap-security.html"
+
+    },
+
+    {
+
+        title: "SAP Testing",
+
+        category: "Testing",
+
+        image: "./assets/images/sap-testing.png",
+
+        description: "Specialized testing for SAP applications and modules.",
+
+        subCourses: ["Integration Testing", "Performance Testing", "Unit Testing"],
+
+        page: "sap-testing.html"
+
+    },
+
+    {
+
+        title: "SQL for Data Analysis",
+
+        category: "Data Science",
+
+        image: "./assets/images/sql.png",
+
+        description: "Learn SQL for efficient data querying and analysis.",
+
+        subCourses: ["Query Optimization", "Stored Procedures", "Window Functions"],
+
+        page: "sql-data-analysis.html"
+
+    },
+
+    {
+
+        title: "Tableau",
+
+        category: "Data Science",
+
+        image: "./assets/images/tableau-two.jfif",
+
+        description: "Data visualization with Tableau and Power BI tools.",
+
+        subCourses: ["Dashboards", "Data Modeling", "Visual Analytics"],
+
+        page: "tableau-powerbi.html"
+
+    }
+
+];
+
+
+
+// Sort the courses array alphabetically by title
+
+courses.sort((a, b) => a.title.localeCompare(b.title));
+
+
+
+// Sort subCourses arrays for each course
+
+courses.forEach(course => {
+
+    course.subCourses.sort((a, b) => a.localeCompare(b));
+
+});
+
+        // Load Courses
+
+        function loadCourses() {
+
+            const courseList = document.getElementById('courseList');
+
+            courseList.innerHTML = '';
+
+            
+
+            if (courses.length === 0) {
+
+                document.getElementById('noResults').style.display = 'block';
+
+                return;
+
+            }
+
+            
+
+            courses.forEach(course => {
+
+                const subCoursesHTML = course.subCourses.map(sub => `<li>${sub}</li>`).join("");
+
+                
+
+                const col = document.createElement('div');
+
+                col.className = 'col';
+
+                
+
+                col.innerHTML = `
+
+                    <div class="course-card" data-category="${course.category}" 
+
+                         data-search="${course.title.toLowerCase()} ${course.description.toLowerCase()} ${course.category.toLowerCase()}">
+
+                        <div class="course-image-container">
+
+                            <a href="${course.page}">
+
+                                <img src="${course.image}" alt="${course.title}" class="course-image">
+
+                            </a>
+
+                        </div>
+
+                        <a href="course.html?id=${course.title}" class="course-title">${course.title}</a>
+
+                        <span class="course-category">${course.category}</span>
+
+                        <p>${course.description}</p>
+
+                        <ul>${subCoursesHTML}</ul>
+
+                    </div>
+
+                `;
+
+                
+
+                courseList.appendChild(col);
+
+            });
+
+        }
+
+
+
+        // Filter Courses
+
+        function filterCourses() {
+
+            const searchTerm = document.getElementById('courseSearch').value.toLowerCase();
+
+            const categoryFilter = document.getElementById('courseFilter').value;
+
+            const courseCards = document.querySelectorAll('.course-card');
+
+            let visibleCount = 0;
+
+            
+
+            courseCards.forEach(card => {
+
+                const matchesSearch = card.dataset.search.includes(searchTerm);
+
+                const matchesCategory = categoryFilter === 'all' || card.dataset.category === categoryFilter;
+
+                
+
+                if (matchesSearch && matchesCategory) {
+
+                    card.parentElement.style.display = 'block';
+
+                    visibleCount++;
+
+                } else {
+
+                    card.parentElement.style.display = 'none';
+
+                }
+
+            });
+
+            
+
+            document.getElementById('noResults').style.display = visibleCount === 0 ? 'block' : 'none';
+
+        }
+
+
+
+        // Initialize
+
+        document.addEventListener('DOMContentLoaded', () => {
+
+            loadCourses();
+
+            
+
+            document.getElementById('courseSearch').addEventListener('input', filterCourses);
+
+            document.getElementById('courseFilter').addEventListener('change', filterCourses);
+
+            
+
+            // Dark Mode Toggle
+
+            const darkModeToggle = document.getElementById('darkModeToggle');
+
+            const darkModeIcon = darkModeToggle.querySelector('i');
+
+            
+
+            darkModeToggle.addEventListener('click', () => {
+
+                document.body.classList.toggle('dark-mode');
+
+                
+
+                if (document.body.classList.contains('dark-mode')) {
+
+                    darkModeIcon.classList.replace('fa-moon', 'fa-sun');
+
+                    localStorage.setItem('darkMode', 'enabled');
+
+                } else {
+
+                    darkModeIcon.classList.replace('fa-sun', 'fa-moon');
+
+                    localStorage.setItem('darkMode', 'disabled');
+
+                }
+
+            });
+
+            
+
+            // Check for saved preference
+
+            if (localStorage.getItem('darkMode') === 'enabled') {
+
+                document.body.classList.add('dark-mode');
+
+                darkModeIcon.classList.replace('fa-moon', 'fa-sun');
+
+            }
+
+            
+
+            // Login Modal
+
+            const loginBtn = document.getElementById('loginBtn');
+
+            loginBtn.addEventListener('click', () => {
+
+                const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+
+                loginModal.show();
+
+            });
+
+            
+
+            // Login Form Submission
+
+            document.getElementById('loginForm').addEventListener('submit', (e) => {
+
+                e.preventDefault();
+
+                alert('Login functionality would be implemented here. This is just a demo.');
+
+                const loginModal = bootstrap.Modal.getInstance(document.getElementById('loginModal'));
+
+                loginModal.hide();
+
+            });
+
+        });
+
+    </script>
+        <script src="./assets/js/shared.js"></script>
+
+
+</body>
+
+</html>
