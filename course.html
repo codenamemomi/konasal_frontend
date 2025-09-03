@@ -466,7 +466,7 @@
 
                     const data = await response.json();
                     alert(data.message);
-                    window.location.href = 'profile.html'; // Redirect to profile
+                    window.location.href = 'profile.html';
                     return true;
                 } catch (error) {
                     console.error('Error enrolling in course:', error);
@@ -474,7 +474,6 @@
                     return false;
                 }
             }
-
             function populateCourseData(course) {
                 // Basic info
                 document.getElementById("nav-title").textContent = course.name;
@@ -658,11 +657,12 @@
                         label: 'paypal'
                     },
                     createOrder: function (data, actions) {
+                        const price = parseFloat(document.getElementById('price').textContent.replace('$', ''));
                         return actions.order.create({
                             purchase_units: [{
                                 description: `Enrollment for ${course.name}`,
                                 amount: {
-                                    value: document.getElementById('price').textContent.replace('$', '')
+                                    value: price.toFixed(2)
                                 }
                             }]
                         });
