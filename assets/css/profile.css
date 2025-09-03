@@ -240,4 +240,10 @@
     .enrolled-courses-title {
         font-size: 1.4rem;
     }
+    .course-progress {
+    font-weight: 500;
+    color: var(--accent-color);
+    font-size: 0.8rem;
+    }
 }
+

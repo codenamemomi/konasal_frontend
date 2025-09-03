@@ -1,172 +1,469 @@
-.header {
-  position: relative;
-  color: white;
-  padding: 2rem;
-  padding-bottom: 0;
-  overflow: hidden;
-  height: 60vh;
-  display: flex;
-  flex-direction: column;
+/* assets/css/course.css - Enhanced Version */
+:root {
+    --primary-blue: #002060;
+    --primary-yellow: #FFC000;
+    --light-yellow: #FFE9A3;
+    --light-gray: #F2F2F2;
+    --white: #FFFFFF;
+    --dark-text: #212529;
 }
 
-.header img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1;
+.header {
+    background: linear-gradient(135deg, var(--primary-blue) 0%, #00308F 100%);
+    color: var(--white);
+    padding: 3rem 0;
+    position: relative;
+    overflow: hidden;
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+}
+
+.header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 300px;
+    height: 300px;
+    background: var(--primary-yellow);
+    border-radius: 50%;
+    opacity: 0.1;
+    transform: translate(150px, -150px);
 }
 
 .breadcrumb {
-  font-size: 0.9rem;
-  margin-bottom: 1rem;
+    padding: 0 2rem;
+    margin-bottom: 1rem;
+    font-size: 0.95rem;
+}
+
+.breadcrumb a {
+    color: var(--light-yellow) !important;
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+
+.breadcrumb a:hover {
+    color: var(--primary-yellow) !important;
 }
 
 .hero {
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 2rem;
-  padding-bottom: 0;
-  border-radius: 8px;
-  justify-self: flex-end;
-  margin-top: auto;
+    padding: 0 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: rgba(0, 32, 96, 0.8);
+    padding: 2rem;
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    margin-top: auto;
 }
 
 .hero h1 {
-  margin: 0 0 1rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--white);
+}
+
+.hero p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.9);
 }
 
 .pricing {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  margin-top: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    margin-top: 2rem;
+    flex-wrap: wrap;
 }
 
 .price {
-  font-size: 1.5rem;
-  font-weight: bold;
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-yellow);
 }
 
 .enroll-button {
-  padding: 0.5rem 1rem;
-  background-color: #007bff;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 4px;
+    background: var(--primary-yellow);
+    color: var(--primary-blue);
+    border: none;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.enroll-button:hover {
+    background: var(--light-yellow);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 32, 96, 0.2);
+}
+
+.paypal-container {
+    position: relative;
+}
+
+.paypal-button-container {
+    position: absolute;
+    top: 3px;
+    opacity: 0;
+}
+
+#headerImg {
+    margin-top: 2rem;
+    text-align: center;
+}
+
+#headerImg img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .coupon-box {
-  margin-top: 10px;
-  padding-left: 30px;
-  display: flex;
-  z-index: 20;
-  position: relative;
-  gap: 5px;
+    background: var(--light-gray);
+    padding: 1.5rem;
+    margin: 2rem auto;
+    border-radius: 12px;
+    max-width: 500px;
+    text-align: center;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: center;
 }
 
-#coupon-code {
-  width: 15%;
+.coupon-box .form-control {
+    border: 2px solid var(--primary-blue);
+    border-radius: 8px;
+    padding: 0.75rem;
+    width: 100%;
+    max-width: 300px;
 }
 
-.course-tabs {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 10px;
-  padding: 10px 20px;
-  background-color: #f8f8f8;
+.coupon-box .btn {
+    background: var(--primary-blue);
+    color: var(--white);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
-.course-tabs p {
-  padding: 10px 15px;
-  margin: 0;
-  background-color: #e0e0e0;
-  border-radius: 5px;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: background-color 0.3s;
-  flex: 1 0 auto;
-  text-align: center;
+.coupon-box .btn:hover {
+    background: #00308F;
+    transform: translateY(-1px);
 }
 
-.course-tabs p:hover {
-  color: #007bff;
-  border-bottom: 2px solid #007bff;
+.coupon-box .btn-danger {
+    background: #dc3545;
+}
+
+.coupon-box .btn-danger:hover {
+    background: #c82333;
 }
 
 .content {
-  padding: 2rem;
-  max-width: 1200px;
-  margin: auto;
+    max-width: 1200px;
+    margin: 3rem auto;
+    padding: 0 2rem;
 }
 
-h2 {
-  border-bottom: 2px solid #ccc;
-  padding-bottom: 0.5rem;
+.course-tabs {
+    display: flex;
+    gap: 0;
+    background: var(--light-gray);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
 }
 
+.course-tabs p {
+    padding: 1rem 1.5rem;
+    margin: 0;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    color: var(--dark-text);
+    border-bottom: 3px solid transparent;
+    flex: 1;
+    text-align: center;
+    min-width: 120px;
+}
+
+.course-tabs p:hover {
+    background: var(--primary-yellow);
+    color: var(--primary-blue);
+}
+
+.course-tabs p.active {
+    background: var(--primary-blue);
+    color: var(--white);
+    border-bottom-color: var(--primary-yellow);
+}
+
+section {
+    margin-bottom: 3rem;
+    padding: 2rem;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+}
+
+section h4 {
+    color: var(--primary-blue);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+section p {
+    line-height: 1.8;
+    color: var(--dark-text);
+    font-size: 1rem;
+}
+
+section ul {
+    list-style: none;
+    padding: 0;
+}
+
+section li {
+    padding: 0.75rem 0;
+    position: relative;
+    padding-left: 2rem;
+    color: var(--dark-text);
+}
+
+section li::before {
+    content: '•';
+    color: var(--primary-yellow);
+    font-weight: bold;
+    font-size: 1.5rem;
+    position: absolute;
+    left: 0.5rem;
+    top: 0.5rem;
+}
+
+/* Accordion styles */
 .accordion {
-  background-color: #eee;
-  border: none;
-  padding: 1rem;
-  width: 100%;
-  text-align: left;
-  outline: none;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  margin-top: 0.5rem;
+    background: var(--light-gray);
+    color: var(--primary-blue);
+    cursor: pointer;
+    padding: 1.5rem;
+    width: 100%;
+    text-align: left;
+    border: none;
+    border-radius: 8px;
+    margin: 0.5rem 0;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    font-family: 'Poppins', sans-serif;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .accordion:hover {
-  background-color: #ddd;
+    background: var(--primary-yellow);
+    color: var(--primary-blue);
+}
+
+.accordion::after {
+    content: '▼';
+    font-size: 0.8rem;
+    transition: transform 0.3s ease;
+}
+
+.accordion.active::after {
+    transform: rotate(180deg);
 }
 
 .panel {
-  display: none;
-  background-color: white;
-  padding: 1rem;
-  border: 1px solid #ccc;
-  border-top: none;
+    padding: 1.5rem;
+    background: var(--white);
+    display: none;
+    overflow: hidden;
+    border-radius: 0 0 8px 8px;
+    margin-bottom: 1rem;
+    border: 1px solid var(--light-gray);
 }
 
-.test-scores p {
-  margin: 0.5rem 0;
+.panel ul {
+    padding-left: 1rem;
 }
 
-.fees ul {
-  list-style: none;
-  padding: 0;
+.panel li {
+    padding: 0.5rem 0;
+    padding-left: 1.5rem;
 }
 
-.fees li {
-  margin: 0.5rem 0;
+.panel li::before {
+    content: '→';
+    color: var(--primary-blue);
+    font-weight: normal;
+    font-size: 1rem;
+    left: 0;
+    top: 0.4rem;
 }
 
+/* Success and error messages */
+.success-message {
+    color: #28a745;
+    font-weight: 500;
+}
+
+.error-message {
+    color: #dc3545;
+    font-weight: 500;
+}
+
+/* Loading state */
+.loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* Responsive design */
 @media (max-width: 768px) {
-  .pricing {
-    flex-direction: column;
-    align-items: flex-start;
-  }
+    .header {
+        min-height: 50vh;
+        padding: 2rem 0;
+    }
 
-  .hero {
-    padding: 1rem;
-  }
+    .hero {
+        padding: 1.5rem;
+        margin: 0 1rem;
+    }
 
-  .content {
-    padding: 1rem;
-  }
+    .hero h1 {
+        font-size: 2rem;
+    }
 
-  .coupon-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
+    .pricing {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
 
-  #coupon-code {
-    width: 63%;
-  }
+    .course-tabs {
+        flex-direction: column;
+    }
+
+    .course-tabs p {
+        border-bottom: 1px solid rgba(0, 32, 96, 0.1);
+        min-width: auto;
+    }
+
+    .content {
+        padding: 0 1rem;
+        margin: 2rem auto;
+    }
+
+    section {
+        padding: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .coupon-box {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    .coupon-box .form-control {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero h1 {
+        font-size: 1.75rem;
+    }
+
+    .hero p {
+        font-size: 1rem;
+    }
+
+    .price {
+        font-size: 1.5rem;
+    }
+
+    .enroll-button {
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+    }
+
+    section h4 {
+        font-size: 1.25rem;
+    }
+
+    .course-tabs p {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+/* Animation for section transitions */
+section {
+    animation: fadeInUp 0.6s ease-out;
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Smooth scrolling for anchor links */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Focus styles for accessibility */
+.accordion:focus,
+.btn:focus,
+.form-control:focus {
+    outline: 2px solid var(--primary-yellow);
+    outline-offset: 2px;
+}
+
+/* Print styles */
+@media print {
+    .header {
+        background: var(--primary-blue) !important;
+        color: black !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    
+    .enroll-button,
+    .coupon-box,
+    .paypal-container {
+        display: none !important;
+    }
 }
