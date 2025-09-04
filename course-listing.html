@@ -64,6 +64,7 @@
     <!-- Footer will be injected by footer.js -->
     <div id="footer"></div>
 
+        <script src="config.js"></script>
         <script>
             document.addEventListener('DOMContentLoaded', async function () {
                 // DOM elements
@@ -74,7 +75,7 @@
                 // Fetch courses from FastAPI
                 let courses = [];
                 try {
-                    const response = await fetch('http://localhost:8000/api/v1/courses');
+                    const response = await fetch('${API_BASE_URL}/courses');
                     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                     courses = await response.json();
                 } catch (error) {
@@ -99,7 +100,7 @@
                     }
 
                     try {
-                        const response = await fetch(`http://localhost:8000/api/v1/courses/enroll/${courseId}`, {
+                        const response = await fetch(`${API_BASE_URL}/courses/enroll/${courseId}`, {
                             method: 'POST',
                             headers: {
                                 'Authorization': `Bearer ${token}`,
