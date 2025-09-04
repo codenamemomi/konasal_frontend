@@ -3,23 +3,15 @@
 
 <head>
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>KONASAL TRAINING INSTITUTE - Career Courses & Training</title>
-
+    
     <!-- Google Fonts -->
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 
     <!-- Bootstrap & FontAwesome -->
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
 
     <!-- CSS -->
     <link rel="stylesheet" href="./assets/css/shared.css">
@@ -30,283 +22,640 @@
     <script src="./assets/js/footer.js" defer></script>
 
     <style>
+        /* In course.html <style> */
+        @import url('./assets/css/shared.css');
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--text-color);
+            background: white;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 3rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            opacity: 0.1;
+            transform: translate(150px, -150px);
+        }
+
+        .breadcrumb a {
+            color: var(--light-color) !important;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .breadcrumb a:hover {
+            color: var(--accent-color) !important;
+        }
+
+        .hero h1 {
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: white;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .pricing {
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .price {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .enroll-button {
+            background: var(--accent-color);
+            color: var(--primary-color);
+            border: none;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: var(--border-radius);
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .enroll-button:hover {
+            background: #c4911b;
+            transform: translateY(-2px);
+            box-shadow: var(--box-shadow);
+        }
+
+
         .paypal-container {
             position: relative;
         }
 
         .paypal-button-container {
+            position: static;
+            opacity: 1;
+        }
+
+        #headerImg {
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        #headerImg img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .coupon-box {
+            background: var(--light-gray);
+            padding: 1.5rem;
+            margin: 2rem auto;
+            border-radius: 12px;
+            max-width: 500px;
+            text-align: center;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        .coupon-box .form-control {
+            border: 2px solid var(--primary-blue);
+            border-radius: 8px;
+            padding: 0.75rem;
+        }
+
+        .coupon-box .btn {
+            margin-top: 0.5rem;
+            background: var(--primary-blue);
+            color: var(--white);
+            border: none;
+            padding: 0.5rem 1.5rem;
+        }
+
+        .coupon-box .btn:hover {
+            background: #00308F;
+        }
+
+        .content {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
+        }
+
+        .course-tabs {
+            display: flex;
+            gap: 0;
+            background: var(--light-gray);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .course-tabs p {
+            padding: 1rem 1.5rem;
+            margin: 0;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+            color: var(--dark-text);
+            border-bottom: 3px solid transparent;
+        }
+
+        .course-tabs p:hover {
+            background: var(--primary-yellow);
+            color: var(--primary-blue);
+        }
+
+        .course-tabs p.active {
+            background: var(--primary-blue);
+            color: var(--white);
+            border-bottom-color: var(--primary-yellow);
+        }
+
+        section {
+            margin-bottom: 3rem;
+            padding: 2rem;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+        }
+
+        section h4 {
+            color: var(--primary-blue);
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            font-size: 1.5rem;
+        }
+
+        section p {
+            line-height: 1.8;
+            color: var(--dark-text);
+        }
+
+        section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        section li {
+            padding: 0.5rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        section li::before {
+            content: '•';
+            color: var(--primary-yellow);
+            font-weight: bold;
             position: absolute;
-            top: 3px;
-            opacity: 0;
+            left: 0;
+        }
+
+        /* Accordion styles */
+        .accordion {
+            background: var(--light-gray);
+            color: var(--primary-blue);
+            cursor: pointer;
+            padding: 1.5rem;
+            width: 100%;
+            text-align: left;
+            border: none;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .accordion:hover {
+            background: var(--primary-yellow);
+            color: var(--primary-blue);
+        }
+
+        .panel {
+            padding: 1.5rem;
+            background: var(--white);
+            display: none;
+            overflow: hidden;
+            border-radius: 0 0 8px 8px;
+            margin-bottom: 1rem;
+        }
+
+        .panel ul {
+            padding-left: 1rem;
+        }
+
+        .panel li {
+            padding: 0.3rem 0;
+        }
+
+        /* Responsive design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .pricing {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1rem;
+            }
+            
+            .course-tabs {
+                flex-direction: column;
+            }
+            
+            .course-tabs p {
+                border-bottom: 1px solid rgba(0, 32, 96, 0.1);
+            }
+        }
+
+        /* Loading states */
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .success-message {
+            color: #28a745;
+            font-weight: 500;
+        }
+
+        .error-message {
+            color: #dc3545;
+            font-weight: 500;
         }
     </style>
 </head>
 
 <body>
     <div id="navbar"></div>
+    
     <header class="header">
-        <nav class="breadcrumb"><a href="course-listing.html" style="color: white;">Courses</a>&nbsp; > &nbsp;<span
-                id="nav-title"></span></nav>
+        <nav class="breadcrumb">
+            <a href="course-listing.html" style="color: white;">Courses</a>&nbsp; > &nbsp;
+            <span id="nav-title">Loading...</span>
+        </nav>
         <div class="hero">
-            <h1 id="title"></h1>
-            <p id="summary">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-                been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                scrambled it to make a type specimen book. It has survived not only five centuries,</p>
-            <p>Duration: <span id="duration"></span></p>
+            <h1 id="title">Loading...</h1>
+            <p id="summary">Loading course information...</p>
+            <p>Duration: <span id="duration">Loading...</span></p>
             <div class="pricing">
-                <span class="price" id="price"></span>
+                <span class="price" id="price">$0.00</span>
                 <div class="paypal-container">
-                    <button class="enroll-button">Enroll Now</button>
+                    <button class="enroll-button">
+                        <i class="fas fa-lock me-2"></i>Enroll Now
+                    </button>
                     <div id="paypal-button-container" class="paypal-button-container"></div>
                 </div>
             </div>
         </div>
         <div id="headerImg"></div>
     </header>
+    
     <div class="coupon-box">
         <input type="text" id="coupon-code" placeholder="Enter coupon code" class="form-control" />
-        <button id="apply-coupon" class="btn-outline-primary btn btn-sm">Apply Coupon</button>
-        <p id="coupon-message" style="font-size: 0.9em;margin: 0;"></p>
+        <button id="apply-coupon" class="btn">
+            <i class="fas fa-tag me-2"></i>Apply Coupon
+        </button>
+        <button id="remove-coupon" class="btn btn-danger" style="display: none; margin-top: 0.5rem;">
+            <i class="fas fa-times me-2"></i>Remove Coupon
+        </button>
+        <p id="coupon-message" style="font-size: 0.9em; margin: 0.5rem 0 0 0;"></p>
     </div>
 
     <main class="content">
         <div class="course-tabs">
-            <p data-target="about">Description</p>
+            <p data-target="about" class="active">Description</p>
             <p data-target="objective">Objectives</p>
             <p data-target="curriculum">Curriculum</p>
-            <p data-target="targetA">Target Audience</p>
+            <p data-target="targetA">Audience</p>
             <p data-target="coursebenefits">Benefits</p>
-            <p data-target="courseCompletions">Course Completion</p>
+            <p data-target="courseCompletions">Completion</p>
         </div>
+        
         <section id="about">
-            <h4>Description</h4>
-            <p id="description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum
-                has been the
-                industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
-                scrambled it to make a type specimen book. It has survived not only five centuries,Lorem Ipsum is simply
-                dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy
-                text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type
-                specimen book. It has survived not only five centuries,Lorem Ipsum is simply dummy text of the printing
-                and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
-                when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has
-                survived not only five centuries.</p>
+            <h4><i class="fas fa-info-circle me-2"></i>Description</h4>
+            <p id="description">Loading course description...</p>
         </section>
 
-        <section class="objectives" id="objective">
-            <h4>Course Objectives</h4>
+        <section id="objective" style="display: none;">
+            <h4><i class="fas fa-bullseye me-2"></i>Course Objectives</h4>
             <ul id="objectives"></ul>
         </section>
 
-        <section id="curriculum">
-            <h4>Course curriculum</h4>
+        <section id="curriculum" style="display: none;">
+            <h4><i class="fas fa-book me-2"></i>Course Curriculum</h4>
+            <div id="curriculum-content"></div>
         </section>
 
-        <section id="targetA">
-            <h4>Target Audience</h4>
+        <section id="targetA" style="display: none;">
+            <h4><i class="fas fa-users me-2"></i>Target Audience</h4>
             <ul id="target"></ul>
         </section>
 
-        <section id="coursebenefits">
-            <h4>Course Benefits</h4>
+        <section id="coursebenefits" style="display: none;">
+            <h4><i class="fas fa-gift me-2"></i>Course Benefits</h4>
             <ul id="coursebenefit"></ul>
         </section>
 
-        <section id="courseCompletions">
-            <h4>Course Completion</h4>
-            <p id="courseCompletion"></p>
+        <section id="courseCompletions" style="display: none;">
+            <h4><i class="fas fa-certificate me-2"></i>Course Completion</h4>
+            <p id="courseCompletion">Loading completion details...</p>
         </section>
     </main>
 
     <div id="footer"></div>
 
 
+    <script src="https://www.paypal.com/sdk/js?client-id=AZBBqmukW9x9cQ2HPU9tBWUMI4zQ0URlLgM-QCzUgp6rOfRyW8f_gfXdQQjM_koi6cmnTlJPXvgHSF6v&currency=USD"></script>
+
     <script>
-        const tabs = document.querySelectorAll(".course-tabs p");
-        const sections = document.querySelectorAll("section");
+        document.addEventListener('DOMContentLoaded', async function () {
+            const params = new URLSearchParams(window.location.search);
+            const courseId = params.get('id');
 
-        tabs.forEach(tab => {
-            tab.addEventListener("click", () => {
-                const targetId = tab.getAttribute("data-target");
-                const section = document.getElementById(targetId);
-                if (section) {
-                    const offset = 100;
-                    const top = section.getBoundingClientRect().top + window.pageYOffset - offset;
+            if (!courseId) {
+                window.location.href = "course-listing.html";
+                return;
+            }
 
-                    window.scrollTo({
-                        top,
-                        behavior: "smooth"
-                    });
+            // Show loading state
+            document.body.classList.add('loading');
+
+            let course;
+            let originalPrice; // Store original price for coupon logic
+            let finalPrice; // Store final price after coupon
+            try {
+                const response = await fetch(`http://localhost:8000/api/v1/courses/${courseId}`);
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                course = await response.json();
+                // Populate course data
+                populateCourseData(course);
+                setupEventListeners(course);
+                originalPrice = parseFloat(course.price);
+                finalPrice = originalPrice;
+                if (parseFloat(course.price) > 0) {
+                    setupPayPal(course); // Show PayPal for paid courses
+                } else {
+                    // For free courses, show enroll button without PayPal
+                    document.querySelector('.paypal-container').innerHTML = `
+                        <button class="enroll-button btn-enroll" onclick="enrollCourse(${course.id})">
+                            <i class="fas fa-plus-circle me-2"></i>Enroll Now
+                        </button>
+                    `;
                 }
-            });
-        });
+            } catch (error) {
+                console.error('Error fetching course:', error);
+                showError('Failed to load course details. Please try again later.');
+            } finally {
+                document.body.classList.remove('loading');
+            }
 
+            async function enrollCourse(courseId) {
+                const token = localStorage.getItem('access_token');
+                if (!token) {
+                    window.location.href = 'login.html';
+                    return false;
+                }
 
-    </script>
-    <script
-        src="https://www.paypal.com/sdk/js?client-id=AZBBqmukW9x9cQ2HPU9tBWUMI4zQ0URlLgM-QCzUgp6rOfRyW8f_gfXdQQjM_koi6cmnTlJPXvgHSF6v&currency=USD"></script>
+                try {
+                    const response = await fetch(`http://localhost:8000/api/v1/courses/enroll/${courseId}`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        }
+                    });
 
-    <script type="module" defer>
-        const params = new URLSearchParams(window.location.search);
-        const courseId = params.get('id');
+                    if (!response.ok) {
+                        if (response.status === 401) {
+                            localStorage.removeItem('access_token');
+                            localStorage.removeItem('user');
+                            window.location.href = 'login.html';
+                            return false;
+                        }
+                        const errorData = await response.json();
+                        throw new Error(errorData.detail || 'Failed to enroll');
+                    }
 
+                    const data = await response.json();
+                    alert(data.message);
+                    window.location.href = 'profile.html';
+                    return true;
+                } catch (error) {
+                    console.error('Error enrolling in course:', error);
+                    showError('Error enrolling in course: ' + error.message);
+                    return false;
+                }
+            }
 
-        if (!courseId || courseId.trim() === "") {
-            window.location.href = "course-listing.html";
-        }
+            function populateCourseData(course) {
+                // Basic info
+                document.getElementById("nav-title").textContent = course.name;
+                document.getElementById("title").textContent = course.name;
+                document.getElementById("price").textContent = `$${parseFloat(course.price).toFixed(2)}`;
+                document.getElementById("summary").textContent = course.summary;
+                document.getElementById("duration").textContent = course.duration || 'Not specified';
+                document.getElementById("description").textContent = course.description || 'No description available';
+                
+                // Course image
+                if (course.image) {
+                    document.getElementById("headerImg").innerHTML = `
+                        <img src="${course.image}" alt="${course.name}" style="max-width: 100%; border-radius: 12px;">
+                    `;
+                }
 
+                // Parse JSON fields
+                const parseField = (field) => {
+                    if (typeof field === 'string') {
+                        try {
+                            return JSON.parse(field);
+                        } catch {
+                            return [];
+                        }
+                    }
+                    return field || [];
+                };
 
-        const course = courses.find(c => c.name === courseId);
+                // Objectives
+                const objectives = parseField(course.courseobjectives);
+                const objectivesList = document.getElementById("objectives");
+                objectives.forEach(item => {
+                    const li = createListItem(item);
+                    objectivesList.appendChild(li);
+                });
 
+                // Curriculum
+                const curriculum = parseField(course.curriculum);
+                const curriculumContainer = document.getElementById("curriculum-content");
+                curriculum.forEach((module, index) => {
+                    const moduleDiv = createModule(module, index);
+                    curriculumContainer.appendChild(moduleDiv);
+                });
 
-        if (!course) {
-            window.location.href = "course-listing.html";
-        }
+                // Target audience
+                const targetAudience = parseField(course.targetaudience);
+                const targetList = document.getElementById("target");
+                targetAudience.forEach(item => {
+                    const li = createListItem(item);
+                    targetList.appendChild(li);
+                });
 
+                // Benefits
+                const benefits = parseField(course.coursebenefits);
+                const benefitsList = document.getElementById("coursebenefit");
+                benefits.forEach(item => {
+                    const li = createListItem(item);
+                    benefitsList.appendChild(li);
+                });
 
-        // Course data
-        import courses from './assets/js/courses.js';
-        document.addEventListener('DOMContentLoaded', function () {
+                // Completion
+                document.getElementById("courseCompletion").textContent = 
+                    course.coursecompletion || 'No completion details available.';
+            }
 
-
-            document.getElementById("nav-title").innerHTML = course.name;
-            document.getElementById("title").innerHTML = course.name;
-            document.getElementById("price").innerHTML = "$" + course.price;
-            document.getElementById("summary").innerHTML = course.summary;
-            document.getElementById("duration").innerHTML = course.duration;
-            document.getElementById("description").innerHTML = course.description;
-            document.getElementById("headerImg").innerHTML = `<img src="${course.image}" />`;
-            const obj = document.getElementById("objectives");
-
-            course.courseObjectives.forEach(item => {
+            function createListItem(item) {
                 const li = document.createElement("li");
+                if (typeof item === 'string' && item.includes(":")) {
+                    const parts = item.split(":");
+                    const boldPart = parts[0] + ":";
+                    const rest = parts.slice(1).join(":").trim();
+                    li.innerHTML = `<strong>${boldPart}</strong> ${rest}`;
+                } else {
+                    li.textContent = item;
+                }
+                return li;
+            }
 
-                const parts = item.split(":");
-                const boldPart = parts[0] + ":";
-                const rest = parts.slice(1).join(":").trim();
-
-                li.innerHTML = `<strong>${boldPart}</strong> ${rest}`;
-                obj.appendChild(li);
-            });
-
-
-
-            const container = document.getElementById("curriculum");
-
-            course.curriculum.forEach(module => {
-
+            function createModule(module, index) {
                 const moduleDiv = document.createElement("div");
                 moduleDiv.classList.add("module");
 
-
                 const button = document.createElement("button");
                 button.classList.add("accordion");
-                button.textContent = module.day;
-
+                button.innerHTML = `<i class="fas fa-chevron-down me-2"></i> ${module.day || module.title || `Module ${index + 1}`}`;
 
                 const panel = document.createElement("div");
                 panel.classList.add("panel");
 
-
                 const ul = document.createElement("ul");
-                module.topics.forEach(topic => {
+                const topics = module.topics || [];
+                topics.forEach(topic => {
                     const li = document.createElement("li");
                     li.textContent = topic;
                     ul.appendChild(li);
                 });
                 panel.appendChild(ul);
 
-
                 moduleDiv.appendChild(button);
                 moduleDiv.appendChild(panel);
-                container.appendChild(moduleDiv);
-
 
                 button.addEventListener("click", () => {
-                    panel.style.display = panel.style.display === "block" ? "none" : "block";
+                    const isOpen = panel.style.display === "block";
+                    panel.style.display = isOpen ? "none" : "block";
+                    button.innerHTML = isOpen ? 
+                        `<i class="fas fa-chevron-down me-2"></i> ${module.day || module.title || `Module ${index + 1}`}` :
+                        `<i class="fas fa-chevron-up me-2"></i> ${module.day || module.title || `Module ${index + 1}`}`;
                 });
 
-            });
+                return moduleDiv;
+            }
 
-            const target = document.getElementById("target");
+            function setupEventListeners(course) {
+                // Tab navigation
+                const tabs = document.querySelectorAll(".course-tabs p");
+                const sections = document.querySelectorAll("section");
 
-            course.targetAudience.forEach(item => {
-                const li = document.createElement("li");
+                tabs.forEach(tab => {
+                    tab.addEventListener("click", () => {
+                        tabs.forEach(t => t.classList.remove('active'));
+                        tab.classList.add('active');
 
-                const parts = item.split(":");
-                const boldPart = parts[0] + ":";
-                const rest = parts.slice(1).join(":").trim();
+                        const targetId = tab.getAttribute("data-target");
+                        sections.forEach(section => {
+                            section.style.display = section.id === targetId ? 'block' : 'none';
+                        });
 
-                li.innerHTML = `<strong>${boldPart}</strong> ${rest}`;
-                target.appendChild(li);
-            });
+                        const section = document.getElementById(targetId);
+                        if (section) {
+                            const offset = 100;
+                            const top = section.offsetTop - offset;
+                            window.scrollTo({ top, behavior: 'smooth' });
+                        }
+                    });
+                });
 
-            const coursebenefit = document.getElementById("coursebenefit");
+                // Coupon functionality
+                const couponInput = document.getElementById('coupon-code');
+                const applyButton = document.getElementById('apply-coupon');
+                const removeButton = document.getElementById('remove-coupon');
+                const couponMessage = document.getElementById('coupon-message');
+                const priceDisplay = document.getElementById('price');
 
-            course.courseBenefits.forEach(item => {
-                const li = document.createElement("li");
+                applyButton.addEventListener('click', async () => {
+                    const code = couponInput.value.trim().toLowerCase();
+                    // For now, keep client-side coupon logic since backend doesn't support it
+                    if (code === "konasal30") {
+                        finalPrice = originalPrice * 0.7;
+                        priceDisplay.textContent = `$${finalPrice.toFixed(2)}`;
+                        couponMessage.textContent = "Coupon applied! 30% discount.";
+                        couponMessage.className = 'success-message';
+                        couponInput.disabled = true;
+                        applyButton.disabled = true;
+                        removeButton.style.display = 'block';
+                        // Re-render PayPal buttons with updated price
+                        document.getElementById('paypal-button-container').innerHTML = '';
+                        setupPayPal(course);
+                    } else {
+                        couponMessage.textContent = "Invalid coupon code.";
+                        couponMessage.className = 'error-message';
+                    }
+                });
 
-                const parts = item.split(":");
-                const boldPart = parts[0] + ":";
-                const rest = parts.slice(1).join(":").trim();
+                removeButton.addEventListener('click', () => {
+                    finalPrice = originalPrice;
+                    priceDisplay.textContent = `$${finalPrice.toFixed(2)}`;
+                    couponInput.disabled = false;
+                    applyButton.disabled = false;
+                    couponInput.value = '';
+                    couponMessage.textContent = '';
+                    couponMessage.className = '';
+                    removeButton.style.display = 'none';
+                    // Re-render PayPal buttons with original price
+                    document.getElementById('paypal-button-container').innerHTML = '';
+                    setupPayPal(course);
+                });
+            }
 
-                li.innerHTML = `<strong>${boldPart}</strong> ${rest}`;
-                coursebenefit.appendChild(li);
-            });
-
-            const courseCompletion = document.getElementById("courseCompletion").innerHTML = course.courseCompletion;
-
-
-
-            let originalPrice = parseFloat(course.price.replace(/,/g, ''));
-            let finalPrice = originalPrice;
-
-            const couponInput = document.getElementById('coupon-code');
-            const applyButton = document.getElementById('apply-coupon');
-            const couponMessage = document.getElementById('coupon-message');
-            const priceDisplay = document.getElementById('price');
-
-            // Create a remove button dynamically
-            const removeButton = document.createElement('button');
-            removeButton.textContent = "Remove Coupon";
-            removeButton.className = "btn btn-sm btn-danger";
-            removeButton.style.display = "none"; // initially hidden
-
-            // Insert remove button after the apply button
-            applyButton.parentNode.appendChild(removeButton);
-
-            // Handle applying the coupon
-            applyButton.addEventListener('click', () => {
-                const code = couponInput.value.trim().toLowerCase();
-
-                if (code === "konasal30") {
-                    finalPrice = originalPrice * 0.7; // 30% off
-                    priceDisplay.innerHTML = "$" + finalPrice.toLocaleString();
-                    couponMessage.innerText = "Coupon applied! 30% off.";
-                    couponMessage.style.color = "green";
-                    couponInput.disabled = true;
-                    applyButton.disabled = true;
-                    removeButton.style.display = "inline-block";
-                } else {
-                    finalPrice = originalPrice; // reset
-                    priceDisplay.innerHTML = "$" + finalPrice.toLocaleString();
-                    couponMessage.innerText = "Invalid coupon.";
-                    couponMessage.style.color = "red";
-                }
-            });
-
-            // Handle removing the coupon
-            removeButton.addEventListener('click', () => {
-                finalPrice = originalPrice;
-                priceDisplay.innerHTML = "$" + finalPrice.toLocaleString();
-                couponInput.disabled = false;
-                applyButton.disabled = false;
-                couponInput.value = '';
-                couponMessage.innerText = '';
-                removeButton.style.display = "none";
-            });
-
-
+        function setupPayPal(course) {
             paypal.Buttons({
                 style: {
                     layout: 'vertical',
@@ -314,32 +663,110 @@
                     shape: 'rect',
                     label: 'paypal'
                 },
-                createOrder: function (data, actions) {
-                    return actions.order.create({
-                        purchase_units: [{
-                            description: `Enrollment for ${course.name}`,
-                            amount: {
-                                value: finalPrice // Replace with your course price
-                            }
-                        }]
-                    });
+                createOrder: async function (data, actions) {
+                    const token = localStorage.getItem('access_token');
+                    console.log('Access token from localStorage:', token); // Debug
+                    if (!token) {
+                        console.log('No token in localStorage, redirecting to login');
+                        window.location.href = 'login.html';
+                        return;
+                    }
+                    if (isNaN(finalPrice) || finalPrice <= 0) {
+                        console.error('Invalid finalPrice:', finalPrice);
+                        showError('Invalid course price. Please refresh and try again.');
+                        throw new Error('Invalid course price');
+                    }
+                    try {
+                        console.log('Sending create-order request with payload:', {
+                            course_id: parseInt(course.id),
+                            amount: finalPrice,
+                            currency: 'USD'
+                        });
+                        console.log('Request headers:', {
+                            Authorization: `Bearer ${token}`,
+                            'Content-Type': 'application/json'
+                        });
+                        const response = await fetch('http://localhost:8000/api/v1/payments/create-order', {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${token}`,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                course_id: String(course.id),
+                                amount: finalPrice,
+                                currency: 'USD'
+                            }),
+                            credentials: 'include' // Include cookies
+                        });
+                        if (!response.ok) {
+                            const errorData = await response.json();
+                            console.error('Create order error response:', errorData);
+                            throw new Error(errorData.detail || 'Failed to create order');
+                        }
+                        const orderData = await response.json();
+                        console.log('Create order response:', orderData);
+                        return orderData.order_id;
+                    } catch (error) {
+                        console.error('Error creating order:', error);
+                        showError('Failed to create payment order. Please try again.');
+                        throw error;
+                    }
                 },
-                onApprove: function (data, actions) {
-                    return actions.order.capture().then(function (details) {
-                        alert('Payment Successful! Thank you, ' + details.payer.name.given_name + '!');
-                        // You can also redirect to a success page here
-                    });
+                onApprove: async function (data, actions) {
+                    const token = localStorage.getItem('access_token');
+                    console.log('Access token for capture:', token); // Debug
+                    if (!token) {
+                        console.log('No token found, redirecting to login');
+                        window.location.href = 'login.html';
+                        return;
+                    }
+                    try {
+                        console.log('Capturing order:', data.orderID);
+                        const response = await fetch(`http://localhost:8000/api/v1/payments/capture/${data.orderID}`, {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': `Bearer ${token}`,
+                                'Content-Type': 'application/json'
+                            },
+                            credentials: 'include'
+                        });
+                        if (!response.ok) {
+                            const errorData = await response.json();
+                            console.error('Capture order error response:', errorData);
+                            throw new Error(errorData.detail || 'Failed to capture payment');
+                        }
+                        const captureData = await response.json();
+                        console.log('Capture response:', captureData);
+                        const enrolled = await enrollCourse(course.id);
+                        if (enrolled) {
+                            alert('Payment and enrollment successful! Thank you!');
+                            window.location.href = 'profile.html';
+                        } else {
+                            alert('Payment successful, but enrollment failed. Please contact support.');
+                        }
+                    } catch (error) {
+                        console.error('Payment capture error:', error);
+                        showError('Payment could not be completed. Please try again.');
+                    }
                 },
                 onError: function (err) {
-                    console.error(err);
-                    alert('Payment could not be completed. Please try again.');
+                    console.error('PayPal error:', err);
+                    showError('Payment could not be completed. Please try again.');
                 }
             }).render('#paypal-button-container');
+            document.querySelector('.paypal-button-container').style.opacity = '1';
+            document.querySelector('.enroll-button').style.display = 'none';
+        }
 
+            function showError(message) {
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'alert alert-danger';
+                errorDiv.textContent = message;
+                document.querySelector('.content').prepend(errorDiv);
+                setTimeout(() => errorDiv.remove(), 5000); // Remove after 5 seconds
+            }
         });
     </script>
-
-
 </body>
-
 </html>

@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -122,9 +121,6 @@
             color: #aaa;
         }
 
-
-
-
         .checkbox-group {
             display: flex;
             align-items: flex-start;
@@ -182,7 +178,6 @@
             position: relative;
             overflow: hidden;
         }
-
 
         .register-btn:hover {
             transform: translateY(-3px);
@@ -275,7 +270,6 @@
             color: #f5576c;
         }
 
-
         .step {
             width: 8px;
             height: 8px;
@@ -347,21 +341,24 @@
             font-size: 30px;
             font-weight: bold;
         }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 0.95rem;
+        }
     </style>
 </head>
-
 <body>
     <div class="register-container">
         <div class="logo">
             <h1>Konasal</h1>
         </div>
-
         <div class="welcome-text">
             <h2>Create Account</h2>
             <p>Join thousands of learners on their educational journey</p>
         </div>
-
-
         <form class="register-form" id="registerForm">
             <div class="form-row">
                 <div class="form-group">
@@ -373,48 +370,42 @@
                     <input type="text" id="lastName" name="lastName" placeholder="Doe" required>
                 </div>
             </div>
-
             <div class="form-group">
                 <label for="email">Email Address</label>
                 <input type="email" id="email" name="email" placeholder="john.doe@example.com" required>
             </div>
-
             <div class="form-group">
                 <label for="phone">Phone Number</label>
                 <input type="tel" id="phone" name="phone_number" placeholder="+1 (555) 123-4567">
             </div>
-
             <div class="form-row">
-                
                 <div class="form-group">
                     <label for="gender">Gender</label>
                     <select id="gender" name="gender">
                         <option value="">Select Gender</option>
-                        <option value="male">Male</option>
-                        <option value="female">Female</option>
+                        <option value="MALE">Male</option>
+                        <option value="FEMALE">Female</option>
+                        <option value="OTHER">Other</option>
                     </select>
                 </div>
+                <div class="form-group">
+                    <label for="dateOfBirth">Date of Birth</label>
+                    <input type="date" id="dateOfBirth" name="dateOfBirth">
+                </div>
             </div>
-
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" id="password" name="password" placeholder="Create a strong password" required>
             </div>
-
             <div class="form-group">
                 <label for="confirmPassword">Confirm Password</label>
-                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password"
-                    required>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
             </div>
-
-
-
             <button type="submit" class="register-btn" id="registerBtn">Create Account</button>
             <div class="register-link">
                 Have an account? <a href="login.html">Login</a>
             </div>
         </form>
-
         <script src="assets/js/register.js"></script>
     </div>
 </body>

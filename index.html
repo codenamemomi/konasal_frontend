@@ -1,542 +1,601 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>KONASAL TRAINING INSTITUTE - Career Courses & Training</title>
-
     <!-- Google Fonts -->
-
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap"
-        rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
     <!-- Bootstrap & FontAwesome -->
-
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
     <!-- CSS -->
     <link rel="stylesheet" href="./assets/css/shared.css">
     <link rel="stylesheet" href="./assets/css/index.css">
-
     <!-- JS -->
     <script src="./assets/js/navbar.js" defer></script>
     <script src="./assets/js/footer.js" defer></script>
+    <style>
+        :root {
+            --primary-color: #002060;
+            --secondary-color: #FFC000;
+            --accent-color: #FFE9A3;
+            --light-color: #F2F2F2;
+            --dark-color: #333333;
+            --text-color: #333333;
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+        
+        /* Improved promo slider */
+        .promo-slider {
+            margin-top: 76px;
+        }
+        
+        .promo-slide {
+            height: 500px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+        }
+        
+        .promo-slide::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to right, rgba(0, 32, 96, 0.8), rgba(0, 32, 96, 0.5));
+        }
+        
+        .promo-slide-content {
+            position: absolute;
+            top: 50%;
+            left: 10%;
+            transform: translateY(-50%);
+            max-width: 600px;
+            color: white;
+            z-index: 2;
+        }
+        
+        .promo-slide-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .promo-slide-text {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .promo-slide-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            border-radius: 4px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+        
+        .promo-slide-btn:hover {
+            background-color: #e6ac00;
+            transform: translateY(-3px);
+            color: var(--primary-color);
+        }
+        
+        /* Enhanced course cards */
+        .courses-section {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: var(--primary-color);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 4px;
+            background-color: var(--secondary-color);
+            margin: 1rem auto;
+        }
+        
+        .course-card {
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            height: 100%;
+            margin-bottom: 2rem;
+            border: 1px solid #eee;
+        }
+        
+        .course-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .course-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .course-body {
+            padding: 1.5rem;
+        }
+        
+        .course-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: var(--primary-color);
+        }
+        
+        .course-description {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+        
+        .course-meta {
+            margin-bottom: 1.5rem;
+        }
+        
+        .course-category {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+        }
+        
+        .btn-enroll {
+            background-color: var(--primary-color);
+            color: white;
+            width: 100%;
+            padding: 10px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        
+        .btn-enroll:hover {
+            background-color: #00194d;
+        }
+        
+        /* Enhanced about section */
+        .about-section {
+            padding: 5rem 0;
+            background-color: var(--light-color);
+        }
+        
+        .about-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+        }
+        
+        .about-text {
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+        
+        .feature-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .feature-list li {
+            margin-bottom: 1rem;
+            padding-left: 30px;
+            position: relative;
+        }
+        
+        .feature-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--secondary-color);
+            font-weight: bold;
+        }
+        
+        /* Enhanced testimonials */
+        .testimonials-section {
+            padding: 5rem 0;
+            background-color: white;
+        }
+        
+        .testimonial-card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 2rem;
+            box-shadow: var(--shadow);
+            margin-bottom: 2rem;
+            height: 100%;
+            border: 1px solid #eee;
+        }
+        
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding: 0 1rem;
+        }
+        
+        .testimonial-text::before,
+        .testimonial-text::after {
+            content: '"';
+            font-size: 3rem;
+            color: var(--secondary-color);
+            opacity: 0.3;
+            position: absolute;
+        }
+        
+        .testimonial-text::before {
+            top: -1rem;
+            left: -0.5rem;
+        }
+        
+        .testimonial-text::after {
+            bottom: -2rem;
+            right: -0.5rem;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .author-img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 1rem;
+        }
+        
+        .author-name {
+            font-weight: 600;
+            margin-bottom: 0.25rem;
+            color: var(--primary-color);
+        }
+        
+        .author-title {
+            font-size: 0.9rem;
+            color: #666;
+            margin: 0;
+        }
+        
+        /* Enhanced CTA section */
+        .cta-section {
+            padding: 5rem 0;
+            background-color: var(--primary-color);
+            color: white;
+        }
+        
+        .cta-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .cta-text {
+            font-size: 1.2rem;
+            max-width: 800px;
+            margin: 0 auto 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .cta-subtext {
+            margin-bottom: 2rem;
+        }
+        
+        .btn-cta {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+            padding: 12px 30px;
+            font-weight: 600;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        
+        .btn-cta:hover {
+            background-color: #e6ac00;
+            color: var(--primary-color);
+        }
+        
+        /* Enhanced signup section */
+        .signup-offer-section {
+            padding: 4rem 0;
+            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
+        }
+        
+        .signup-slide-btn {
+            display: inline-block;
+            padding: 15px 40px;
+            background-color: var(--primary-color);
+            color: white;
+            border-radius: 4px;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+        
+        .signup-slide-btn:hover {
+            transform: scale(1.05);
+            background-color: #00194d;
+            color: white;
+        }
+        
+        /* Responsive improvements */
+        @media (max-width: 768px) {
+            .promo-slide {
+                height: 400px;
+            }
+            
+            .promo-slide-content {
+                left: 5%;
+                right: 5%;
+                text-align: center;
+            }
+            
+            .promo-slide-title {
+                font-size: 2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .cta-title {
+                font-size: 1.7rem;
+            }
+            
+            .cta-text {
+                font-size: 1.1rem;
+            }
+        }
+    </style>
 </head>
-
 <body>
-
     <div id="navbar"></div>
 
     <!-- Main Content (starts below fixed header) -->
-
     <main>
-
         <!-- Promo Banner Slider -->
-
         <div id="promoSlider" class="carousel slide promo-slider" data-bs-ride="carousel">
-
             <div class="carousel-indicators">
-
                 <button type="button" data-bs-target="#promoSlider" data-bs-slide-to="0" class="active"></button>
-
                 <button type="button" data-bs-target="#promoSlider" data-bs-slide-to="1"></button>
-
                 <button type="button" data-bs-target="#promoSlider" data-bs-slide-to="2"></button>
-
             </div>
-
             <div class="carousel-inner">
-
                 <!-- Slide 1 -->
-
-                <div class="carousel-item active promo-slide"
-                    style="background-image: url('./assets/images/banner1.PNG');">
-
+                <div class="carousel-item active promo-slide" style="background-image: url('./assets/images/banner1.PNG');">
                     <div class="promo-slide-content">
-
                         <h2 class="promo-slide-title">30% Off All Career Courses</h2>
-
-                        <p class="promo-slide-text">Register today and get instant access to all our career-focused
-                            programs at a discounted price. Offer valid until December 31, 2025.</p>
-
+                        <p class="promo-slide-text">Register today and get instant access to all our career-focused programs at a discounted price. Offer valid until December 31, 2025.</p>
                         <a href="course-listing.html" class="promo-slide-btn">
-
                             <i class="me-2 fas fa-gift"></i>Claim Your Discount
-
                         </a>
-
                     </div>
-
                 </div>
-
-
-
                 <!-- Slide 2 -->
-
                 <div class="carousel-item promo-slide" style="background-image: url('./assets/images/banner2.PNG');">
-
                     <div class="promo-slide-content">
-
                         <h2 class="promo-slide-title">New Cybersecurity Program</h2>
-
-                        <p class="promo-slide-text">Launch your career in one of the fastest-growing fields with our
-                            comprehensive cybersecurity training program.</p>
-
+                        <p class="promo-slide-text">Launch your career in one of the fastest-growing fields with our comprehensive cybersecurity training program.</p>
                         <a href="course-listing.html" class="promo-slide-btn">
-
                             <i class="me-2 fas fa-shield-alt"></i>Learn More
-
                         </a>
-
                     </div>
-
                 </div>
-
-
-
                 <!-- Slide 3 -->
-
                 <div class="carousel-item promo-slide" style="background-image: url('./assets/images/banner3.PNG');">
-
                     <div class="promo-slide-content">
-
                         <h2 class="promo-slide-title">Job Placement Guarantee</h2>
-
                         <p class="promo-slide-text">We offer Job Search Services at affordable prices.</p>
-
                         <a href="course-listing.html" class="promo-slide-btn">
-
                             <i class="me-2 fas fa-briefcase"></i>Explore our plan packages
-
                         </a>
-
                     </div>
-
                 </div>
-
             </div>
-
             <button class="carousel-control-prev" type="button" data-bs-target="#promoSlider" data-bs-slide="prev">
-
                 <span class="carousel-control-prev-icon"></span>
-
                 <span class="visually-hidden">Previous</span>
-
             </button>
-
             <button class="carousel-control-next" type="button" data-bs-target="#promoSlider" data-bs-slide="next">
-
                 <span class="carousel-control-next-icon"></span>
-
                 <span class="visually-hidden">Next</span>
-
             </button>
-
         </div>
 
-
-
         <!-- Courses Section -->
-
         <section class="courses-section">
-
             <div class="container">
-
                 <h2 class="section-title">Hot Career Courses in 2025</h2>
-
-
-
                 <div class="row">
-
-                    <!-- Course 1 -->
-
-                    <div class="col-md-5 col-lg-3">
-
+                    <!-- Course 1: Cyber Security (ID: 5) -->
+                    <div class="col-md-6 col-lg-3">
                         <div class="course-card">
-
                             <img src="./assets/images/cybersecurity.PNG" class="course-img" alt="Cyber Security">
-
                             <div class="course-body">
-
                                 <h3 class="course-title">Cyber Security Career Program</h3>
-
-                                <p class="course-description">Become a security expert with hands-on training in ethical
-                                    hacking and network defense.</p>
-
+                                <p class="course-description">Become a security expert with hands-on training in ethical hacking and network defense.</p>
                                 <div class="d-flex justify-content-center course-meta">
-
                                     <span class="course-category">Cyber Security</span>
-
-                                    <!-- <span class="course-price">$199</span> -->
-
                                 </div>
-                                <a href="course.html?id=Cybersecurity Analysis">
+                                <a href="course.html?id=5">
                                     <button class="btn btn-enroll">
-
                                         <i class="me-2 fas fa-plus-circle"></i>Enroll Now
-
                                     </button>
                                 </a>
                             </div>
-
                         </div>
-
                     </div>
-
-
-
-                    <!-- Course 2 -->
-
-                    <div class="col-md-5 col-lg-3">
-
+                    <!-- Course 2: Artificial Intelligence (ID: 1) -->
+                    <div class="col-md-6 col-lg-3">
                         <div class="course-card">
-
                             <img src="./assets/images/ai.jpg" class="course-img" alt="AI">
-
                             <div class="course-body">
-
                                 <h3 class="course-title">Artificial Intelligence</h3>
-
-                                <p class="course-description">Designed to provide learners with the foundational and advanced knowledge of Artificial Intelligence (AI) techniques and applications. </p>
-
+                                <p class="course-description">Designed to provide learners with the foundational and advanced knowledge of Artificial Intelligence (AI) techniques and applications.</p>
                                 <div class="d-flex justify-content-center course-meta">
-
                                     <span class="course-category">AI</span>
-
-                                    <!-- <span class="course-price">$249</span> -->
-
                                 </div>
-
-                                 <a href="course.html?id=Artificial Intelligence">
+                                <a href="course.html?id=1">
                                     <button class="btn btn-enroll">
-
                                         <i class="me-2 fas fa-plus-circle"></i>Enroll Now
-
                                     </button>
                                 </a>
-
                             </div>
-
                         </div>
-
                     </div>
-
-
-
-                    <!-- Course 3 -->
-
-                    <div class="col-md-5 col-lg-3">
-
+                    <!-- Course 3: Data Science (ID: 6) -->
+                    <div class="col-md-6 col-lg-3">
                         <div class="course-card">
-
                             <img src="./assets/images/data%20science.PNG" class="course-img" alt="Data Science">
-
                             <div class="course-body">
-
                                 <h3 class="course-title">Data Science Career Bootcamp</h3>
-
-                                <p class="course-description">Become a data expert with Python, machine learning, and
-                                    data visualization techniques.</p>
-
+                                <p class="course-description">Become a data expert with Python, machine learning, and data visualization techniques.</p>
                                 <div class="d-flex justify-content-center course-meta">
-
                                     <span class="course-category">Data Science</span>
-
-                                    <!-- <span class="course-price">$299</span> -->
-
                                 </div>
-
-                                 <a href="course.html?id=Data Science">
+                                <a href="course.html?id=6">
                                     <button class="btn btn-enroll">
-
                                         <i class="me-2 fas fa-plus-circle"></i>Enroll Now
-
                                     </button>
                                 </a>
-
                             </div>
-
                         </div>
-
                     </div>
-
-
-
-                    <!-- Course 4 -->
-
-                    <div class="col-md-5 col-lg-3">
-
+                    <!-- Course 4: Azure Admin (ID: 4) -->
+                    <div class="col-md-6 col-lg-3">
                         <div class="course-card">
-
                             <img src="./assets/images/azure.png" class="course-img" alt="Azure">
-
                             <div class="course-body">
-
                                 <h3 class="course-title">Azure Admin</h3>
-
                                 <p class="course-description">Designed to provide participants with foundational and advanced skills required to effectively manage and administer Microsoft Azure.</p>
-
                                 <div class="d-flex justify-content-center course-meta">
-
                                     <span class="course-category">Cloud</span>
-
-                                    <!-- <span class="course-price">$199</span> -->
-
                                 </div>
-
-                                 <a href="course.html?id=Azure Admin">
+                                <a href="course.html?id=4">
                                     <button class="btn btn-enroll">
-
                                         <i class="me-2 fas fa-plus-circle"></i>Enroll Now
-
                                     </button>
                                 </a>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
-
-
-
                 <div class="mt-4 text-center">
-
-                    <a href="course-listing.html" class="btn-outline-primary btn btn-lg">
-
+                    <a href="course-listing.html" class="btn btn-outline-primary btn-lg">
                         <i class="me-2 fas fa-book"></i>View All Career Courses
-
                     </a>
-
                 </div>
-
             </div>
-
         </section>
-
-
 
         <!-- About/Train With Us Section -->
-
         <section class="about-section">
-
             <div class="container">
-
                 <div class="row">
-
                     <div class="col-lg-6">
-
                         <div class="about-column">
-
                             <h2 class="about-title">Who We Are?</h2>
-
-                            <p class="about-text">At Konasal Training Institute, we are dedicated to empowering
-
-                                individuals through exceptional learning experiences. We are proud to partner with
-                                leading companies to bring you expert trainers who are industry leaders in their fields.
-
-                            </p>
-
-                            <p class="about-text">Together, we strive to deliver high-quality training that
-
-                                equips you with the skills and knowledge necessary to excel in your career. Join us and
-                                unlock your potential!</p>
-
+                            <p class="about-text">At Konasal Training Institute, we are dedicated to empowering individuals through exceptional learning experiences. We are proud to partner with leading companies to bring you expert trainers who are industry leaders in their fields.</p>
+                            <p class="about-text">Together, we strive to deliver high-quality training that equips you with the skills and knowledge necessary to excel in your career. Join us and unlock your potential!</p>
                         </div>
-
                     </div>
-
                     <div class="col-lg-6">
-
                         <div class="about-column">
-
                             <h2 class="about-title">Why Train With Us?</h2>
-
                             <ul class="feature-list">
-
                                 <li><strong>Skilled Trainers:</strong> Learn from experienced instructors.</li>
-
-                                <li><strong>Comprehensive Curriculum:</strong> Programs combine theory and practice for
-                                    skill enhancement or career launch.</li>
-
-                                <li><strong>Live Online Learning:</strong> Select instructors that fit your schedule.
-                                </li>
-
-                                <li><strong>Career Growth:</strong> Boost employability and support professional goals.
-                                </li>
-
+                                <li><strong>Comprehensive Curriculum:</strong> Programs combine theory and practice for skill enhancement or career launch.</li>
+                                <li><strong>Live Online Learning:</strong> Select instructors that fit your schedule.</li>
+                                <li><strong>Career Growth:</strong> Boost employability and support professional goals.</li>
                                 <li><strong>Networking:</strong> Connect with peers and industry professionals.</li>
-
                             </ul>
-
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
         </section>
 
-
-
         <!-- Testimonials Section -->
-
         <section class="testimonials-section">
-
             <div class="container">
-
                 <h2 class="section-title">Our Students Testimonials</h2>
-
-
-
                 <div class="row">
-
                     <div class="col-md-6">
-
                         <div class="testimonial-card">
-
-                            <p class="testimonial-text">The Cyber Security Career Program completely transformed my
-                                professional life. I went from an IT support role to a security analyst position within
-                                3 months.</p>
-
+                            <p class="testimonial-text">The Cyber Security Career Program completely transformed my professional life. I went from an IT support role to a security analyst position within 3 months.</p>
                             <div class="testimonial-author">
-
                                 <img src="./assets/images/blog-2.jpg" class="author-img" alt="John D.">
-
                                 <div>
-
                                     <h4 class="author-name">John D.</h4>
-
                                     <p class="author-title">Security Analyst at TechSecure</p>
-
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
-
-
-
                     <div class="col-md-6">
-
                         <div class="testimonial-card">
-
-                            <p class="testimonial-text">Thanks to the Cloud Engineer Career Track, I landed my dream job
-                                at a major tech company with a 40% salary increase!</p>
-
+                            <p class="testimonial-text">Thanks to the Cloud Engineer Career Track, I landed my dream job at a major tech company with a 40% salary increase!</p>
                             <div class="testimonial-author">
-
                                 <img src="./assets/images/course-2.jpg" class="author-img" alt="Sarah M.">
-
                                 <div>
-
                                     <h4 class="author-name">Sarah M.</h4>
-
                                     <p class="author-title">Cloud Engineer at DataCloud</p>
-
                                 </div>
-
                             </div>
-
                         </div>
-
                     </div>
-
                 </div>
-
             </div>
-
         </section>
 
         <!-- SIGN UP NOW and RECEIVE Section -->
-        <section class="py-5 text-white text-center signup-offer-section"
-            style="background-color: var(--accent-color);">
-
+        <section class="py-5 text-white text-center signup-offer-section">
             <div class="container">
-
-                <h2 class="mb-3 display-5 fw-bold" style="color: var(--primary-color);">SIGN UP NOW AND RECEIVE</h2>
-
-                <p class="mb-4 lead" style="color: var(--primary-color);">Register on our website and get a <strong>FREE
-                        e-course!</strong></p>
-
-                <!-- <a href="signup-form.html" class="px-4 py-2 btn btn-dark fw-bold" style="border-radius: 30px;">Sign Up Now</a> -->
-
-                <a href="signup-form.html" class="signup-slide-btn fw-bold"> Sign Up Now </a>
-
+                <h2 class="mb-3 display-5 fw-bold">SIGN UP NOW AND RECEIVE</h2>
+                <p class="mb-4 lead">Register on our website and get a <strong>FREE e-course!</strong></p>
+                <a href="register.html" class="signup-slide-btn fw-bold">Sign Up Now</a>
             </div>
-
         </section>
-
-
-
 
         <!-- CTA Section -->
-
         <section class="cta-section">
-
             <div class="text-center container">
-
                 <h2 class="cta-title">Become a part of our training community – we look forward to welcoming you!</h2>
-
                 <p class="cta-text">
-
                     Join the Konasal Training Institute and start your journey towards a brighter future.
-
                     Whether you're enhancing your skills or exploring a new career, we're here to support you.
-
                     Let's unlock your potential together!
-
                 </p>
-
                 <p class="cta-subtext">For more information about our courses and enrollment options:</p>
-
                 <a href="course-listing.html" class="btn btn-cta">
-
                     <i class="me-2 fas fa-user-graduate"></i>
-
                     Explore our individual courses to discover detailed information tailored for you!
-
                 </a>
-
             </div>
-
         </section>
-
     </main>
 
-
-
     <!-- Footer -->
-
     <div id="footer"></div>
 
-
-
     <!-- jQuery & Bootstrap JS -->
-
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
     <script src="./assets/js/shared.js"></script>
-
-
-
-
 </body>
-
 </html>
