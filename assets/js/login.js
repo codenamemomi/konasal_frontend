@@ -1,5 +1,4 @@
 // assets/js/login.js
-import { API_BASE_URL } from '/config.js';
 document.getElementById('loginForm').addEventListener('submit', async (event) => {
     event.preventDefault(); // Prevent default form submission
 
