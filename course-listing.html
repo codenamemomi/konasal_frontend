@@ -75,7 +75,7 @@
                 // Fetch courses from FastAPI
                 let courses = [];
                 try {
-                    const response = await fetch('${API_BASE_URL}/courses');
+                    const response = await fetch(`${API_BASE_URL}/courses`);
                     if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                     courses = await response.json();
                 } catch (error) {

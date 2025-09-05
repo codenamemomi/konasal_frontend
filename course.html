@@ -686,7 +686,7 @@
                             Authorization: `Bearer ${token}`,
                             'Content-Type': 'application/json'
                         });
-                        const response = await fetch('${API_BASE_URL}/payments/create-order', {
+                        const response = await fetch(`${API_BASE_URL}/payments/create-order`, {
                             method: 'POST',
                             headers: {
                                 'Authorization': `Bearer ${token}`,

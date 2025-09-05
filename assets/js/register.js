@@ -1,6 +1,6 @@
 // assets/js/register.js
 // Declare formData globally to make it accessible across functions
-import { API_BASE_URL } from '../config.js';
+import { API_BASE_URL } from '/config.js';
 let formData = null;
 
 document.getElementById('registerForm').addEventListener('submit', async (event) => {
@@ -23,7 +23,7 @@ document.getElementById('registerForm').addEventListener('submit', async (event)
     };
 
     try {
-        const response = await fetch('${API_BASE_URL}/auth/signup', {
+        const response = await fetch(`${API_BASE_URL}/auth/signup`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
@@ -90,7 +90,7 @@ function showVerificationPrompt(message) {
         }
 
         try {
-            const response = await fetch('${API_BASE_URL}/auth/verify-email', {
+            const response = await fetch(`${API_BASE_URL}/auth/verify-email`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email, token })
@@ -134,7 +134,7 @@ function showVerificationPrompt(message) {
         }
 
         try {
-            const response = await fetch('${API_BASE_URL}/auth/resend-verification', {
+            const response = await fetch(`${API_BASE_URL}/auth/resend-verification`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ email })
