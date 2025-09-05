@@ -1,5 +1,5 @@
 // assets/js/login.js
-import { API_BASE_URL } from '../config.js';
+import { API_BASE_URL } from '/config.js';
 document.getElementById('loginForm').addEventListener('submit', async (event) => {
     event.preventDefault(); // Prevent default form submission
 
@@ -14,7 +14,7 @@ document.getElementById('loginForm').addEventListener('submit', async (event) =>
     };
 
     try {
-        const response = await fetch('${API_BASE_URL}/auth/login', {
+        const response = await fetch(`${API_BASE_URL}/auth/login`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(formData)
