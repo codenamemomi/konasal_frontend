@@ -394,7 +394,7 @@
 
     <div id="footer"></div>
 
-
+    <script src="config.js"></script>
     <script src="https://www.paypal.com/sdk/js?client-id=AZBBqmukW9x9cQ2HPU9tBWUMI4zQ0URlLgM-QCzUgp6rOfRyW8f_gfXdQQjM_koi6cmnTlJPXvgHSF6v&currency=USD"></script>
 
     <script>
@@ -414,7 +414,7 @@
             let originalPrice; // Store original price for coupon logic
             let finalPrice; // Store final price after coupon
             try {
-                const response = await fetch(`http://localhost:8000/api/v1/courses/${courseId}`);
+                const response = await fetch(`${API_BASE_URL}/courses/${courseId}`);
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 course = await response.json();
                 // Populate course data
@@ -447,7 +447,7 @@
                 }
 
                 try {
-                    const response = await fetch(`http://localhost:8000/api/v1/courses/enroll/${courseId}`, {
+                    const response = await fetch(`${API_BASE_URL}/courses/enroll/${courseId}`, {
                         method: 'POST',
                         headers: {
                             'Authorization': `Bearer ${token}`,
@@ -686,7 +686,7 @@
                             Authorization: `Bearer ${token}`,
                             'Content-Type': 'application/json'
                         });
-                        const response = await fetch('http://localhost:8000/api/v1/payments/create-order', {
+                        const response = await fetch('${API_BASE_URL}/payments/create-order', {
                             method: 'POST',
                             headers: {
                                 'Authorization': `Bearer ${token}`,
@@ -723,7 +723,7 @@
                     }
                     try {
                         console.log('Capturing order:', data.orderID);
-                        const response = await fetch(`http://localhost:8000/api/v1/payments/capture/${data.orderID}`, {
+                        const response = await fetch(`${API_BASE_URL}/payments/capture/${data.orderID}`, {
                             method: 'POST',
                             headers: {
                                 'Authorization': `Bearer ${token}`,
