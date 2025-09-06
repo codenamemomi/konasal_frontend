@@ -1,6 +1,5 @@
 // assets/js/register.js
 // Declare formData globally to make it accessible across functions
-import { API_BASE_URL } from '/config.js';
 let formData = null;
 
 document.getElementById('registerForm').addEventListener('submit', async (event) => {
