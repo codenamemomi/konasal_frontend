@@ -137,3 +137,16 @@ if (mobileMenuToggle && mainNav && overlay) {
         mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
     });
 }
+
+// Dropdown toggle for mobile
+document.addEventListener('click', function(e) {
+    const isDropdownToggle = e.target.classList.contains('dropdown-toggle') || e.target.closest('.dropdown-toggle');
+    if (!isDropdownToggle) return;
+
+    e.preventDefault();
+    const toggle = e.target.classList.contains('dropdown-toggle') ? e.target : e.target.closest('.dropdown-toggle');
+    const dropdownMenu = toggle.nextElementSibling;
+    if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
+        dropdownMenu.classList.toggle('show');
+    }
+});
