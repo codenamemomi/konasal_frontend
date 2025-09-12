@@ -1,28 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>KONASAL TRAINING INSTITUTE - Career Courses & Training</title>
-    
-    <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-
-    <!-- Bootstrap & FontAwesome -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-
-    <!-- CSS -->
     <link rel="stylesheet" href="./assets/css/shared.css">
     <link rel="stylesheet" href="./assets/css/course.css">
-
-    <!-- JS -->
     <script src="./assets/js/navbar.js" defer></script>
     <script src="./assets/js/footer.js" defer></script>
-
     <style>
-        /* In course.html <style> */
         @import url('./assets/css/shared.css');
 
         body {
@@ -110,7 +99,6 @@
             transform: translateY(-2px);
             box-shadow: var(--box-shadow);
         }
-
 
         .paypal-container {
             position: relative;
@@ -238,7 +226,6 @@
             left: 0;
         }
 
-        /* Accordion styles */
         .accordion {
             background: var(--light-gray);
             color: var(--primary-blue);
@@ -276,7 +263,6 @@
             padding: 0.3rem 0;
         }
 
-        /* Responsive design */
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2rem;
@@ -297,7 +283,6 @@
             }
         }
 
-        /* Loading states */
         .loading {
             opacity: 0.7;
             pointer-events: none;
@@ -314,7 +299,6 @@
         }
     </style>
 </head>
-
 <body>
     <div id="navbar"></div>
     
@@ -330,9 +314,9 @@
             <div class="pricing">
                 <span class="price" id="price">$0.00</span>
                 <div class="paypal-container">
-                    <button class="enroll-button">
+                    <a href="payment.html" class="enroll-button">
                         <i class="fas fa-lock me-2"></i>Enroll Now
-                    </button>
+                    </a>
                     <div id="paypal-button-container" class="paypal-button-container"></div>
                 </div>
             </div>
@@ -411,27 +395,16 @@
             document.body.classList.add('loading');
 
             let course;
-            let originalPrice; // Store original price for coupon logic
-            let finalPrice; // Store final price after coupon
+            let originalPrice;
+            let finalPrice;
             try {
                 const response = await fetch(`${API_BASE_URL}/courses/${courseId}`);
                 if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
                 course = await response.json();
-                // Populate course data
                 populateCourseData(course);
                 setupEventListeners(course);
                 originalPrice = parseFloat(course.price);
                 finalPrice = originalPrice;
-                if (parseFloat(course.price) > 0) {
-                    setupPayPal(course); // Show PayPal for paid courses
-                } else {
-                    // For free courses, show enroll button without PayPal
-                    document.querySelector('.paypal-container').innerHTML = `
-                        <button class="enroll-button btn-enroll" onclick="enrollCourse(${course.id})">
-                            <i class="fas fa-plus-circle me-2"></i>Enroll Now
-                        </button>
-                    `;
-                }
             } catch (error) {
                 console.error('Error fetching course:', error);
                 showError('Failed to load course details. Please try again later.');
@@ -439,46 +412,7 @@
                 document.body.classList.remove('loading');
             }
 
-            async function enrollCourse(courseId) {
-                const token = localStorage.getItem('access_token');
-                if (!token) {
-                    window.location.href = 'login.html';
-                    return false;
-                }
-
-                try {
-                    const response = await fetch(`${API_BASE_URL}/courses/enroll/${courseId}`, {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${token}`,
-                            'Content-Type': 'application/json'
-                        }
-                    });
-
-                    if (!response.ok) {
-                        if (response.status === 401) {
-                            localStorage.removeItem('access_token');
-                            localStorage.removeItem('user');
-                            window.location.href = 'login.html';
-                            return false;
-                        }
-                        const errorData = await response.json();
-                        throw new Error(errorData.detail || 'Failed to enroll');
-                    }
-
-                    const data = await response.json();
-                    alert(data.message);
-                    window.location.href = 'profile.html';
-                    return true;
-                } catch (error) {
-                    console.error('Error enrolling in course:', error);
-                    showError('Error enrolling in course: ' + error.message);
-                    return false;
-                }
-            }
-
             function populateCourseData(course) {
-                // Basic info
                 document.getElementById("nav-title").textContent = course.name;
                 document.getElementById("title").textContent = course.name;
                 document.getElementById("price").textContent = `$${parseFloat(course.price).toFixed(2)}`;
@@ -486,14 +420,12 @@
                 document.getElementById("duration").textContent = course.duration || 'Not specified';
                 document.getElementById("description").textContent = course.description || 'No description available';
                 
-                // Course image
                 if (course.image) {
                     document.getElementById("headerImg").innerHTML = `
                         <img src="${course.image}" alt="${course.name}" style="max-width: 100%; border-radius: 12px;">
                     `;
                 }
 
-                // Parse JSON fields
                 const parseField = (field) => {
                     if (typeof field === 'string') {
                         try {
@@ -505,7 +437,6 @@
                     return field || [];
                 };
 
-                // Objectives
                 const objectives = parseField(course.courseobjectives);
                 const objectivesList = document.getElementById("objectives");
                 objectives.forEach(item => {
@@ -513,7 +444,6 @@
                     objectivesList.appendChild(li);
                 });
 
-                // Curriculum
                 const curriculum = parseField(course.curriculum);
                 const curriculumContainer = document.getElementById("curriculum-content");
                 curriculum.forEach((module, index) => {
@@ -521,7 +451,6 @@
                     curriculumContainer.appendChild(moduleDiv);
                 });
 
-                // Target audience
                 const targetAudience = parseField(course.targetaudience);
                 const targetList = document.getElementById("target");
                 targetAudience.forEach(item => {
@@ -529,7 +458,6 @@
                     targetList.appendChild(li);
                 });
 
-                // Benefits
                 const benefits = parseField(course.coursebenefits);
                 const benefitsList = document.getElementById("coursebenefit");
                 benefits.forEach(item => {
@@ -537,7 +465,6 @@
                     benefitsList.appendChild(li);
                 });
 
-                // Completion
                 document.getElementById("courseCompletion").textContent = 
                     course.coursecompletion || 'No completion details available.';
             }
@@ -590,7 +517,6 @@
             }
 
             function setupEventListeners(course) {
-                // Tab navigation
                 const tabs = document.querySelectorAll(".course-tabs p");
                 const sections = document.querySelectorAll("section");
 
@@ -613,7 +539,6 @@
                     });
                 });
 
-                // Coupon functionality
                 const couponInput = document.getElementById('coupon-code');
                 const applyButton = document.getElementById('apply-coupon');
                 const removeButton = document.getElementById('remove-coupon');
@@ -622,7 +547,6 @@
 
                 applyButton.addEventListener('click', async () => {
                     const code = couponInput.value.trim().toLowerCase();
-                    // For now, keep client-side coupon logic since backend doesn't support it
                     if (code === "konasal30") {
                         finalPrice = originalPrice * 0.7;
                         priceDisplay.textContent = `$${finalPrice.toFixed(2)}`;
@@ -631,9 +555,6 @@
                         couponInput.disabled = true;
                         applyButton.disabled = true;
                         removeButton.style.display = 'block';
-                        // Re-render PayPal buttons with updated price
-                        document.getElementById('paypal-button-container').innerHTML = '';
-                        setupPayPal(course);
                     } else {
                         couponMessage.textContent = "Invalid coupon code.";
                         couponMessage.className = 'error-message';
@@ -649,122 +570,15 @@
                     couponMessage.textContent = '';
                     couponMessage.className = '';
                     removeButton.style.display = 'none';
-                    // Re-render PayPal buttons with original price
-                    document.getElementById('paypal-button-container').innerHTML = '';
-                    setupPayPal(course);
                 });
             }
-
-        function setupPayPal(course) {
-            paypal.Buttons({
-                style: {
-                    layout: 'vertical',
-                    color: 'blue',
-                    shape: 'rect',
-                    label: 'paypal'
-                },
-                createOrder: async function (data, actions) {
-                    const token = localStorage.getItem('access_token');
-                    console.log('Access token from localStorage:', token); // Debug
-                    if (!token) {
-                        console.log('No token in localStorage, redirecting to login');
-                        window.location.href = 'login.html';
-                        return;
-                    }
-                    if (isNaN(finalPrice) || finalPrice <= 0) {
-                        console.error('Invalid finalPrice:', finalPrice);
-                        showError('Invalid course price. Please refresh and try again.');
-                        throw new Error('Invalid course price');
-                    }
-                    try {
-                        console.log('Sending create-order request with payload:', {
-                            course_id: parseInt(course.id),
-                            amount: finalPrice,
-                            currency: 'USD'
-                        });
-                        console.log('Request headers:', {
-                            Authorization: `Bearer ${token}`,
-                            'Content-Type': 'application/json'
-                        });
-                        const response = await fetch(`${API_BASE_URL}/payments/create-order`, {
-                            method: 'POST',
-                            headers: {
-                                'Authorization': `Bearer ${token}`,
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({
-                                course_id: String(course.id),
-                                amount: finalPrice,
-                                currency: 'USD'
-                            }),
-                            credentials: 'include' // Include cookies
-                        });
-                        if (!response.ok) {
-                            const errorData = await response.json();
-                            console.error('Create order error response:', errorData);
-                            throw new Error(errorData.detail || 'Failed to create order');
-                        }
-                        const orderData = await response.json();
-                        console.log('Create order response:', orderData);
-                        return orderData.order_id;
-                    } catch (error) {
-                        console.error('Error creating order:', error);
-                        showError('Failed to create payment order. Please try again.');
-                        throw error;
-                    }
-                },
-                onApprove: async function (data, actions) {
-                    const token = localStorage.getItem('access_token');
-                    console.log('Access token for capture:', token); // Debug
-                    if (!token) {
-                        console.log('No token found, redirecting to login');
-                        window.location.href = 'login.html';
-                        return;
-                    }
-                    try {
-                        console.log('Capturing order:', data.orderID);
-                        const response = await fetch(`${API_BASE_URL}/payments/capture/${data.orderID}`, {
-                            method: 'POST',
-                            headers: {
-                                'Authorization': `Bearer ${token}`,
-                                'Content-Type': 'application/json'
-                            },
-                            credentials: 'include'
-                        });
-                        if (!response.ok) {
-                            const errorData = await response.json();
-                            console.error('Capture order error response:', errorData);
-                            throw new Error(errorData.detail || 'Failed to capture payment');
-                        }
-                        const captureData = await response.json();
-                        console.log('Capture response:', captureData);
-                        const enrolled = await enrollCourse(course.id);
-                        if (enrolled) {
-                            alert('Payment and enrollment successful! Thank you!');
-                            window.location.href = 'profile.html';
-                        } else {
-                            alert('Payment successful, but enrollment failed. Please contact support.');
-                        }
-                    } catch (error) {
-                        console.error('Payment capture error:', error);
-                        showError('Payment could not be completed. Please try again.');
-                    }
-                },
-                onError: function (err) {
-                    console.error('PayPal error:', err);
-                    showError('Payment could not be completed. Please try again.');
-                }
-            }).render('#paypal-button-container');
-            document.querySelector('.paypal-button-container').style.opacity = '1';
-            document.querySelector('.enroll-button').style.display = 'none';
-        }
 
             function showError(message) {
                 const errorDiv = document.createElement('div');
                 errorDiv.className = 'alert alert-danger';
                 errorDiv.textContent = message;
                 document.querySelector('.content').prepend(errorDiv);
-                setTimeout(() => errorDiv.remove(), 5000); // Remove after 5 seconds
+                setTimeout(() => errorDiv.remove(), 5000);
             }
         });
     </script>
