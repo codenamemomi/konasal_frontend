@@ -1,48 +1,105 @@
 /* Profile Page Styles */
 .profile-section {
     padding: 3.5rem 0;
-    background-color: var(--light-color);
+    background-color: var(--light-color); /* #f8f9fa */
 }
 
 .profile-card {
     background-color: white;
-    border-radius: var(--border-radius);
-    box-shadow: var(--box-shadow);
+    border-radius: var(--border-radius); /* 8px */
+    box-shadow: var(--box-shadow); /* 0 4px 12px rgba(0,0,0,0.1) */
     padding: 2rem;
     border: 1px solid rgba(10, 36, 99, 0.1);
     margin-bottom: 2rem;
 }
 
 .profile-title {
+    font-family: 'Poppins', sans-serif;
     font-size: 1.8rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--primary-color); /* #0a2463 */
     margin-bottom: 1.5rem;
     position: relative;
     padding-bottom: 0.6rem;
+    text-align: center;
 }
 
 .profile-title:after {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 0;
+    left: 50%;
+    transform: translateX(-50%);
     width: 50px;
     height: 3px;
-    background-color: var(--accent-color);
+    background-color: var(--accent-color); /* #DAA520 */
 }
 
 .profile-info {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Open Sans', sans-serif;
     font-size: 1rem;
-    color: var(--text-light);
+    color: var(--text-light); /* #6c757d */
     margin-bottom: 1rem;
 }
 
 .profile-info label {
+    font-family: 'Poppins', sans-serif;
     font-weight: 600;
-    color: var(--primary-color);
-    margin-right: 0.5rem;
+    color: var(--primary-color); /* #0a2463 */
+    margin-bottom: 0.3rem;
+    display: block;
+}
+
+.profile-info input,
+.profile-info select {
+    width: 100%;
+    padding: 0.6rem 1rem;
+    border: 1px solid rgba(10, 36, 99, 0.2);
+    border-radius: var(--border-radius); /* 8px */
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
+    color: var(--text-color); /* #333 */
+    transition: var(--transition); /* all 0.3s ease */
+}
+
+.profile-info input:focus,
+.profile-info select:focus {
+    outline: none;
+    border-color: var(--accent-color); /* #DAA520 */
+    box-shadow: 0 0 5px rgba(218, 165, 32, 0.3);
+}
+
+.profile-info input[type="file"] {
+    padding: 0.4rem;
+}
+
+.profile-picture-preview {
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.profile-picture-preview img {
+    width: 128px;
+    height: 128px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid rgba(10, 36, 99, 0.1);
+}
+
+.error-message {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.9rem;
+    color: #dc3545;
+    text-align: center;
+    margin-top: 0.5rem;
+}
+
+.success-message {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 0.9rem;
+    color: var(--success-color); /* #4caf50 */
+    text-align: center;
+    margin-top: 0.5rem;
 }
 
 .profile-actions {
@@ -53,34 +110,42 @@
 }
 
 .btn-profile {
-    background-color: var(--primary-color);
-    color: var(--accent-color);
+    background-color: var(--primary-color); /* #0a2463 */
+    color: var(--accent-color); /* #DAA520 */
     padding: 0.7rem 1.8rem;
+    font-family: 'Poppins', sans-serif;
     font-size: 1rem;
     font-weight: 600;
     border-radius: 50px;
     border: none;
-    transition: var(--transition);
+    transition: var(--transition); /* all 0.3s ease */
     text-decoration: none;
     display: inline-flex;
     align-items: center;
 }
 
 .btn-profile:hover {
-    background-color: #c4911b; /* Darker shade of #DAA520 */
+    background-color: #e6b800; /* Lighter gold, consistent with btn-auth hover */
+    color: var(--primary-color); /* #0a2463 */
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-profile:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
 }
 
 .btn-logout {
     background-color: #dc3545;
     color: white;
     padding: 0.7rem 1.8rem;
+    font-family: 'Poppins', sans-serif;
     font-size: 1rem;
     font-weight: 600;
     border-radius: 50px;
     border: none;
-    transition: var(--transition);
+    transition: var(--transition); /* all 0.3s ease */
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -89,7 +154,7 @@
 .btn-logout:hover {
     background-color: #c82333;
     transform: translateY(-3px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 /* Enrolled Courses Section */
@@ -99,10 +164,11 @@
 }
 
 .enrolled-courses-title {
+    font-family: 'Poppins', sans-serif;
     text-align: center;
     font-size: 1.8rem;
     font-weight: 700;
-    color: var(--primary-color);
+    color: var(--primary-color); /* #0a2463 */
     margin-bottom: 2.5rem;
     position: relative;
 }
@@ -112,27 +178,27 @@
     display: block;
     width: 70px;
     height: 3px;
-    background-color: var(--accent-color);
+    background-color: var(--accent-color); /* #DAA520 */
     margin: 1rem auto 0;
     border-radius: 2px;
 }
 
-/* Reuse course-card styles from index.css for consistency */
+/* Course Card (reused from index.css for consistency) */
 .course-card {
     border: none;
-    border-radius: var(--border-radius);
+    border-radius: var(--border-radius); /* 8px */
     overflow: hidden;
-    box-shadow: var(--box-shadow);
-    transition: var(--transition);
+    box-shadow: var(--box-shadow); /* 0 4px 12px rgba(0,0,0,0.1) */
+    transition: var(--transition); /* all 0.3s ease */
     margin-bottom: 1.8rem;
-    background-color: var(--light-color);
+    background-color: var(--light-color); /* #f8f9fa */
     border: 1px solid rgba(10, 36, 99, 0.1);
 }
 
 .course-card:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 25px rgba(0,0,0,0.15);
-    border-color: var(--accent-color);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.15);
+    border-color: var(--accent-color); /* #DAA520 */
 }
 
 .course-img {
@@ -146,14 +212,16 @@
 }
 
 .course-title {
+    font-family: 'Poppins', sans-serif;
     font-size: 1.15rem;
     font-weight: 600;
     margin-bottom: 0.6rem;
-    color: var(--primary-color);
+    color: var(--primary-color); /* #0a2463 */
 }
 
 .course-description {
-    color: var(--text-light);
+    font-family: 'Open Sans', sans-serif;
+    color: var(--text-light); /* #6c757d */
     margin-bottom: 1.1rem;
     font-size: 0.9rem;
 }
@@ -166,35 +234,46 @@
 }
 
 .course-category {
-    background-color: var(--primary-color);
+    background-color: var(--primary-color); /* #0a2463 */
     color: white;
     padding: 0.2rem 0.6rem;
     border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
     font-size: 0.7rem;
     font-weight: 500;
 }
 
+.course-progress {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 500;
+    color: var(--accent-color); /* #DAA520 */
+    font-size: 0.8rem;
+}
+
 .btn-enroll {
-    background-color: var(--primary-color);
-    color: var(--accent-color);
+    background-color: var(--primary-color); /* #0a2463 */
+    color: var(--accent-color); /* #DAA520 */
     border: none;
     padding: 0.4rem 1.1rem;
     border-radius: 50px;
+    font-family: 'Poppins', sans-serif;
     font-weight: 500;
-    transition: var(--transition);
+    transition: var(--transition); /* all 0.3s ease */
     width: 100%;
     margin-top: 0.8rem;
     font-size: 0.85rem;
+    text-align: center;
 }
 
 .btn-enroll:hover {
-    background-color: #c4911b; /* Darker shade of #DAA520 */
+    background-color: #e6b800; /* Lighter gold, consistent with btn-auth hover */
+    color: var(--primary-color); /* #0a2463 */
 }
 
-/* Responsive adjustments */
-@media (max-width: 767.98px) {
+/* Responsive Adjustments */
+@media (max-width: 991.98px) {
     .profile-section {
-        padding: 2rem 0;
+        padding: 2.5rem 0;
     }
 
     .profile-card {
@@ -210,11 +289,42 @@
     }
 
     .enrolled-courses-section {
-        padding: 2rem 0;
+        padding: 2.5rem 0;
     }
 
     .enrolled-courses-title {
         font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 767.98px) {
+    .profile-section {
+        padding: 2rem 0;
+    }
+
+    .profile-card {
+        padding: 1.2rem;
+    }
+
+    .profile-title {
+        font-size: 1.5rem;
+    }
+
+    .profile-info {
+        font-size: 0.9rem;
+    }
+
+    .enrolled-courses-section {
+        padding: 2rem 0;
+    }
+
+    .enrolled-courses-title {
+        font-size: 1.5rem;
+    }
+
+    .profile-picture-preview img {
+        width: 100px;
+        height: 100px;
     }
 }
 
@@ -224,10 +334,11 @@
     }
 
     .profile-info {
-        font-size: 0.9rem;
+        font-size: 0.85rem;
     }
 
-    .btn-profile, .btn-logout {
+    .btn-profile,
+    .btn-logout {
         padding: 0.5rem 1.2rem;
         font-size: 0.9rem;
     }
@@ -240,10 +351,8 @@
     .enrolled-courses-title {
         font-size: 1.4rem;
     }
+
     .course-progress {
-    font-weight: 500;
-    color: var(--accent-color);
-    font-size: 0.8rem;
+        font-size: 0.75rem;
     }
 }
-
