@@ -64,117 +64,79 @@
     <!-- Footer will be injected by footer.js -->
     <div id="footer"></div>
 
-        <script src="/config.js"></script>
-        <script>
-            document.addEventListener('DOMContentLoaded', async function () {
-                // DOM elements
-                const courseContainer = document.getElementById('course-container');
-                const searchInput = document.getElementById('search-input');
-                const categoryFilter = document.getElementById('category-filter');
+    <script src="/config.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async function () {
+            // DOM elements
+            const courseContainer = document.getElementById('course-container');
+            const searchInput = document.getElementById('search-input');
+            const categoryFilter = document.getElementById('category-filter');
 
-                // Fetch courses from FastAPI
-                let courses = [];
-                try {
-                    const response = await fetch(`${API_BASE_URL}/courses`);
-                    if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-                    courses = await response.json();
-                } catch (error) {
-                    console.error('Error fetching courses:', error);
-                    courseContainer.innerHTML = '<div class="no-results">Failed to load courses. Please try again later.</div>';
+            // Fetch courses from FastAPI
+            let courses = [];
+            try {
+                const response = await fetch(`${API_BASE_URL}/courses`);
+                if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+                courses = await response.json();
+            } catch (error) {
+                console.error('Error fetching courses:', error);
+                courseContainer.innerHTML = '<div class="no-results">Failed to load courses. Please try again later.</div>';
+                return;
+            }
+
+            // Display all courses initially
+            displayCourses(courses);
+
+            // Add event listeners for search and filter
+            searchInput.addEventListener('input', filterCourses);
+            categoryFilter.addEventListener('change', filterCourses);
+
+            // Function to display courses
+            function displayCourses(coursesToDisplay) {
+                courseContainer.innerHTML = '';
+
+                if (coursesToDisplay.length === 0) {
+                    courseContainer.innerHTML = '<div class="no-results">No courses match your search criteria.</div>';
                     return;
                 }
 
-                // Display all courses initially
-                displayCourses(courses);
-
-                // Add event listeners for search and filter
-                searchInput.addEventListener('input', filterCourses);
-                categoryFilter.addEventListener('change', filterCourses);
-
-                // Function to enroll in a course
-                async function enrollCourse(courseId) {
-                    const token = localStorage.getItem('access_token');
-                    if (!token) {
-                        window.location.href = 'login.html';
-                        return;
-                    }
-
-                    try {
-                        const response = await fetch(`${API_BASE_URL}/courses/enroll/${courseId}`, {
-                            method: 'POST',
-                            headers: {
-                                'Authorization': `Bearer ${token}`,
-                                'Content-Type': 'application/json'
-                            }
-                        });
-
-                        if (!response.ok) {
-                            if (response.status === 401) {
-                                localStorage.removeItem('access_token');
-                                localStorage.removeItem('user');
-                                window.location.href = 'login.html';
-                                return;
-                            }
-                            const errorData = await response.json();
-                            throw new Error(errorData.detail || 'Failed to enroll');
-                        }
-
-                        const data = await response.json();
-                        alert(data.message);
-                        // Optionally redirect to profile.html to see enrolled courses
-                        // window.location.href = 'profile.html';
-                    } catch (error) {
-                        console.error('Error enrolling in course:', error);
-                        alert('Error enrolling in course: ' + error.message);
-                    }
-                }
-
-                // Function to display courses
-                function displayCourses(coursesToDisplay) {
-                    courseContainer.innerHTML = '';
-
-                    if (coursesToDisplay.length === 0) {
-                        courseContainer.innerHTML = '<div class="no-results">No courses match your search criteria.</div>';
-                        return;
-                    }
-
-                    coursesToDisplay.forEach(course => {
-                        const courseCard = document.createElement('div');
-                        courseCard.className = 'course-card';
-                        courseCard.innerHTML = `
-                            <img src="${course.image || './assets/images/default-course.jpg'}" alt="${course.name}">
-                            <div class="course-card-content">
-                                <h3>${course.name}</h3>
-                                <p><i>${course.category}</i></p>
-                                <p>${course.summary}</p>
-                                <div class="course-actions">
-                                    <a href="course.html?id=${course.id}" class="btn btn-learn-more">Learn More</a>
-                                    <button onclick="enrollCourse(${course.id})" class="btn btn-enroll">
-                                        <i class="fas fa-plus-circle me-2"></i>Enroll Now
-                                    </button>
-                                </div>
+                coursesToDisplay.forEach(course => {
+                    const courseCard = document.createElement('div');
+                    courseCard.className = 'course-card';
+                    courseCard.innerHTML = `
+                        <img src="${course.image || './assets/images/default-course.jpg'}" alt="${course.name}">
+                        <div class="course-card-content">
+                            <h3>${course.name}</h3>
+                            <p><i>${course.category}</i></p>
+                            <p>${course.summary}</p>
+                            <div class="course-actions">
+                                <a href="course.html?id=${course.id}" class="btn btn-learn-more">Learn More</a>
+                                <a href="payment.html?id=${course.id}" class="btn btn-enroll">
+                                    <i class="fas fa-plus-circle me-2"></i>Enroll Now
+                                </a>
                             </div>
-                        `;
-                        courseContainer.appendChild(courseCard);
-                    });
-                }
+                        </div>
+                    `;
+                    courseContainer.appendChild(courseCard);
+                });
+            }
 
-                // Function to filter courses based on search and category
-                function filterCourses() {
-                    const searchTerm = searchInput.value.toLowerCase();
-                    const selectedCategory = categoryFilter.value;
+            // Function to filter courses based on search and category
+            function filterCourses() {
+                const searchTerm = searchInput.value.toLowerCase();
+                const selectedCategory = categoryFilter.value;
 
-                    const filteredCourses = courses.filter(course => {
-                        const matchesSearch = course.name.toLowerCase().includes(searchTerm) ||
-                            (course.description && course.description.toLowerCase().includes(searchTerm));
-                        const matchesCategory = selectedCategory === '' || course.category === selectedCategory;
+                const filteredCourses = courses.filter(course => {
+                    const matchesSearch = course.name.toLowerCase().includes(searchTerm) ||
+                        (course.description && course.description.toLowerCase().includes(searchTerm));
+                    const matchesCategory = selectedCategory === '' || course.category === selectedCategory;
 
-                        return matchesSearch && matchesCategory;
-                    });
+                    return matchesSearch && matchesCategory;
+                });
 
-                    displayCourses(filteredCourses);
-                }
-            });
-        </script>
+                displayCourses(filteredCourses);
+            }
+        });
+    </script>
 </body>
 </html>
