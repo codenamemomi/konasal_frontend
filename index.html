@@ -6,368 +6,25 @@
     <title>KONASAL TRAINING INSTITUTE - Career Courses & Training</title>
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
-    <!-- Bootstrap & FontAwesome -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-    <!-- CSS -->
-    <link rel="stylesheet" href="./assets/css/shared.css">
-    <link rel="stylesheet" href="./assets/css/index.css">
-    <!-- JS -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./assets/css/shared.css?v=1">
+    <link rel="stylesheet" href="./assets/css/index.css?v=1">
+    <!-- Config and JS -->
+    <script src="./config.js"></script>
     <script src="./assets/js/navbar.js" defer></script>
     <script src="./assets/js/footer.js" defer></script>
-    <script src="./assets/js/shared.js"></script>
-    <style>
-        :root {
-            --primary-color: #002060;
-            --secondary-color: #FFC000;
-            --accent-color: #FFE9A3;
-            --light-color: #F2F2F2;
-            --dark-color: #333333;
-            --text-color: #333333;
-            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-        }
-        
-        /* Improved promo slider */
-        .promo-slider {
-            margin-top: 76px;
-        }
-        
-        .promo-slide {
-            height: 500px;
-            background-size: cover;
-            background-position: center;
-            position: relative;
-        }
-        
-        .promo-slide::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to right, rgba(0, 32, 96, 0.8), rgba(0, 32, 96, 0.5));
-        }
-        
-        .promo-slide-content {
-            position: absolute;
-            top: 50%;
-            left: 10%;
-            transform: translateY(-50%);
-            max-width: 600px;
-            color: white;
-            z-index: 2;
-        }
-        
-        .promo-slide-title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-        }
-        
-        .promo-slide-text {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-        }
-        
-        .promo-slide-btn {
-            display: inline-block;
-            padding: 12px 30px;
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-            border-radius: 4px;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-        
-        .promo-slide-btn:hover {
-            background-color: #e6ac00;
-            transform: translateY(-3px);
-            color: var(--primary-color);
-        }
-        
-        /* Enhanced course cards */
-        .courses-section {
-            padding: 5rem 0;
-            background-color: white;
-        }
-        
-        .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: var(--primary-color);
-            position: relative;
-        }
-        
-        .section-title::after {
-            content: '';
-            display: block;
-            width: 80px;
-            height: 4px;
-            background-color: var(--secondary-color);
-            margin: 1rem auto;
-        }
-        
-        .course-card {
-            border-radius: 8px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-            height: 100%;
-            margin-bottom: 2rem;
-            border: 1px solid #eee;
-        }
-        
-        .course-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
-        }
-        
-        .course-img {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-        
-        .course-body {
-            padding: 1.5rem;
-        }
-        
-        .course-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 0.75rem;
-            color: var(--primary-color);
-        }
-        
-        .course-description {
-            color: #666;
-            margin-bottom: 1rem;
-        }
-        
-        .course-meta {
-            margin-bottom: 1.5rem;
-        }
-        
-        .course-category {
-            background-color: var(--primary-color);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8rem;
-        }
-        
-        .btn-enroll {
-            background-color: var(--primary-color);
-            color: white;
-            width: 100%;
-            padding: 10px;
-            border-radius: 4px;
-            transition: var(--transition);
-        }
-        
-        .btn-enroll:hover {
-            background-color: #00194d;
-        }
-        
-        /* Enhanced about section */
-        .about-section {
-            padding: 5rem 0;
-            background-color: var(--light-color);
-        }
-        
-        .about-title {
-            font-size: 1.8rem;
-            margin-bottom: 1.5rem;
-            color: var(--primary-color);
-        }
-        
-        .about-text {
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-        }
-        
-        .feature-list {
-            list-style-type: none;
-            padding: 0;
-        }
-        
-        .feature-list li {
-            margin-bottom: 1rem;
-            padding-left: 30px;
-            position: relative;
-        }
-        
-        .feature-list li::before {
-            content: '✓';
-            position: absolute;
-            left: 0;
-            color: var(--secondary-color);
-            font-weight: bold;
-        }
-        
-        /* Enhanced testimonials */
-        .testimonials-section {
-            padding: 5rem 0;
-            background-color: white;
-        }
-        
-        .testimonial-card {
-            background-color: white;
-            border-radius: 8px;
-            padding: 2rem;
-            box-shadow: var(--shadow);
-            margin-bottom: 2rem;
-            height: 100%;
-            border: 1px solid #eee;
-        }
-        
-        .testimonial-text {
-            font-style: italic;
-            margin-bottom: 1.5rem;
-            position: relative;
-            padding: 0 1rem;
-        }
-        
-        .testimonial-text::before,
-        .testimonial-text::after {
-            content: '"';
-            font-size: 3rem;
-            color: var(--secondary-color);
-            opacity: 0.3;
-            position: absolute;
-        }
-        
-        .testimonial-text::before {
-            top: -1rem;
-            left: -0.5rem;
-        }
-        
-        .testimonial-text::after {
-            bottom: -2rem;
-            right: -0.5rem;
-        }
-        
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-        }
-        
-        .author-img {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            object-fit: cover;
-            margin-right: 1rem;
-        }
-        
-        .author-name {
-            font-weight: 600;
-            margin-bottom: 0.25rem;
-            color: var(--primary-color);
-        }
-        
-        .author-title {
-            font-size: 0.9rem;
-            color: #666;
-            margin: 0;
-        }
-        
-        /* Enhanced CTA section */
-        .cta-section {
-            padding: 5rem 0;
-            background-color: var(--primary-color);
-            color: white;
-        }
-        
-        .cta-title {
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .cta-text {
-            font-size: 1.2rem;
-            max-width: 800px;
-            margin: 0 auto 1.5rem;
-            line-height: 1.6;
-        }
-        
-        .cta-subtext {
-            margin-bottom: 2rem;
-        }
-        
-        .btn-cta {
-            background-color: var(--secondary-color);
-            color: var(--primary-color);
-            padding: 12px 30px;
-            font-weight: 600;
-            border-radius: 4px;
-            transition: var(--transition);
-        }
-        
-        .btn-cta:hover {
-            background-color: #e6ac00;
-            color: var(--primary-color);
-        }
-        
-        /* Enhanced signup section */
-        .signup-offer-section {
-            padding: 4rem 0;
-            background: linear-gradient(135deg, var(--secondary-color) 0%, var(--accent-color) 100%);
-        }
-        
-        .signup-slide-btn {
-            display: inline-block;
-            padding: 15px 40px;
-            background-color: var(--primary-color);
-            color: white;
-            border-radius: 4px;
-            font-size: 1.2rem;
-            transition: var(--transition);
-        }
-        
-        .signup-slide-btn:hover {
-            transform: scale(1.05);
-            background-color: #00194d;
-            color: white;
-        }
-        
-        /* Responsive improvements */
-        @media (max-width: 768px) {
-            .promo-slide {
-                height: 400px;
-            }
-            
-            .promo-slide-content {
-                left: 5%;
-                right: 5%;
-                text-align: center;
-            }
-            
-            .promo-slide-title {
-                font-size: 2rem;
-            }
-            
-            .section-title {
-                font-size: 2rem;
-            }
-            
-            .cta-title {
-                font-size: 1.7rem;
-            }
-            
-            .cta-text {
-                font-size: 1.1rem;
-            }
-        }
-    </style>
+    <script src="./assets/js/shared.js" defer></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
     <div id="navbar"></div>
 
-    <!-- Main Content (starts below fixed header) -->
+    <!-- Main Content -->
     <main>
         <!-- Promo Banner Slider -->
         <div id="promoSlider" class="carousel slide promo-slider" data-bs-ride="carousel">
@@ -377,7 +34,6 @@
                 <button type="button" data-bs-target="#promoSlider" data-bs-slide-to="2"></button>
             </div>
             <div class="carousel-inner">
-                <!-- Slide 1 -->
                 <div class="carousel-item active promo-slide" style="background-image: url('./assets/images/banner1.PNG');">
                     <div class="promo-slide-content">
                         <h2 class="promo-slide-title">30% Off All Career Courses</h2>
@@ -387,7 +43,6 @@
                         </a>
                     </div>
                 </div>
-                <!-- Slide 2 -->
                 <div class="carousel-item promo-slide" style="background-image: url('./assets/images/banner2.PNG');">
                     <div class="promo-slide-content">
                         <h2 class="promo-slide-title">New Cybersecurity Program</h2>
@@ -397,7 +52,6 @@
                         </a>
                     </div>
                 </div>
-                <!-- Slide 3 -->
                 <div class="carousel-item promo-slide" style="background-image: url('./assets/images/banner3.PNG');">
                     <div class="promo-slide-content">
                         <h2 class="promo-slide-title">Job Placement Guarantee</h2>
@@ -422,79 +76,8 @@
         <section class="courses-section">
             <div class="container">
                 <h2 class="section-title">Hot Career Courses in 2025</h2>
-                <div class="row">
-                    <!-- Course 1: Cyber Security (ID: 5) -->
-                    <div class="col-md-6 col-lg-3">
-                        <div class="course-card">
-                            <img src="./assets/images/cybersecurity.PNG" class="course-img" alt="Cyber Security">
-                            <div class="course-body">
-                                <h3 class="course-title">Cyber Security Career Program</h3>
-                                <p class="course-description">Become a security expert with hands-on training in ethical hacking and network defense.</p>
-                                <div class="d-flex justify-content-center course-meta">
-                                    <span class="course-category">Cyber Security</span>
-                                </div>
-                                <a href="payment.html?id=5">
-                                    <button class="btn btn-enroll">
-                                        <i class="me-2 fas fa-plus-circle"></i>Enroll Now
-                                    </button>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Course 2: Artificial Intelligence (ID: 1) -->
-                    <div class="col-md-6 col-lg-3">
-                        <div class="course-card">
-                            <img src="./assets/images/ai.jpg" class="course-img" alt="AI">
-                            <div class="course-body">
-                                <h3 class="course-title">Artificial Intelligence</h3>
-                                <p class="course-description">Designed to provide learners with the foundational and advanced knowledge of Artificial Intelligence (AI) techniques and applications.</p>
-                                <div class="d-flex justify-content-center course-meta">
-                                    <span class="course-category">AI</span>
-                                </div>
-                                <a href="payment.html?id=1">
-                                    <button class="btn btn-enroll">
-                                        <i class="me-2 fas fa-plus-circle"></i>Enroll Now
-                                    </button>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Course 3: Data Science (ID: 6) -->
-                    <div class="col-md-6 col-lg-3">
-                        <div class="course-card">
-                            <img src="./assets/images/data%20science.PNG" class="course-img" alt="Data Science">
-                            <div class="course-body">
-                                <h3 class="course-title">Data Science Career Bootcamp</h3>
-                                <p class="course-description">Become a data expert with Python, machine learning, and data visualization techniques.</p>
-                                <div class="d-flex justify-content-center course-meta">
-                                    <span class="course-category">Data Science</span>
-                                </div>
-                                <a href="payment.html?id=6">
-                                    <button class="btn btn-enroll">
-                                        <i class="me-2 fas fa-plus-circle"></i>Enroll Now
-                                    </button>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- Course 4: Azure Admin (ID: 4) -->
-                    <div class="col-md-6 col-lg-3">
-                        <div class="course-card">
-                            <img src="./assets/images/azure.png" class="course-img" alt="Azure">
-                            <div class="course-body">
-                                <h3 class="course-title">Azure Admin</h3>
-                                <p class="course-description">Designed to provide participants with foundational and advanced skills required to effectively manage and administer Microsoft Azure.</p>
-                                <div class="d-flex justify-content-center course-meta">
-                                    <span class="course-category">Cloud</span>
-                                </div>
-                                <a href="payment.html?id=4">
-                                    <button class="btn btn-enroll">
-                                        <i class="me-2 fas fa-plus-circle"></i>Enroll Now
-                                    </button>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="row" id="courses-container">
+                    <!-- Courses will be populated dynamically -->
                 </div>
                 <div class="mt-4 text-center">
                     <a href="course-listing.html" class="btn btn-outline-primary btn-lg">
@@ -564,40 +147,71 @@
             </div>
         </section>
 
-        <!-- SIGN UP NOW and RECEIVE Section (Home) -->
-        <section class="py-5 text-BLUE text-center signup-offer-section-home">
+        <!-- SIGN UP NOW Section -->
+        <section class="signup-offer-section">
             <div class="container">
                 <h2 class="mb-3 display-5 fw-bold">SIGN UP NOW AND RECEIVE</h2>
                 <p class="mb-4 lead">Register on our website and get a <strong>FREE e-course!</strong></p>
-                <a href="register.html" class="signup-slide-btn-home fw-bold">Sign Up Now</a>
+                <a href="register.html" class="signup-slide-btn fw-bold">Sign Up Now</a>
             </div>
         </section>
 
-        <!-- CTA Section (Home) -->
-        <section class="cta-section-home">
-            <div class="text-center container">
-                <h2 class="cta-title-home">Become a part of our training community – we look forward to welcoming you!</h2>
-                <p class="cta-text-home">
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container text-center">
+                <h2 class="cta-title">Become a part of our training community – we look forward to welcoming you!</h2>
+                <p class="cta-text">
                     Join the Konasal Training Institute and start your journey towards a brighter future.
                     Whether you're enhancing your skills or exploring a new career, we're here to support you.
                     Let's unlock your potential together!
                 </p>
-                <p class="cta-subtext-home">For more information about our courses and enrollment options:</p>
-                <a href="payment.html" class="btn btn-cta-home">
-                    <i class="me-2 fas fa-user-graduate"></i>
-                    Enroll Now
+                <p class="cta-subtext">For more information about our courses and enrollment options:</p>
+                <a href="payment.html" class="btn-cta">
+                    <i class="me-2 fas fa-user-graduate"></i>Enroll Now
                 </a>
             </div>
         </section>
 
         <!-- Footer -->
         <div id="footer"></div>
+    </main>
 
-        <!-- jQuery & Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-        <script src="config.js"></script>
-        <!-- Remove payment.js from index.html as it's not needed -->
-        <script src="./assets/js/shared.js"></script>
-    </body>
+    <script>
+        // Fetch and populate courses dynamically
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const response = await fetch(`${window.API_BASE_URL}/courses`, {
+                    headers: { 'Content-Type': 'application/json' }
+                });
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const courses = await response.json();
+                const container = document.getElementById('courses-container');
+                container.innerHTML = ''; // Clear static content
+                courses.slice(0, 4).forEach(course => {
+                    const div = document.createElement('div');
+                    div.className = 'col-md-6 col-lg-3 mb-4';
+                    div.innerHTML = `
+                        <div class="course-card d-flex flex-column">
+                            <img src="${course.image || './assets/images/placeholder.jpg'}" class="course-img" alt="${course.name}">
+                            <div class="course-body flex-grow-1">
+                                <h3 class="course-title">${course.name}</h3>
+                                <p class="course-description">${course.summary}</p>
+                                <div class="course-meta">
+                                    <span class="course-category">${course.category}</span>
+                                </div>
+                                <a href="payment.html?id=${course.id}">
+                                    <button class="btn-enroll"><i class="me-2 fas fa-plus-circle"></i>Enroll Now</button>
+                                </a>
+                            </div>
+                        </div>
+                    `;
+                    container.appendChild(div);
+                });
+            } catch (error) {
+                console.error('Error fetching courses:', error);
+                // Fallback to static content if API fails
+            }
+        });
+    </script>
+</body>
 </html>
