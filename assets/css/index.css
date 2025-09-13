@@ -1,9 +1,9 @@
-/* Variables */
+/* Variables (aligned with shared.css) */
 :root {
-    --primary-color: #002060;
-    --secondary-color: #FFC000;
-    --accent-color: #FFE9A3;
-    --light-color: #F2F2F2;
+    --primary-color: #0a2463; /* Navy Blue from shared.css */
+    --secondary-color: #FFC000; /* Gold */
+    --accent-color: #FFE9A3; /* Light Gold */
+    --light-color: #f8f9fa; /* Matches shared.css */
     --dark-color: #333333;
     --text-color: #333333;
     --text-light: #666666;
@@ -14,7 +14,7 @@
 
 /* Promo Banner Slider Styles */
 .promo-slider {
-    margin-top: 76px;
+    margin-top: 100px; /* Matches shared.css navbar height */
     border-radius: var(--border-radius);
     overflow: hidden;
     box-shadow: var(--box-shadow);
@@ -49,12 +49,14 @@
 }
 
 .promo-slide-title {
+    font-family: 'Poppins', sans-serif;
     font-size: 2.5rem;
     font-weight: 700;
     margin-bottom: 1rem;
 }
 
 .promo-slide-text {
+    font-family: 'Open Sans', sans-serif;
     font-size: 1.2rem;
     margin-bottom: 2rem;
 }
@@ -65,6 +67,7 @@
     background-color: var(--secondary-color);
     color: var(--primary-color);
     border-radius: 4px;
+    font-family: 'Poppins', sans-serif;
     font-weight: 600;
     transition: var(--transition);
     text-decoration: none;
@@ -96,11 +99,11 @@
     height: 12px;
     border-radius: 50%;
     margin: 0 5px;
-    background-color: rgba(255,255,255,0.5);
+    background-color: rgba(255, 255, 255, 0.5);
     border: none;
 }
 
-.carousel-indicators button.active {
+.carousel-indicators .active {
     background-color: var(--secondary-color);
 }
 
@@ -111,6 +114,7 @@
 }
 
 .section-title {
+    font-family: 'Poppins', sans-serif;
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 3rem;
@@ -132,10 +136,11 @@
     overflow: hidden;
     box-shadow: var(--box-shadow);
     transition: var(--transition);
-    height: 100%;
-    margin-bottom: 2rem;
     border: 1px solid #eee;
     background-color: var(--light-color);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .course-card:hover {
@@ -152,9 +157,14 @@
 
 .course-body {
     padding: 1.5rem;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .course-title {
+    font-family: 'Poppins', sans-serif;
     font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 0.75rem;
@@ -162,8 +172,10 @@
 }
 
 .course-description {
+    font-family: 'Open Sans', sans-serif;
     color: var(--text-light);
     margin-bottom: 1rem;
+    flex-grow: 1;
 }
 
 .course-meta {
@@ -177,6 +189,7 @@
     color: white;
     padding: 4px 12px;
     border-radius: 20px;
+    font-family: 'Poppins', sans-serif;
     font-size: 0.8rem;
 }
 
@@ -188,9 +201,10 @@
     border-radius: 4px;
     transition: var(--transition);
     text-decoration: none;
-    display: block;
-    text-align: center;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
     border: none;
+    text-align: center;
 }
 
 .btn-enroll:hover {
@@ -202,6 +216,8 @@
 .btn-outline-primary.btn-lg {
     border-color: var(--primary-color);
     color: var(--primary-color);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
 }
 
 .btn-outline-primary.btn-lg:hover {
@@ -220,11 +236,12 @@
     background-color: white;
     border-radius: var(--border-radius);
     box-shadow: var(--box-shadow);
-    height: 100%;
     border: 1px solid rgba(0, 32, 96, 0.1);
+    min-height: 100%;
 }
 
 .about-title {
+    font-family: 'Poppins', sans-serif;
     font-size: 1.8rem;
     margin-bottom: 1.5rem;
     color: var(--primary-color);
@@ -243,6 +260,7 @@
 }
 
 .about-text {
+    font-family: 'Open Sans', sans-serif;
     margin-bottom: 1.5rem;
     line-height: 1.7;
     color: var(--text-light);
@@ -278,12 +296,12 @@
     border-radius: var(--border-radius);
     padding: 2rem;
     box-shadow: var(--box-shadow);
-    margin-bottom: 2rem;
-    height: 100%;
     border: 1px solid #eee;
+    min-height: 100%;
 }
 
 .testimonial-text {
+    font-family: 'Open Sans', sans-serif;
     font-style: italic;
     margin-bottom: 1.5rem;
     position: relative;
@@ -323,15 +341,16 @@
 }
 
 .author-name {
+    font-family: 'Poppins', sans-serif;
     font-weight: 600;
     margin-bottom: 0.25rem;
     color: var(--primary-color);
 }
 
 .author-title {
+    font-family: 'Open Sans', sans-serif;
     font-size: 0.9rem;
     color: var(--text-light);
-    margin: 0;
 }
 
 /* SIGN UP NOW Section */
@@ -348,10 +367,11 @@
     background-color: var(--primary-color);
     color: white;
     border-radius: 4px;
+    font-family: 'Poppins', sans-serif;
     font-size: 1.2rem;
+    font-weight: bold;
     transition: var(--transition);
     text-decoration: none;
-    font-weight: bold;
 }
 
 .signup-slide-btn:hover {
@@ -369,11 +389,13 @@
 }
 
 .cta-title {
+    font-family: 'Poppins', sans-serif;
     font-size: 2rem;
     margin-bottom: 1.5rem;
 }
 
 .cta-text {
+    font-family: 'Open Sans', sans-serif;
     font-size: 1.2rem;
     max-width: 800px;
     margin: 0 auto 1.5rem;
@@ -381,6 +403,7 @@
 }
 
 .cta-subtext {
+    font-family: 'Open Sans', sans-serif;
     margin-bottom: 2rem;
 }
 
@@ -388,6 +411,7 @@
     background-color: var(--secondary-color);
     color: var(--primary-color);
     padding: 12px 30px;
+    font-family: 'Poppins', sans-serif;
     font-weight: 600;
     border-radius: 4px;
     transition: var(--transition);
@@ -401,57 +425,91 @@
     color: var(--primary-color);
 }
 
-/* Responsive improvements */
-@media (max-width: 768px) {
+/* Responsive Improvements */
+@media (max-width: 991.98px) {
+    .promo-slider {
+        margin-top: 120px; /* Adjust for mobile navbar */
+    }
+
     .promo-slide {
         height: 400px;
     }
-    
+
     .promo-slide-content {
         left: 5%;
         right: 5%;
         text-align: center;
     }
-    
+
     .promo-slide-title {
         font-size: 2rem;
     }
-    
+
     .section-title {
         font-size: 2rem;
     }
-    
-    .cta-title {
-        font-size: 1.7rem;
-    }
-    
-    .cta-text {
-        font-size: 1.1rem;
-    }
-    
+
     .about-column {
         margin-bottom: 2rem;
     }
+
+    .cta-title {
+        font-size: 1.7rem;
+    }
+
+    .cta-text {
+        font-size: 1.1rem;
+    }
 }
 
-@media (max-width: 575px) {
+@media (max-width: 767.98px) {
     .promo-slide {
         height: 350px;
     }
-    
+
     .promo-slide-title {
-        font-size: 1.5rem;
+        font-size: 1.8rem;
     }
-    
+
     .promo-slide-text {
         font-size: 1rem;
     }
-    
+
     .section-title {
         font-size: 1.8rem;
     }
-    
+
     .course-card {
         margin-bottom: 1.5rem;
+    }
+
+    .testimonial-card {
+        margin-bottom: 1.5rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .promo-slide {
+        height: 300px;
+    }
+
+    .promo-slide-title {
+        font-size: 1.5rem;
+    }
+
+    .promo-slide-text {
+        font-size: 0.9rem;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+
+    .course-title {
+        font-size: 1.1rem;
+    }
+
+    .course-description {
+        font-size: 0.9rem;
     }
 }
