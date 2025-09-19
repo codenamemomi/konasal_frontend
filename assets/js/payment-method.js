@@ -11,7 +11,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const confirmPaymentMethod = document.getElementById('confirmPaymentMethod');
     const paymentSummary = document.getElementById('paymentSummary');
 
-    const API_BASE_URL = 'http://127.0.0.1:8000/api/v1';
     const enrollmentId = localStorage.getItem('enrollment_id');
     const paymentAmount = parseFloat(localStorage.getItem('payment_amount'));
     const selectedCourse = JSON.parse(localStorage.getItem('selected_course'));
