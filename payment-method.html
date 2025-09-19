@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Select a payment method for your Konasal Training Institute course enrollment.">
+    <meta name="keywords" content="Konasal Training Institute, payment methods, PayPal, Zelle, Bank Transfer">
+    <title>Select Payment Method - Konasal Training Institute</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/shared.css">
+    <link rel="stylesheet" href="assets/css/payment.css">
+</head>
+<body>
+    <div id="navbar" role="navigation" aria-label="Main navigation"></div>
+    <main class="container">
+        <section class="payment-header text-center my-5">
+            <h1>Select Your Payment Method</h1>
+            <p>Choose a payment method to complete your enrollment.</p>
+        </section>
+        <section class="payment-methods mb-5">
+            <h2>Payment Options</h2>
+            <div id="paymentSummary" class="mb-3"></div>
+            <form id="paymentMethodForm">
+                <div class="form-group mb-3">
+                    <label>Choose Payment Method</label>
+                    <div>
+                        <input type="radio" id="paypalMethod" name="paymentMethod" value="paypal" required>
+                        <label for="paypalMethod">PayPal</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="zelleMethod" name="paymentMethod" value="zelle">
+                        <label for="zelleMethod">Zelle</label>
+                    </div>
+                    <div>
+                        <input type="radio" id="bankTransferMethod" name="paymentMethod" value="bankTransfer">
+                        <label for="bankTransferMethod">Bank Transfer</label>
+                    </div>
+                </div>
+                <div id="paypalContainer" class="mt-3" style="display: none;">
+                    <div id="paypal-button-container"></div>
+                </div>
+                <div id="zelleInstructions" class="mt-3" style="display: none;">
+                    <h6>Zelle Payment Instructions</h6>
+                    <p>Send payment to: <strong>Konasal LLC</strong></p>
+                    <p>Amount: <span id="zelleAmount"></span></p>
+                </div>
+                <div id="bankTransferInstructions" class="mt-3" style="display: none;">
+                    <h6>Bank Transfer Instructions</h6>
+                    <p>Company Name: <strong>Konasal LLC</strong></p>
+                    <p>Routing No: <strong>122105278</strong></p>
+                    <p>Account No: <strong>6551130849</strong></p>
+                    <p>Amount: <span id="bankTransferAmount"></span></p>
+                </div>
+                <button type="button" id="confirmPaymentMethod" class="btn btn-primary mt-3">Confirm Payment</button>
+            </form>
+        </section>
+    </main>
+    <div id="footer" role="contentinfo" aria-label="Footer"></div>
+    <!-- Remove jQuery if not used by navbar.js or footer.js -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.paypal.com/sdk/js?client-id=AZBBqmukW9x9cQ2HPU9tBWUMI4zQ0URlLgM-QCzUgp6rOfRyW8f_gfXdQQjM_koi6cmnTlJPXvgHSF6v&currency=USD"></script>
+    <script src="config.js"></script>
+    <script src="assets/js/navbar.js"></script>
+    <script src="assets/js/footer.js"></script>
+    <script src="assets/js/payment-method.js"></script>
+</body>
+</html>
