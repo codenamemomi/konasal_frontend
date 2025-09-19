@@ -1,56 +1,114 @@
 document.addEventListener('DOMContentLoaded', () => {
     const courseSelect = document.getElementById('courseSelect');
+    const enrollmentModal = new bootstrap.Modal(document.getElementById('enrollmentModal'));
     const enrollmentForm = document.getElementById('enrollmentForm');
     const fullPaymentRadio = document.getElementById('fullPayment');
     const flexiblePaymentRadio = document.getElementById('flexiblePayment');
     const promoCodeSection = document.getElementById('promoCodeSection');
     const applyPromoButton = document.getElementById('applyPromo');
+    const proceedToEnrollmentBtn = document.getElementById('proceedToEnrollment');
     const paymentSummary = document.getElementById('paymentSummary');
 
     let courses = [];
     let selectedCourse = null;
     let discountApplied = false;
+    let selectedPaymentOption = null;
+    let paymentAmount = 0;
+    let userEmail = localStorage.getItem('user_email'); // Assume email is stored after login
+
 
     // Get course ID from URL query parameter
     const urlParams = new URLSearchParams(window.location.search);
     const courseId = urlParams.get('id');
 
+    // Fetch user email if not already stored
+    async function fetchUserEmail() {
+        try {
+            const token = localStorage.getItem('access_token');
+            if (!token) throw new Error('No authentication token found');
+            const response = await fetch(`${API_BASE_URL}/users/profile`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`,
+                    'Content-Type': 'application/json'
+                }
+            });
+            if (!response.ok) throw new Error(`Failed to fetch user profile: ${response.statusText}`);
+            const data = await response.json();
+            userEmail = data.email;
+            localStorage.setItem('user_email', userEmail);
+            return userEmail;
+        } catch (error) {
+            console.error('Error fetching user email:', error);
+            paymentSummary.innerHTML = `<p class="error-message">Error: ${error.message}. Please log in again.</p>`;
+            window.location.href = 'login.html';
+        }
+    }
+
     // Fetch courses
-    fetch(`${API_BASE_URL}/courses`)
-        .then(response => {
-            if (!response.ok) throw new Error('Failed to fetch courses');
-            return response.json();
-        })
-        .then(data => {
-            courses = data;
+    async function fetchCourses() {
+        try {
+            const response = await fetch(`${API_BASE_URL}/courses`);
+            if (!response.ok) throw new Error(`Failed to fetch courses: ${response.statusText}`);
+            courses = await response.json();
             courseSelect.innerHTML = '<option value="">Select a course</option>';
-            data.forEach(course => {
+            courses.forEach(course => {
                 const option = document.createElement('option');
                 option.value = course.id;
                 option.textContent = `${course.name} - $${parseFloat(course.price).toFixed(2)}`;
                 courseSelect.appendChild(option);
             });
-            // Pre-select course if courseId is provided
             if (courseId) {
                 courseSelect.value = courseId;
                 selectedCourse = courses.find(course => course.id == courseId);
                 updatePaymentSummary();
+                enrollmentModal.show();
             }
-        })
-        .catch(error => {
+        } catch (error) {
             console.error('Error fetching courses:', error);
-            paymentSummary.innerHTML = '<p class="error-message">Failed to load courses. Please try again.</p>';
-        });
+            paymentSummary.innerHTML = `<p class="error-message">Failed to load courses: ${error.message}</p>`;
+        }
+    }
+
+    // Initialize
+    async function init() {
+        if (!userEmail) await fetchUserEmail();
+        await fetchCourses();
+    }
+    init();
+
+    // Show enrollment modal when course is selected or button is clicked
+    courseSelect.addEventListener('change', () => {
+        selectedCourse = courses.find(course => course.id == courseSelect.value);
+        if (selectedCourse) {
+            discountApplied = false;
+            updatePaymentSummary();
+            enrollmentModal.show();
+        }
+    });
+
+    // Handle Proceed to Enrollment button click
+    proceedToEnrollmentBtn.addEventListener('click', () => {
+        selectedCourse = courses.find(course => course.id == courseSelect.value);
+        if (selectedCourse) {
+            discountApplied = false;
+            updatePaymentSummary();
+            enrollmentModal.show();
+        } else {
+            paymentSummary.innerHTML = '<p class="error-message">Please select a course first.</p>';
+        }
+    });
 
     // Toggle promo code field
     fullPaymentRadio.addEventListener('change', () => {
         promoCodeSection.style.display = 'block';
+        selectedPaymentOption = 'full';
         updatePaymentSummary();
     });
 
     flexiblePaymentRadio.addEventListener('change', () => {
         promoCodeSection.style.display = 'none';
         discountApplied = false;
+        selectedPaymentOption = 'flexible';
         updatePaymentSummary();
     });
 
@@ -77,25 +135,19 @@ document.addEventListener('DOMContentLoaded', () => {
         if (fullPaymentRadio.checked && discountApplied) {
             price *= 0.7; // 30% discount
         }
-        const downPayment = flexiblePaymentRadio.checked ? (price * 0.5).toFixed(2) : null;
+        paymentAmount = selectedPaymentOption === 'flexible' ? price * 0.5 : price;
+        const downPayment = selectedPaymentOption === 'flexible' ? (price * 0.5).toFixed(2) : null;
         paymentSummary.innerHTML = `
             <p><strong>Course:</strong> ${selectedCourse.name}</p>
             <p><strong>Total Price:</strong> $${price.toFixed(2)}</p>
-            ${flexiblePaymentRadio.checked ? `
+            ${selectedPaymentOption === 'flexible' ? `
                 <p><strong>Down Payment (50%):</strong> $${downPayment}</p>
                 <p><strong>Balance (50%):</strong> $${downPayment} (due after 3rd class)</p>
             ` : ''}
         `;
     }
 
-    // Update selected course
-    courseSelect.addEventListener('change', () => {
-        selectedCourse = courses.find(course => course.id == courseSelect.value);
-        discountApplied = false;
-        updatePaymentSummary();
-    });
-
-    // Form submission
+    // Handle enrollment form submission
     enrollmentForm.addEventListener('submit', async (e) => {
         e.preventDefault();
         if (!selectedCourse) {
@@ -104,18 +156,22 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         const token = localStorage.getItem('access_token');
         if (!token) {
+            paymentSummary.innerHTML = '<p class="error-message">Please log in to enroll.</p>';
             window.location.href = 'login.html';
             return;
         }
-        const name = document.getElementById('name').value;
-        const email = document.getElementById('email').value;
-        const paymentOption = fullPaymentRadio.checked ? 'full' : 'flexible';
-        const promoCode = fullPaymentRadio.checked ? document.getElementById('promoCode').value : '';
+        userEmail = document.getElementById('email').value.trim();
+        if (!userEmail) {
+            paymentSummary.innerHTML = '<p class="error-message">Please enter your email.</p>';
+            return;
+        }
+        selectedPaymentOption = fullPaymentRadio.checked ? 'full' : 'flexible';
+        const promoCode = fullPaymentRadio.checked ? document.getElementById('promoCode').value.trim() : '';
 
         const payload = {
-            course_id: selectedCourse.id,
-            payment_option: paymentOption,
-            promo_code: promoCode
+            course_id: parseInt(selectedCourse.id),
+            payment_option: selectedPaymentOption,
+            promo_code: promoCode || null
         };
 
         try {
@@ -128,68 +184,29 @@ document.addEventListener('DOMContentLoaded', () => {
                 body: JSON.stringify(payload)
             });
             const data = await response.json();
-            if (response.ok) {
-                localStorage.setItem('enrollment_id', data.enrollment_id); // Store enrollment_id
-                if (paymentOption === 'full') {
-                    // Initialize PayPal payment
-                    paypal.Buttons({
-                        createOrder: async (data, actions) => {
-                            let price = parseFloat(selectedCourse.price);
-                            if (discountApplied) price *= 0.7;
-                            try {
-                                const orderResponse = await fetch(`${API_BASE_URL}/payments/create-order`, {
-                                    method: 'POST',
-                                    headers: {
-                                        'Authorization': `Bearer ${token}`,
-                                        'Content-Type': 'application/json'
-                                    },
-                                    body: JSON.stringify({
-                                        course_id: selectedCourse.id,
-                                        amount: price,
-                                        currency: 'USD',
-                                        enrollment_id: localStorage.getItem('enrollment_id')
-                                    })
-                                });
-                                const orderData = await orderResponse.json();
-                                if (!orderResponse.ok) throw new Error(orderData.detail);
-                                return orderData.order_id; // Extract order_id from response
-                            } catch (error) {
-                                paymentSummary.innerHTML = `<p class="error-message">Error creating payment: ${error.message}</p>`;
-                                throw error;
-                            }
-                        },
-                        onApprove: async (data, actions) => {
-                            try {
-                                const captureResponse = await fetch(`${API_BASE_URL}/payments/capture/${data.orderID}`, {
-                                    method: 'POST',
-                                    headers: {
-                                        'Authorization': `Bearer ${token}`,
-                                        'Content-Type': 'application/json'
-                                    }
-                                });
-                                const captureData = await captureResponse.json();
-                                if (!captureResponse.ok) throw new Error(captureData.detail);
-                                alert('Payment and enrollment successful!');
-                                localStorage.removeItem('enrollment_id');
-                                window.location.href = 'profile.html';
-                            } catch (error) {
-                                paymentSummary.innerHTML = `<p class="error-message">Error capturing payment: ${error.message}</p>`;
-                            }
-                        },
-                        onError: (err) => {
-                            paymentSummary.innerHTML = `<p class="error-message">Payment error: ${err.message}</p>`;
-                        }
-                    }).render('#paypal-button-container');
-                } else {
-                    alert(`Enrollment successful! Enrollment ID: ${data.enrollment_id}. Please complete the down payment via Zelle or Bank Transfer.`);
-                    localStorage.removeItem('enrollment_id');
-                    window.location.href = 'profile.html';
-                }
-            } else {
-                paymentSummary.innerHTML = `<p class="error-message">Enrollment failed: ${data.detail}</p>`;
+            if (!response.ok) {
+                throw new Error(data.detail || 'Enrollment failed');
             }
+
+            const enrollmentId = data.enrollment_id;
+            paymentAmount = parseFloat(selectedCourse.price);
+            if (selectedPaymentOption === 'full' && discountApplied) {
+                paymentAmount *= 0.7;
+            } else if (selectedPaymentOption === 'flexible') {
+                paymentAmount *= 0.5;
+            }
+
+            // Store data for payment-method.html
+            localStorage.setItem('enrollment_id', enrollmentId);
+            localStorage.setItem('payment_amount', paymentAmount.toFixed(2));
+            localStorage.setItem('selected_course', JSON.stringify(selectedCourse));
+            localStorage.setItem('selected_payment_option', selectedPaymentOption);
+
+            paymentSummary.innerHTML = `<p class="success-message">${data.message}</p>`;
+            enrollmentModal.hide();
+            window.location.href = 'payment-method.html';
         } catch (error) {
-            paymentSummary.innerHTML = `<p class="error-message">Error submitting enrollment: ${error.message}</p>`;
+            paymentSummary.innerHTML = `<p class="error-message">Error: ${error.message}</p>`;
         }
     });
 });
