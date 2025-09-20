@@ -16,7 +16,7 @@ document.getElementById('footer').innerHTML = `
 
                         <a href="https://www.facebook.com/share/1BsDx2h717/?mibextid=wwXIfr" class="social-link"><i class="fab fa-facebook-f"></i></a>
 
-                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="https://x.com/konasal?t=bDQOg1J8JQuEfrsQzixCrQ&s=09" class="social-link"><i class="fab fa-twitter"></i></a>
 
                         <a href="https://www.tiktok.com/@konasaltraininginstitute?_t=ZM-8xgeht8EqcH&_r=1" class="social-link"><i class="fab fa-tiktok"></i></a>
 
@@ -24,7 +24,7 @@ document.getElementById('footer').innerHTML = `
 
                         <a href="https://www.instagram.com/konasaltraininginstitute?igsh=aW1mdHdhczltMzdy" class="social-link"><i class="fab fa-instagram"></i></a>
 
-                        <a href="https://youtube.com/@konasaltraininginstitute?si=wG6fkHaBz62mFrMz" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="https://www.youtube.com/@konasaltraininginstitutekti" class="social-link"><i class="fab fa-youtube"></i></a>
 
                     </div>
 
