@@ -119,34 +119,3 @@ if (window.location.pathname !== '/' && window.location.pathname !== '/index.htm
     if (promo) promo.style.display = 'none';
 }
 
-// Mobile menu toggle
-const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-const mainNav = document.getElementById('mainNav');
-const overlay = document.getElementById('overlay');
-if (mobileMenuToggle && mainNav && overlay) {
-    mobileMenuToggle.addEventListener('click', () => {
-        mainNav.classList.toggle('active');
-        overlay.classList.toggle('active');
-        mobileMenuToggle.innerHTML = mainNav.classList.contains('active')
-            ? '<i class="fas fa-times"></i>'
-            : '<i class="fas fa-bars"></i>';
-    });
-    overlay.addEventListener('click', () => {
-        mainNav.classList.remove('active');
-        overlay.classList.remove('active');
-        mobileMenuToggle.innerHTML = '<i class="fas fa-bars"></i>';
-    });
-}
-
-// Dropdown toggle for mobile
-document.addEventListener('click', function(e) {
-    const isDropdownToggle = e.target.classList.contains('dropdown-toggle') || e.target.closest('.dropdown-toggle');
-    if (!isDropdownToggle) return;
-
-    e.preventDefault();
-    const toggle = e.target.classList.contains('dropdown-toggle') ? e.target : e.target.closest('.dropdown-toggle');
-    const dropdownMenu = toggle.nextElementSibling;
-    if (dropdownMenu && dropdownMenu.classList.contains('dropdown-menu')) {
-        dropdownMenu.classList.toggle('show');
-    }
-});
