@@ -548,8 +548,8 @@
                 const priceDisplay = document.getElementById('price');
 
                 applyButton.addEventListener('click', async () => {
-                    const code = couponInput.value.trim().toLowerCase();
-                    if (code === "konasal30") {
+                    const code = couponInput.value.trim();
+                    if (code.toLowerCase() === "konasal30") {
                         finalPrice = originalPrice * 0.7;
                         priceDisplay.textContent = `$${finalPrice.toFixed(2)}`;
                         couponMessage.textContent = "Coupon applied! 30% discount.";
