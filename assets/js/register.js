@@ -1,21 +1,18 @@
-// assets/js/register.js
-// Declare formData globally to make it accessible across functions
 let formData = null;
 
 document.getElementById('registerForm').addEventListener('submit', async (event) => {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault();
 
     const registerBtn = document.getElementById('registerBtn');
-    registerBtn.disabled = true; // Disable button during request
+    registerBtn.disabled = true;
     registerBtn.textContent = 'Creating Account...';
 
-    // Collect form data
     formData = {
         first_name: document.getElementById('firstName').value,
         last_name: document.getElementById('lastName').value,
         email: document.getElementById('email').value,
         phone_number: document.getElementById('phone').value || null,
-        gender: document.getElementById('gender').value.toUpperCase() || null,
+        gender: document.getElementById('gender').value || null,
         password: document.getElementById('password').value,
         password_verify: document.getElementById('confirmPassword').value,
         date_of_birth: document.getElementById('dateOfBirth').value || null
@@ -31,11 +28,16 @@ document.getElementById('registerForm').addEventListener('submit', async (event)
         const data = await response.json();
 
         if (response.ok) {
-            // Show success message and verification prompt
             showVerificationPrompt(data.message);
         } else {
-            // Show error message and keep the form visible
-            const errorMessage = typeof data.detail === 'string' ? data.detail : 'Registration failed. Please try again.';
+            let errorMessage = 'Registration failed. Please try again.';
+            if (data.detail) {
+                if (typeof data.detail === 'string') {
+                    errorMessage = data.detail;
+                } else if (Array.isArray(data.detail)) {
+                    errorMessage = data.detail.map(err => `${err.loc.join('.')}: ${err.msg}`).join('; ');
+                }
+            }
             showError(errorMessage);
         }
     } catch (error) {
@@ -46,7 +48,6 @@ document.getElementById('registerForm').addEventListener('submit', async (event)
     }
 });
 
-// Function to show verification prompt
 function showVerificationPrompt(message) {
     const container = document.querySelector('.register-container');
     container.innerHTML = `
@@ -71,7 +72,6 @@ function showVerificationPrompt(message) {
         </div>
     `;
 
-    // Add event listener for verification form
     document.getElementById('verifyForm').addEventListener('submit', async (event) => {
         event.preventDefault();
         const verifyBtn = document.getElementById('verifyBtn');
@@ -79,7 +79,7 @@ function showVerificationPrompt(message) {
         verifyBtn.textContent = 'Verifying...';
 
         const token = document.getElementById('verificationCode').value;
-        const email = formData ? formData.email : null; // Use formData.email if available
+        const email = formData ? formData.email : null;
 
         if (!email) {
             showError('Email not found. Please try registering again.');
@@ -122,10 +122,9 @@ function showVerificationPrompt(message) {
         }
     });
 
-    // Add event listener for resend link
     document.getElementById('resendLink').addEventListener('click', async (event) => {
         event.preventDefault();
-        const email = formData ? formData.email : null; // Use formData.email if available
+        const email = formData ? formData.email : null;
 
         if (!email) {
             showError('Email not found. Please try registering again.');
@@ -152,30 +151,21 @@ function showVerificationPrompt(message) {
     });
 }
 
-// Function to show error messages
 function showError(message) {
     const errorDiv = document.createElement('div');
     errorDiv.className = 'error-message';
-    errorDiv.style.color = 'red';
-    errorDiv.style.textAlign = 'center';
-    errorDiv.style.marginBottom = '20px';
     errorDiv.textContent = message;
     const container = document.querySelector('.register-container');
 
-    // Remove existing error messages
     const existingError = container.querySelector('.error-message');
     if (existingError) existingError.remove();
 
-    // Insert error message at the top of the form or container
-    const form = container.querySelector('#registerForm');
+    const form = container.querySelector('#registerForm') || container.querySelector('#verifyForm');
     if (form) {
-        // Insert before the form if it exists (during signup)
         container.insertBefore(errorDiv, form);
     } else {
-        // Fallback to prepending to container (e.g., during verification)
         container.prepend(errorDiv);
     }
 
-    setTimeout(() => errorDiv.remove(), 5000); // Remove after 5 seconds
+    setTimeout(() => errorDiv.remove(), 5000);
 }
-

@@ -77,12 +77,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 const data = await response.json();
                 if (response.ok) {
                     localStorage.setItem('access_token', data.access_token);
+                    localStorage.setItem('user_email', data.user.email);
+                    localStorage.setItem('user_phone_number', data.user.phone_number);
                     localStorage.setItem('user', JSON.stringify(data.user));
-                    window.location.href = 'index.html';
+                    console.log('Login successful, token:', data.access_token);
+                    if (data.user.phone_number === "Not provided") {
+                        showError('Please update your phone number in your profile to proceed.', loginForm);
+                        setTimeout(() => window.location.href = 'profile.html', 2000);
+                    } else {
+                        window.location.href = 'index.html';
+                    }
                 } else {
-                    showError(data.detail || 'Login failed. Please try again.', loginForm);
+                    console.error('Login failed:', data);
+                    showError(data.detail || 'Login failed. Please check your credentials.', loginForm);
                 }
             } catch (error) {
+                console.error('Login error:', error);
                 showError('Network error. Please check your connection.', loginForm);
             } finally {
                 loginBtn.disabled = false;
@@ -90,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
 
     // Handle forgot password form submission
     if (forgotPasswordForm) {
@@ -147,9 +158,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             const token = document.getElementById('resetToken').value;
             const newPassword = document.getElementById('newPassword').value;
+            const newPasswordVerify = document.getElementById('newPasswordVerify').value;
 
-            if (!token || newPassword.length < 8) {
-                showError('Please enter a valid token and a password with at least 8 characters.', resetPasswordForm, 'resetErrorAlert');
+            if (!token || newPassword.length < 8 || newPassword !== newPasswordVerify) {
+                showError(
+                    !token ? 'Please enter a valid token.' :
+                    newPassword.length < 8 ? 'Password must be at least 8 characters.' :
+                    'Passwords do not match.',
+                    resetPasswordForm,
+                    'resetErrorAlert'
+                );
                 resetSubmitBtn.disabled = false;
                 resetSubmitBtn.innerHTML = 'Reset Password';
                 return;
@@ -159,7 +177,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const response = await fetch(`${window.API_BASE_URL}/auth/reset-password`, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ token, new_password: newPassword })
+                    body: JSON.stringify({ token, new_password: newPassword, new_password_verify: newPasswordVerify })
                 });
 
                 const data = await response.json();
@@ -168,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     resetSuccessAlert.style.display = 'flex';
                     setTimeout(() => {
                         resetModal.classList.remove('show');
-                        window.location.reload();
+                        window.location.href = 'login.html';
                     }, 2000);
                 } else {
                     showError(data.detail || 'Failed to reset password.', resetPasswordForm, 'resetErrorAlert');
