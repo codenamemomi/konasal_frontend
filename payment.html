@@ -40,6 +40,16 @@
                                 <label for="email">Email</label>
                                 <input type="email" id="email" class="form-control" required aria-required="true">
                             </div>
+                            <!-- Add Phone Number Field Here -->
+                            <div class="form-group mb-3">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" class="form-control" 
+                                    pattern="\+?[1-9]\d{1,14}" 
+                                    placeholder="+1234567890" 
+                                    title="Enter a valid phone number (e.g., +1234567890)"
+                                    aria-required="true">
+                                <div class="form-text">We'll use this for payment verification and course updates.</div>
+                            </div>
                             <div class="form-group mb-3">
                                 <label>Payment Option</label>
                                 <div>
@@ -52,7 +62,7 @@
                                 </div>
                             </div>
                             <div id="promoCodeSection" class="form-group mb-3">
-                                <label for="promoCode">Promo Code (e.g., KONASAL30 for 30% off full payment)</label>
+                                <label for="promoCode">Promo Code </label>
                                 <input type="text" id="promoCode" class="form-control">
                                 <button type="button" id="applyPromo" class="btn btn-primary mt-2">Apply Promo</button>
                             </div>

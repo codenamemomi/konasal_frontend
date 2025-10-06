@@ -99,7 +99,7 @@
                 document.getElementById('date-of-birth').value = user.date_of_birth || '';
                 document.getElementById('gender').value = user.gender || '';
                 if (user.profile_picture) {
-                    previewImg.src = `${window.API_BASE_URL}/uploads/${user.profile_picture}`;
+                    previewImg.src = `${window.API_BASE_URL}${user.profile_picture}`;
                     previewDiv.classList.remove('hidden');
                 }
             } catch (error) {

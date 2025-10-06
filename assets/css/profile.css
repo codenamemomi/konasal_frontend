@@ -72,7 +72,46 @@
 .profile-info input[type="file"] {
     padding: 0.4rem;
 }
+/* Profile Picture Display Styles */
+.profile-picture-display {
+    text-align: center;
+    margin-bottom: 1.5rem;
+    padding: 1rem;
+    border-radius: var(--border-radius);
+    background-color: var(--light-color);
+}
 
+.profile-picture-img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid var(--accent-color);
+    box-shadow: var(--box-shadow);
+}
+
+.profile-picture-display.no-picture {
+    font-family: 'Open Sans', sans-serif;
+    color: var(--text-light);
+    font-style: italic;
+    padding: 2rem;
+    border: 2px dashed rgba(10, 36, 99, 0.2);
+}
+
+/* Update the existing profile-picture-preview to match */
+.profile-picture-preview img {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 3px solid rgba(10, 36, 99, 0.2);
+    box-shadow: var(--box-shadow);
+}
+
+/* Add some spacing for the profile info when picture is present */
+.profile-card .profile-info:first-of-type {
+    margin-top: 1rem;
+}
 .profile-picture-preview {
     margin-top: 0.5rem;
     text-align: center;
