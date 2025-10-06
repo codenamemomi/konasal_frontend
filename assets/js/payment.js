@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const proceedToEnrollmentBtn = document.getElementById('proceedToEnrollment');
     const paymentSummary = document.getElementById('paymentSummary');
     const promoCodeInput = document.getElementById('promoCode');
+    const phoneInput = document.getElementById('phone'); // Added phone input
 
     let courses = [];
     let selectedCourse = null;
@@ -17,13 +18,14 @@ document.addEventListener('DOMContentLoaded', () => {
     let selectedPaymentOption = null;
     let paymentAmount = 0;
     let userEmail = localStorage.getItem('user_email');
+    let userPhone = localStorage.getItem('user_phone'); // Added user phone
 
     // Get course ID from URL query parameter
     const urlParams = new URLSearchParams(window.location.search);
     const courseId = urlParams.get('id');
 
-    // Fetch user email if not already stored
-    async function fetchUserEmail() {
+    // Fetch user profile data (email and phone)
+    async function fetchUserProfile() {
         try {
             const token = localStorage.getItem('access_token');
             if (!token) throw new Error('No authentication token found');
@@ -36,11 +38,19 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!response.ok) throw new Error(`Failed to fetch user profile: ${response.statusText}`);
             const data = await response.json();
             userEmail = data.email;
+            userPhone = data.phone_number || ''; // Get phone number from profile
             localStorage.setItem('user_email', userEmail);
+            localStorage.setItem('user_phone', userPhone);
+            
+            // Populate form fields
             document.getElementById('email').value = userEmail;
-            return userEmail;
+            if (phoneInput) {
+                phoneInput.value = userPhone;
+            }
+            
+            return { email: userEmail, phone: userPhone };
         } catch (error) {
-            console.error('Error fetching user email:', error);
+            console.error('Error fetching user profile:', error);
             showError(error.message || 'Please log in again.');
             setTimeout(() => window.location.href = 'login.html', 2000);
         }
@@ -73,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initialize
     async function init() {
-        if (!userEmail) await fetchUserEmail();
+        if (!userEmail) await fetchUserProfile();
         await fetchCourses();
     }
     init();
@@ -184,8 +194,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         userEmail = document.getElementById('email').value.trim();
+        const userPhone = document.getElementById('phone').value.trim(); // Get phone number
+        
         if (!userEmail) {
             showError('Please enter your email.');
+            submitButton.disabled = false;
+            submitButton.textContent = 'Enroll';
+            return;
+        }
+
+        // Validate phone number if provided
+        if (userPhone && !isValidPhoneNumber(userPhone)) {
+            showError('Please enter a valid phone number (e.g., +1234567890).');
             submitButton.disabled = false;
             submitButton.textContent = 'Enroll';
             return;
@@ -197,7 +217,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const payload = {
             course_id: parseInt(selectedCourse.id),
             payment_option: selectedPaymentOption,
-            promo_code: promoCode
+            promo_code: promoCode,
+            phone_number: userPhone || null // Include phone number in payload
         };
 
         try {
@@ -219,25 +240,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 paymentAmount *= 0.5;
             }
 
-                // In the enrollment form submission handler, update this section:
-                showSuccess(data.message);
-                enrollmentModal.hide();
+            showSuccess(data.message);
+            enrollmentModal.hide();
 
-                // CRITICAL FIX: Store all data in localStorage before redirecting
-                localStorage.setItem('enrollment_id', data.enrollment_id);
-                localStorage.setItem('payment_amount', paymentAmount.toFixed(2));
-                localStorage.setItem('selected_course', JSON.stringify(selectedCourse));
-                localStorage.setItem('selected_payment_option', selectedPaymentOption);
-                localStorage.setItem('user_email', userEmail);
+            // Store all data in localStorage before redirecting
+            localStorage.setItem('enrollment_id', data.enrollment_id);
+            localStorage.setItem('payment_amount', paymentAmount.toFixed(2));
+            localStorage.setItem('selected_course', JSON.stringify(selectedCourse));
+            localStorage.setItem('selected_payment_option', selectedPaymentOption);
+            localStorage.setItem('user_email', userEmail);
+            localStorage.setItem('user_phone', userPhone); // Store phone number
 
-                // Store discount information - USE DATA FROM BACKEND RESPONSE
-                localStorage.setItem('discount_applied', (data.promo_code_applied !== null).toString());
-                localStorage.setItem('applied_promo_code', data.promo_code_applied || appliedPromoCode || '');
-                localStorage.setItem('original_price', data.original_price || selectedCourse.price);
+            // Store discount information
+            localStorage.setItem('discount_applied', (data.promo_code_applied !== null).toString());
+            localStorage.setItem('applied_promo_code', data.promo_code_applied || appliedPromoCode || '');
+            localStorage.setItem('original_price', data.original_price || selectedCourse.price);
 
-                // Redirect to payment method page
-                window.location.href = `payment-method.html`;
-                    } catch (error) {
+            // Redirect to payment method page
+            window.location.href = `payment-method.html`;
+        } catch (error) {
             console.error('Error enrolling:', error);
             showError(`Error: ${error.message}`);
         } finally {
@@ -245,6 +266,12 @@ document.addEventListener('DOMContentLoaded', () => {
             submitButton.textContent = 'Enroll';
         }
     });
+
+    // Phone number validation function
+    function isValidPhoneNumber(phone) {
+        const phoneRegex = /^\+?[1-9]\d{1,14}$/;
+        return phoneRegex.test(phone);
+    }
 
     // Helper functions for error and success messages
     function showError(message) {
