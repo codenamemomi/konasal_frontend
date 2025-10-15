@@ -1,0 +1,422 @@
+/* Admin Dashboard Styles */
+:root {
+    --primary-color: #0a2463;
+    --secondary-color: #DAA520;
+    --accent-color: #e76f51;
+    --light-color: #f8f9fa;
+    --dark-color: #2d3142;
+    --text-color: #333333;
+    --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+    --border-radius: 8px;
+    --table-bg-alt: #f9fafb;
+    --status-pending: #ffc107;
+    --status-active: #28a745;
+    --status-completed: #17a2b8;
+    --status-cancelled: #dc3545;
+    --status-failed: #dc3545;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: #f5f7fa;
+    min-height: 100vh;
+}
+
+.navbar {
+    background: var(--light-color);
+    border-bottom: 1px solid #e1e5e9;
+}
+
+.navbar-brand {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+.nav-tabs .nav-link {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 500;
+    color: var(--text-color);
+    border: none;
+    border-bottom: 2px solid transparent;
+    transition: var(--transition);
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.nav-tabs .nav-link:hover {
+    color: var(--accent-color);
+    border-bottom: 2px solid var(--accent-color);
+}
+
+h1, h2 {
+    font-family: 'Poppins', sans-serif;
+    color: var(--dark-color);
+    font-weight: 600;
+}
+
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.table {
+    background: white;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    margin-bottom: 20px;
+    border-collapse: separate;
+    border-spacing: 0;
+    min-width: 1000px; /* Ensure Enrollments table is wide enough */
+}
+
+.table th {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: var(--primary-color);
+    padding: 14px 16px;
+    background: #e9ecef;
+    border-bottom: 2px solid #dee2e6;
+    border-right: 1px solid #dee2e6;
+    white-space: nowrap;
+    text-align: left;
+}
+
+.table td {
+    padding: 12px 16px;
+    border-bottom: 1px solid #dee2e6;
+    border-right: 1px solid #dee2e6;
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+/* Specific column alignments */
+.table td:nth-child(4) /* Phone Number, Amount */, 
+.table td:nth-child(7) /* Progress */ {
+    text-align: right;
+}
+
+/* Remove border on last column */
+.table th:last-child,
+.table td:last-child {
+    border-right: none;
+}
+
+/* Alternating row colors */
+.table tbody tr:nth-child(even) {
+    background: var(--table-bg-alt);
+}
+
+/* Hover effect */
+.table tbody tr:hover {
+    background: #e9f2ff;
+    transition: var(--transition);
+}
+
+/* Status badges */
+.status-badge {
+    display: inline-block;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: white;
+    text-transform: capitalize;
+}
+
+.status-pending {
+    background: var(--status-pending);
+}
+
+.status-active {
+    background: var(--status-active);
+}
+
+.status-completed {
+    background: var(--status-completed);
+}
+
+.status-cancelled,
+.status-failed {
+    background: var(--status-cancelled);
+}
+
+/* Buttons */
+.btn-primary {
+    background: var(--primary-color);
+    border: none;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    border-radius: var(--border-radius);
+    padding: 6px 12px;
+    transition: var(--transition);
+}
+
+.btn-primary:hover {
+    background: #08204e;
+}
+
+.btn-info {
+    background: #17a2b8;
+    border: none;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    border-radius: var(--border-radius);
+    padding: 6px 12px;
+    transition: var(--transition);
+}
+
+.btn-info:hover {
+    background: #138496;
+}
+
+.btn-danger {
+    background: #dc3545;
+    border: none;
+    color: white;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    border-radius: var(--border-radius);
+    padding: 6px 12px;
+    transition: var(--transition);
+}
+
+.btn-danger:hover {
+    background: #c82333;
+}
+
+.btn-sm {
+    margin: 4px;
+    font-size: 0.85rem;
+}
+
+/* Progress input */
+.progress-input {
+    width: 80px;
+    display: inline-block;
+    border: 2px solid #ced4da;
+    border-radius: var(--border-radius);
+    padding: 4px 8px;
+    font-size: 0.9rem;
+    transition: border-color 0.2s ease;
+}
+
+.progress-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(10, 36, 99, 0.3);
+    outline: none;
+}
+
+.progress-input.is-invalid {
+    border-color: #dc3545;
+    box-shadow: 0 0 5px rgba(220, 53, 69, 0.3);
+}
+
+/* Form controls */
+.form-select, .form-control {
+    font-family: 'Open Sans', sans-serif;
+    border-radius: var(--border-radius);
+    border: 1px solid #ced4da;
+    padding: 8px;
+}
+
+/* Status select */
+.form-select.status-select {
+    width: 120px;
+    display: inline-block;
+}
+
+/* Modal styles */
+.modal-content {
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+}
+
+.modal-header {
+    border-bottom: 1px solid #e1e5e9;
+}
+
+.modal-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    color: var(--dark-color);
+}
+
+.field-error {
+    color: #dc3545;
+    font-size: 0.8rem;
+    margin-top: 5px;
+}
+
+.is-invalid {
+    border-color: #dc3545 !important;
+}
+
+/* Column widths for Enrollments table */
+#enrollments-table th:nth-child(1), /* ID */
+#enrollments-table td:nth-child(1) {
+    width: 15%;
+}
+
+#enrollments-table th:nth-child(2), /* User Email */
+#enrollments-table td:nth-child(2) {
+    width: 15%;
+}
+
+#enrollments-table th:nth-child(3), /* Course */
+#enrollments-table td:nth-child(3) {
+    width: 15%;
+}
+
+#enrollments-table th:nth-child(4), /* Phone Number */
+#enrollments-table td:nth-child(4) {
+    width: 10%;
+}
+
+#enrollments-table th:nth-child(5), /* Promo Code */
+#enrollments-table td:nth-child(5) {
+    width: 10%;
+}
+
+#enrollments-table th:nth-child(6), /* Payment Option */
+#enrollments-table td:nth-child(6) {
+    width: 10%;
+}
+
+#enrollments-table th:nth-child(7), /* Progress */
+#enrollments-table td:nth-child(7) {
+    width: 10%;
+}
+
+#enrollments-table th:nth-child(8), /* Status */
+#enrollments-table td:nth-child(8) {
+    width: 10%;
+}
+
+#enrollments-table th:nth-child(9), /* Actions */
+#enrollments-table td:nth-child(9) {
+    width: 15%;
+}
+
+/* Column widths for Payments table */
+#payments-table th:nth-child(1), /* ID */
+#payments-table td:nth-child(1) {
+    width: 15%;
+}
+
+#payments-table th:nth-child(2), /* User Email */
+#payments-table td:nth-child(2) {
+    width: 20%;
+}
+
+#payments-table th:nth-child(3), /* Course */
+#payments-table td:nth-child(3) {
+    width: 20%;
+}
+
+#payments-table th:nth-child(4), /* Amount */
+#payments-table td:nth-child(4) {
+    width: 15%;
+}
+
+#payments-table th:nth-child(5), /* Created At */
+#payments-table td:nth-child(5) {
+    width: 15%;
+}
+
+#payments-table th:nth-child(6), /* Status */
+#payments-table td:nth-child(6) {
+    width: 10%;
+}
+
+#payments-table th:nth-child(7), /* Actions */
+#payments-table td:nth-child(7) {
+    width: 15%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    h2 {
+        font-size: 1.3rem;
+    }
+
+    .table {
+        font-size: 0.85rem;
+        min-width: 800px; /* Ensure scrollable on smaller screens */
+    }
+
+    .table th, .table td {
+        padding: 8px 10px;
+    }
+
+    .btn-sm {
+        font-size: 0.75rem;
+        padding: 4px 8px;
+        margin: 2px;
+    }
+
+    .progress-input {
+        width: 60px;
+        font-size: 0.8rem;
+    }
+
+    .form-select.status-select {
+        width: 100px;
+        font-size: 0.8rem;
+    }
+
+    /* Stack action buttons vertically on mobile */
+    #enrollments-table td:nth-child(9),
+    #payments-table td:nth-child(7) {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        gap: 4px;
+    }
+
+    .modal-dialog {
+        margin: 0.5rem;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .table {
+        font-size: 0.8rem;
+    }
+
+    .btn-sm {
+        font-size: 0.7rem;
+        padding: 3px 6px;
+    }
+
+    .progress-input {
+        width: 50px;
+    }
+
+    .form-select.status-select {
+        width: 90px;
+    }
+}
+
+/* Accessibility */
+.table caption {
+    caption-side: top;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    text-align: left;
+    padding: 8px 16px;
+}

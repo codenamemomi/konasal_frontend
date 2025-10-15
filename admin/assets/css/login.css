@@ -1,0 +1,260 @@
+/* admin/assets/css/login.css */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login-container {
+    background: #fff;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+.logo h1 {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #1a3c87;
+    margin-bottom: 0.5rem;
+}
+
+.logo p {
+    font-size: 0.9rem;
+    color: #6c757d;
+}
+
+.welcome-text h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #333;
+    margin: 1.5rem 0 0.5rem;
+}
+
+.welcome-text p {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 2rem;
+}
+
+.form-group {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+    text-align: left;
+    margin-bottom: 0.5rem;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    color: #333;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #1a3c87;
+    box-shadow: 0 0 5px rgba(26, 60, 135, 0.3);
+}
+
+.form-group input.error {
+    border-color: #dc3545 !important;
+}
+
+.password-toggle {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-20%);
+    cursor: pointer;
+    color: #6c757d;
+    font-size: 0.9rem;
+}
+
+.forgot-password {
+    text-align: right;
+    margin-bottom: 1.5rem;
+}
+
+.forgot-password a {
+    font-size: 0.85rem;
+    color: #1a3c87;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    justify-content: flex-end;
+}
+
+.forgot-password a:hover {
+    text-decoration: underline;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: #1a3c87;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.login-btn:hover {
+    background: #153070;
+}
+
+.login-btn:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+}
+
+.forgot-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.forgot-modal.show {
+    display: flex;
+}
+
+.forgot-content {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 100%;
+    position: relative;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 1.5rem;
+    color: #6c757d;
+    cursor: pointer;
+}
+
+.close-btn:hover {
+    color: #333;
+}
+
+.forgot-content h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 1rem;
+}
+
+.forgot-content p {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-bottom: 1.5rem;
+}
+
+.alert {
+    padding: 0.75rem;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.alert-success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.alert-error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.modal-btn {
+    width: 100%;
+    padding: 0.75rem;
+    background: #1a3c87;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.modal-btn:hover {
+    background: #153070;
+}
+
+.modal-btn:disabled {
+    background: #6c757d;
+    cursor: not-allowed;
+}
+
+.field-error {
+    color: #dc3545;
+    font-size: 0.8rem;
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+@media (max-width: 480px) {
+    .login-container, .forgot-content {
+        padding: 1.5rem;
+        margin: 1rem;
+    }
+
+    .logo h1 {
+        font-size: 1.5rem;
+    }
+
+    .welcome-text h2 {
+        font-size: 1.2rem;
+    }
+
+    .welcome-text p {
+        font-size: 0.8rem;
+    }
+}
