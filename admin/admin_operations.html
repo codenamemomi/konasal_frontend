@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Management - KONASAL TRAINING INSTITUTE</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="assets/css/shared.css?v=1">
+    <link rel="stylesheet" href="assets/css/admin.css?v=1">
+    <!-- Config and JS -->
+    <script src="../config.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/navbar.js" defer></script>
+    <script src="assets/js/admin-operations.js" defer></script>
+</head>
+<body>
+    <!-- Navbar Placeholder -->
+    <div id="navbar"></div>
+
+    <!-- Main Content -->
+    <main class="container my-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h1 class="mb-0">Admin Management</h1>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createAdminModal">
+                <i class="fas fa-plus"></i> Add New Admin
+            </button>
+        </div>
+
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <div class="mb-3">
+                    <input type="text" class="form-control" id="admins-search" placeholder="Search by email or name...">
+                </div>
+                
+                <div class="table-responsive">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Email</th>
+                                <th>Name</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                                <th>Created By</th>
+                                <th>Created Date</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="admins-table">
+                            <tr><td colspan="8" class="text-center"><i class="fas fa-spinner fa-spin"></i> Loading admins...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Create Admin Modal -->
+    <div class="modal fade" id="createAdminModal" tabindex="-1" aria-labelledby="createAdminModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createAdminModalLabel">Create New Admin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="createAdminForm">
+                        <div class="mb-3">
+                            <label for="adminEmail" class="form-label">Email Address *</label>
+                            <input type="email" class="form-control" id="adminEmail" name="email" required>
+                            <div class="field-error" id="adminEmailError" style="display: none;"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminFirstName" class="form-label">First Name *</label>
+                            <input type="text" class="form-control" id="adminFirstName" name="first_name" required>
+                            <div class="field-error" id="adminFirstNameError" style="display: none;"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminLastName" class="form-label">Last Name *</label>
+                            <input type="text" class="form-control" id="adminLastName" name="last_name" required>
+                            <div class="field-error" id="adminLastNameError" style="display: none;"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminPassword" class="form-label">Password *</label>
+                            <input type="password" class="form-control" id="adminPassword" name="password" required minlength="8">
+                            <div class="field-error" id="adminPasswordError" style="display: none;"></div>
+                            <div class="form-text">Password must be at least 8 characters long.</div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminPasswordVerify" class="form-label">Confirm Password *</label>
+                            <input type="password" class="form-control" id="adminPasswordVerify" name="password_verify" required minlength="8">
+                            <div class="field-error" id="adminPasswordVerifyError" style="display: none;"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="adminRole" class="form-label">Role *</label>
+                            <select class="form-control" id="adminRole" name="role" required>
+                                <option value="admin">Admin</option>
+                                <option value="super_admin">Super Admin</option>
+                            </select>
+                            <div class="field-error" id="adminRoleError" style="display: none;"></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="createAdminBtn">
+                        <i class="fas fa-save"></i> Create Admin
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Edit Admin Modal -->
+    <div class="modal fade" id="editAdminModal" tabindex="-1" aria-labelledby="editAdminModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editAdminModalLabel">Edit Admin</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editAdminForm">
+                        <input type="hidden" id="editAdminId" name="id">
+                        <div class="mb-3">
+                            <label for="editAdminEmail" class="form-label">Email Address *</label>
+                            <input type="email" class="form-control" id="editAdminEmail" name="email" required>
+                            <div class="field-error" id="editAdminEmailError" style="display: none;"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editAdminFirstName" class="form-label">First Name *</label>
+                            <input type="text" class="form-control" id="editAdminFirstName" name="first_name" required>
+                            <div class="field-error" id="editAdminFirstNameError" style="display: none;"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editAdminLastName" class="form-label">Last Name *</label>
+                            <input type="text" class="form-control" id="editAdminLastName" name="last_name" required>
+                            <div class="field-error" id="editAdminLastNameError" style="display: none;"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editAdminRole" class="form-label">Role *</label>
+                            <select class="form-control" id="editAdminRole" name="role" required>
+                                <option value="admin">Admin</option>
+                                <option value="super_admin">Super Admin</option>
+                            </select>
+                            <div class="field-error" id="editAdminRoleError" style="display: none;"></div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editAdminStatus" class="form-label">Status *</label>
+                            <select class="form-control" id="editAdminStatus" name="is_active" required>
+                                <option value="true">Active</option>
+                                <option value="false">Inactive</option>
+                            </select>
+                            <div class="field-error" id="editAdminStatusError" style="display: none;"></div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary" id="editAdminBtn">
+                        <i class="fas fa-save"></i> Save Changes
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center py-4 mt-5">
+        <p>&copy; 2025 Konasal Training Institute. All rights reserved.</p>
+    </footer>
+</body>
+</html>
