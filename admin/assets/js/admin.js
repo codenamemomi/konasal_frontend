@@ -71,6 +71,91 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Download helper function
+    async function downloadData(endpoint, filename) {
+        try {
+            const response = await fetch(`${window.API_BASE_URL}/admin/${endpoint}`, {
+                headers,
+                credentials: 'include'
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            
+            // Create blob and download
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            
+            // Get filename from Content-Disposition header or use default
+            const contentDisposition = response.headers.get('Content-Disposition');
+            if (contentDisposition) {
+                const filenameMatch = contentDisposition.match(/filename="(.+)"/);
+                if (filenameMatch) {
+                    a.download = filenameMatch[1];
+                }
+            } else {
+                a.download = filename;
+            }
+            
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+            
+            showToast('success', 'Download started successfully!');
+        } catch (error) {
+            console.error('Download error:', error);
+            showToast('error', 'Failed to download data. Please try again.');
+        }
+    }
+
+    // Setup download event listeners
+    function setupDownloadButtons() {
+        // Users export
+        const exportUsersBtn = document.getElementById('exportUsersBtn');
+        if (exportUsersBtn) {
+            exportUsersBtn.addEventListener('click', () => {
+                downloadData('export/users', 'users_export.csv');
+            });
+        }
+        
+        // Enrollments export
+        const exportEnrollmentsBtn = document.getElementById('exportEnrollmentsBtn');
+        if (exportEnrollmentsBtn) {
+            exportEnrollmentsBtn.addEventListener('click', () => {
+                downloadData('export/enrollments', 'enrollments_export.csv');
+            });
+        }
+        
+        // Payments export
+        const exportPaymentsBtn = document.getElementById('exportPaymentsBtn');
+        if (exportPaymentsBtn) {
+            exportPaymentsBtn.addEventListener('click', () => {
+                downloadData('export/payments', 'payments_export.csv');
+            });
+        }
+        
+        // Courses export
+        const exportCoursesBtn = document.getElementById('exportCoursesBtn');
+        if (exportCoursesBtn) {
+            exportCoursesBtn.addEventListener('click', () => {
+                downloadData('export/courses', 'courses_export.csv');
+            });
+        }
+        
+        // All data export
+        const exportAllBtn = document.getElementById('exportAllBtn');
+        if (exportAllBtn) {
+            exportAllBtn.addEventListener('click', () => {
+                downloadData('export/all', 'konasal_full_export.zip');
+            });
+        }
+    }
+
     // Fetch and populate payments
     async function fetchPayments() {
         try {
@@ -733,6 +818,7 @@ document.addEventListener('DOMContentLoaded', () => {
             fetchEnrollments();
             fetchCourses();
             fetchUsers();
+            setupDownloadButtons();
         }
     });
 });
