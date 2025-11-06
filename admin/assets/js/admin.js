@@ -191,6 +191,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     <span class="status-badge status-${payment.status}">${payment.status}</span>
                     <select class="form-select status-select" data-id="${payment.id}" style="display: none;">
                         <option value="pending" ${payment.status === 'pending' ? 'selected' : ''}>Pending</option>
+                        <option value="pending_manual" ${payment.status === 'pending_manual' ? 'selected' : ''}>Manual_check</option>
                         <option value="completed" ${payment.status === 'completed' ? 'selected' : ''}>Completed</option>
                         <option value="failed" ${payment.status === 'failed' ? 'selected' : ''}>Failed</option>
                     </select>
