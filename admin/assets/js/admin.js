@@ -182,7 +182,6 @@ document.addEventListener('DOMContentLoaded', () => {
         payments.forEach(payment => {
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td>${payment.id}</td>
                 <td>${payment.email}</td>
                 <td>${payment.course_name}</td>
                 <td>${payment.amount} ${payment.currency}</td>
@@ -291,7 +290,6 @@ document.addEventListener('DOMContentLoaded', () => {
         enrollments.forEach(enrollment => {
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td>${enrollment.id}</td>
                 <td>${enrollment.email}</td>
                 <td>${enrollment.course_name}</td>
                 <td>${enrollment.phone_number || 'N/A'}</td>
@@ -523,7 +521,6 @@ document.addEventListener('DOMContentLoaded', () => {
         users.forEach(user => {
             const row = document.createElement('tr');
             row.innerHTML = `
-                <td>${user.id}</td>
                 <td>${user.email}</td>
                 <td>${user.first_name} ${user.last_name}</td>
                 <td>
