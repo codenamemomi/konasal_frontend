@@ -110,11 +110,63 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    async function downloadAdminsPdfData() {
+        try {
+            const response = await fetch(`${window.API_BASE_URL}/admin/export/admins/pdf`, {
+                headers,
+                credentials: 'include'
+            });
+            
+            if (response.status === 403) {
+                showToast('error', 'Access denied. Super admin privileges required to export admin data.');
+                return;
+            }
+            
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            
+            // Create blob and download
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            
+            // Get filename from Content-Disposition header
+            const contentDisposition = response.headers.get('Content-Disposition');
+            if (contentDisposition) {
+                const filenameMatch = contentDisposition.match(/filename="(.+)"/);
+                if (filenameMatch) {
+                    a.download = filenameMatch[1];
+                }
+            } else {
+                a.download = 'admins_export.pdf';
+            }
+            
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+            
+            showToast('success', 'Admin PDF download started successfully!');
+        } catch (error) {
+            console.error('PDF download error:', error);
+            showToast('error', 'Failed to download admin PDF. Please try again.');
+        }
+    }
+
     // Setup download event listeners
     function setupDownloadButtons() {
         const exportAdminsBtn = document.getElementById('exportAdminsBtn');
         if (exportAdminsBtn) {
             exportAdminsBtn.addEventListener('click', downloadAdminsData);
+        }
+
+        // Add PDF export button
+        const exportAdminsPdfBtn = document.getElementById('exportAdminsPdfBtn');
+        if (exportAdminsPdfBtn) {
+            exportAdminsPdfBtn.addEventListener('click', downloadAdminsPdfData);
         }
     }
 

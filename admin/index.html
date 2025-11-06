@@ -28,9 +28,14 @@
     <main class="container my-5">
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="mb-0">Admin Dashboard</h1>
-            <button class="btn btn-info" id="exportAllBtn">
-                <i class="fas fa-file-export me-2"></i>Export All Data
-            </button>
+            <div>
+                <button class="btn btn-info me-2" id="exportAllBtn">
+                    <i class="fas fa-file-export me-2"></i>Export All (ZIP)
+                </button>
+                <button class="btn btn-warning" id="exportAllPdfBtn">
+                    <i class="fas fa-file-pdf me-2"></i>Export Report (PDF)
+                </button>
+            </div>
         </div>
 
         <!-- Tabs -->
@@ -56,14 +61,19 @@
                 <h2>Payments</h2>
                 <div class="mb-3 d-flex justify-content-between align-items-center">
                     <input type="text" class="form-control w-50" id="payments-search" placeholder="Search by email or course name">
-                    <button class="btn btn-success" id="exportPaymentsBtn">
-                        <i class="fas fa-download me-2"></i>Export Payments
-                    </button>
-                </div>
-                <div class="table-responsive">
+                    <div>
+                        <button class="btn btn-success me-2" id="exportPaymentsBtn">
+                            <i class="fas fa-file-csv me-2"></i>Export CSV
+                        </button>
+                        <button class="btn btn-danger" id="exportPaymentsPdfBtn">
+                            <i class="fas fa-file-pdf me-2"></i>Export PDF
+                        </button>
+                    </div>
+                </div>                <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>User Email</th>
                                 <th>Course</th>
                                 <th>Amount</th>
@@ -83,9 +93,14 @@
                 <h2>Enrollments</h2>
                 <div class="mb-3 d-flex justify-content-between align-items-center">
                     <input type="text" class="form-control w-50" id="enrollments-search" placeholder="Search by email or course name">
-                    <button class="btn btn-success" id="exportEnrollmentsBtn">
-                        <i class="fas fa-download me-2"></i>Export Enrollments
-                    </button>
+                    <div>
+                        <button class="btn btn-success me-2" id="exportEnrollmentsBtn">
+                            <i class="fas fa-file-csv me-2"></i>Export CSV
+                        </button>
+                        <button class="btn btn-danger" id="exportEnrollmentsPdfBtn">
+                            <i class="fas fa-file-pdf me-2"></i>Export PDF
+                        </button>
+                    </div>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-striped">
@@ -114,7 +129,10 @@
                     <input type="text" class="form-control w-50" id="courses-search" placeholder="Search by course name">
                     <div>
                         <button class="btn btn-success me-2" id="exportCoursesBtn">
-                            <i class="fas fa-download me-2"></i>Export Courses
+                            <i class="fas fa-file-csv me-2"></i>Export CSV
+                        </button>
+                        <button class="btn btn-danger me-2" id="exportCoursesPdfBtn">
+                            <i class="fas fa-file-pdf me-2"></i>Export PDF
                         </button>
                         <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#createCourseModal">
                             <i class="fas fa-plus"></i> Add Course
@@ -141,14 +159,21 @@
                 <h2>Users</h2>
                 <div class="mb-3 d-flex justify-content-between align-items-center">
                     <input type="text" class="form-control w-50" id="users-search" placeholder="Search by email or name">
-                    <button class="btn btn-success" id="exportUsersBtn">
-                        <i class="fas fa-download me-2"></i>Export Users
-                    </button>
+                    <div>
+                        <button class="btn btn-success me-2" id="exportUsersBtn">
+                            <i class="fas fa-file-csv me-2"></i>Export CSV
+                        </button>
+                        <button class="btn btn-danger" id="exportUsersPdfBtn">
+                            <i class="fas fa-file-pdf me-2"></i>Export PDF
+                        </button>
+                    </div>
                 </div>
+
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
                             <tr>
+                                <th>ID</th>
                                 <th>Email</th>
                                 <th>Name</th>
                                 <th>Actions</th>
