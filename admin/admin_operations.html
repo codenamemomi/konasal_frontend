@@ -37,11 +37,15 @@
             <div class="card-body">
                 <div class="mb-3 d-flex justify-content-between align-items-center">
                     <input type="text" class="form-control w-50" id="admins-search" placeholder="Search by email or name...">
-                    <button class="btn btn-success" id="exportAdminsBtn">
-                        <i class="fas fa-download me-2"></i>Export Admins
-                    </button>
-                </div>
-                
+                    <div>
+                        <button class="btn btn-success me-2" id="exportAdminsBtn">
+                            <i class="fas fa-file-csv me-2"></i>Export CSV
+                        </button>
+                        <button class="btn btn-danger" id="exportAdminsPdfBtn">
+                            <i class="fas fa-file-pdf me-2"></i>Export PDF
+                        </button>
+                    </div>
+                </div>                
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>

@@ -113,6 +113,47 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    async function downloadPdfData(endpoint, filename) {
+        try {
+            const response = await fetch(`${window.API_BASE_URL}/admin/${endpoint}`, {
+                headers,
+                credentials: 'include'
+            });
+            
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            
+            // Create blob and download
+            const blob = await response.blob();
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.style.display = 'none';
+            a.href = url;
+            
+            // Get filename from Content-Disposition header or use default
+            const contentDisposition = response.headers.get('Content-Disposition');
+            if (contentDisposition) {
+                const filenameMatch = contentDisposition.match(/filename="(.+)"/);
+                if (filenameMatch) {
+                    a.download = filenameMatch[1];
+                }
+            } else {
+                a.download = filename;
+            }
+            
+            document.body.appendChild(a);
+            a.click();
+            window.URL.revokeObjectURL(url);
+            document.body.removeChild(a);
+            
+            showToast('success', 'PDF download started successfully!');
+        } catch (error) {
+            console.error('PDF download error:', error);
+            showToast('error', 'Failed to download PDF. Please try again.');
+        }
+    }
+
     // Setup download event listeners
     function setupDownloadButtons() {
         // Users export
@@ -120,6 +161,14 @@ document.addEventListener('DOMContentLoaded', () => {
         if (exportUsersBtn) {
             exportUsersBtn.addEventListener('click', () => {
                 downloadData('export/users', 'users_export.csv');
+            });
+        }
+
+        // Users PDF export
+        const exportUsersPdfBtn = document.getElementById('exportUsersPdfBtn');
+        if (exportUsersPdfBtn) {
+            exportUsersPdfBtn.addEventListener('click', () => {
+                downloadPdfData('export/users/pdf', 'users_export.pdf');
             });
         }
         
@@ -130,12 +179,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 downloadData('export/enrollments', 'enrollments_export.csv');
             });
         }
-        
+        // Enrollments PDF export
+        const exportEnrollmentsPdfBtn = document.getElementById('exportEnrollmentsPdfBtn');
+        if (exportEnrollmentsPdfBtn) {
+            exportEnrollmentsPdfBtn.addEventListener('click', () => {
+                downloadPdfData('export/enrollments/pdf', 'enrollments_export.pdf');
+            });
+        }
+
         // Payments export
         const exportPaymentsBtn = document.getElementById('exportPaymentsBtn');
         if (exportPaymentsBtn) {
             exportPaymentsBtn.addEventListener('click', () => {
                 downloadData('export/payments', 'payments_export.csv');
+            });
+        }
+
+        // Payments PDF export
+        const exportPaymentsPdfBtn = document.getElementById('exportPaymentsPdfBtn');
+        if (exportPaymentsPdfBtn) {
+            exportPaymentsPdfBtn.addEventListener('click', () => {
+                downloadPdfData('export/payments/pdf', 'payments_export.pdf');
             });
         }
         
@@ -146,12 +210,28 @@ document.addEventListener('DOMContentLoaded', () => {
                 downloadData('export/courses', 'courses_export.csv');
             });
         }
+
+        // Courses PDF export
+        const exportCoursesPdfBtn = document.getElementById('exportCoursesPdfBtn');
+        if (exportCoursesPdfBtn) {
+            exportCoursesPdfBtn.addEventListener('click', () => {
+                downloadPdfData('export/courses/pdf', 'courses_export.pdf');
+            });
+        }
         
         // All data export
         const exportAllBtn = document.getElementById('exportAllBtn');
         if (exportAllBtn) {
             exportAllBtn.addEventListener('click', () => {
                 downloadData('export/all', 'konasal_full_export.zip');
+            });
+        }
+
+        // All data PDF export
+        const exportAllPdfBtn = document.getElementById('exportAllPdfBtn');
+        if (exportAllPdfBtn) {
+            exportAllPdfBtn.addEventListener('click', () => {
+                downloadPdfData('export/all/pdf', 'konasal_comprehensive_report.pdf');
             });
         }
     }
@@ -182,6 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
         payments.forEach(payment => {
             const row = document.createElement('tr');
             row.innerHTML = `
+                <td>${payment.id}</td>
                 <td>${payment.email}</td>
                 <td>${payment.course_name}</td>
                 <td>${payment.amount} ${payment.currency}</td>
@@ -290,6 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
         enrollments.forEach(enrollment => {
             const row = document.createElement('tr');
             row.innerHTML = `
+                <td>${enrollment.id}</td>
                 <td>${enrollment.email}</td>
                 <td>${enrollment.course_name}</td>
                 <td>${enrollment.phone_number || 'N/A'}</td>
@@ -521,6 +603,7 @@ document.addEventListener('DOMContentLoaded', () => {
         users.forEach(user => {
             const row = document.createElement('tr');
             row.innerHTML = `
+                <td>${user.id}</td>
                 <td>${user.email}</td>
                 <td>${user.first_name} ${user.last_name}</td>
                 <td>
